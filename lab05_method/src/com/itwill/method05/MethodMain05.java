@@ -21,6 +21,7 @@ public class MethodMain05 {
 		int sum = sum(scores);
 		System.out.println("총점 = " + sum);
 		
+		
 		double avg = mean(scores);
 		System.out.println("평균 = " + avg);
 
@@ -81,9 +82,8 @@ public class MethodMain05 {
 				return i; 
 			} 
 		}
-		
-	return index;
 	
+	return index;
 	} // end index...
 	
 }
