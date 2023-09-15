@@ -15,8 +15,6 @@ public class MethodMain05 {
 			scores[i] = sc.nextInt(); 
 					//Integer.parseInt(sc.nextLine());
 		}
-		
-		
 
 		//int[] scores = {70, 60, 100, 50, 81};
 
