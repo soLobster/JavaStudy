@@ -46,7 +46,7 @@ public class MethodMain06 {
 
 
     public static boolean isEven(int num) {
-        boolean result;
+        boolean result  = false;
         System.out.println("input Number = "+num);
         if( num % 2 == 0) {
             result = true;
