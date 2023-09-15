@@ -1,5 +1,6 @@
 package com.itwill.method05;
 
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 public class MethodMain05 {
@@ -50,15 +51,27 @@ public class MethodMain05 {
 		} 
 		return sumArr;
 	} // end sum...
+	
+	/**
+	 * 평균을 구한다.
+	 * @param num array 정수들의 1차원 배열.
+	 * @return 원소들의 평균.
+	 */
+	
 	public static double mean(int[] num) {
 		double avgArr = 0;
-		int sum = 0;
+		//int sum = 0;
 		for(int x : num) {
-			sum += x;
-			avgArr = (double) sum/num.length;
+			//sum += x;
+			avgArr = (double) sum(num)/num.length;
 		}
 		return avgArr;
 	} // end mean...
+	/**
+	 * 정수들의 배열의 원소들중 최댓값을 찾아서 리턴.
+	 * @param num (정수들의 배열).
+	 * @return 최댓값.
+	 */
 	public static int max(int[] num) {
 		int max = num[0];
 		for(int x : num) {
@@ -78,21 +91,47 @@ public class MethodMain05 {
 		return min;
 	} // end min...
 
+	/**
+	 * 정수들의 1차원 배열 array에서 최댓값의 위치(인덱스)를 찾아서 리턴.
+	 * 만약 최댓값이 2개 이상인 경우 첫번째 최댓값의 인덱스를 리턴.
+	 * 
+	 * @param num 정수들의 배열.
+	 * @return 최댓값의 인덱스다.
+	 */
 	
+//	public static int index(int[] num) {
+//        int max = num[0]; //최댓값을 저장할 변수.
+//        int index = 0;    //배열 원소의 인덱스를 저장할 변수.
+//        int maxIndex = 0; //최댓값의 인덱스를 저장할 변수.
+//        for(int x : num) {
+//            if(x > max) {
+//                max = x;
+//                maxIndex = index;
+//            } index++;
+//        }
+//        return maxIndex;
+//    }
 	
 	public static int index(int[] num) {
 		Scanner sc = new Scanner(System.in);
 		int index = 0;
+		boolean flag = true;
+		int wantKnowNum = 0;
 		System.out.print("순서를 알고 싶은 번호를 입력하세요 >> ");
-		index = sc.nextInt();
+		wantKnowNum = sc.nextInt();
 		sc.close();
+		
 		for(int i=0; i<num.length; i++) {
-			if(index == num[i]) {
-				return i; 
-			} 
+		    if(wantKnowNum==num[i]) {
+		        index = i;
+		        flag = false;
+		        break;
+		    }   
 		}
-	
-	return index;
+		
+		if(flag) {
+            System.out.println("찾으시는 번호가 없습니다.");
+        }
+		return index;
 	} // end index...
-	
-}
+} 
