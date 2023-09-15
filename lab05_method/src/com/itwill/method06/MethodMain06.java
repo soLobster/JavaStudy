@@ -30,13 +30,13 @@ public class MethodMain06 {
 
         //whoIsBigger(x,y): x,y 중에서 더 큰 수를 리턴.
         int bigger = whoIsBigger(x,y);
-        System.out.println("bigger is = "+bigger);
+        System.out.println("Bigger is = "+bigger);
     }
 
     public static int whoIsBigger(int x, int y) {
         int bigger;
         System.out.printf("%d VS %d\n",x,y);
-        if(x>y) {
+        if(x>=y) {
             bigger = x;
         } else {
             bigger = y;
@@ -48,11 +48,11 @@ public class MethodMain06 {
     public static boolean isEven(int num) {
         boolean result;
         System.out.println("input Number = "+num);
-        if(num%2==0) {
+        if( num % 2 == 0) {
             result = true;
         } else {
             result = false;
-        }
+        } // 
         return result;   
     }//end isEven
 
