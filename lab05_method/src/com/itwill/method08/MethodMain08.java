@@ -9,6 +9,9 @@ public class MethodMain08 {
         int result = 0;
         for(long n = -1; n<=5; n++) {
            System.out.printf("%d! = %d\n",n,factorial(n));
+           System.out.println("---------------------------------");
+           System.out.printf("%d! = %d\n",n,factorial2(n));
+           System.out.println("=================================");
        }
     }
 
@@ -30,6 +33,20 @@ public class MethodMain08 {
         } else if (n>0){
             result = factorial(n -1) * n; //n! = (n-1)! X n.
         } 
+        return result;
+    }//end factorial...
+    
+    public static long factorial2(long n) {
+        long result = -1;
+        if(n==0) {
+            result = 1;
+        } else if (n>0) {
+            result = 1;
+            for(long i = 1; i<=n;i++) {
+                result *= i;
+            }
+        }
+        
         return result;
     }
 }
