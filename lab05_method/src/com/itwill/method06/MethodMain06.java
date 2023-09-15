@@ -52,7 +52,7 @@ public class MethodMain06 {
 //            bigger = y;
 //        }
 //        return bigger;
-    }
+    }//end whoIsBigger.
 
 
     public static boolean isEven(int num) {
