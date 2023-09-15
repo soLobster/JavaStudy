@@ -14,8 +14,28 @@ public class MethodMain06 {
         //parseGenderCode()는 아규먼트가 1or3이면 male, 2or4이면 female, 0인경우 unknown 리턴.
         String gender = parseGenderCode(genderCode);
         System.out.println("gender : "+gender);
+    
+        System.out.println("====================================================");
+        //ex2
+        int number = random.nextInt(100);
+        //isEven(int num) 정수가 짝수이면 true, false 
+        boolean result = isEven(number);
+        System.out.println("Result isEven : "+ result);
+    
     }
 
+    public static boolean isEven(int num) {
+        boolean result;
+        System.out.println("input Number = "+num);
+        if(num%2==0) {
+           result = true;
+        } else {
+           result = false;
+        }
+     return result;   
+    }//end isEven
+    
+    
     public static String parseGenderCode(int num) {
         String gender = " ";
         
