@@ -36,6 +36,10 @@ public class MethodMain06 {
     public static int whoIsBigger(int x, int y) {
         int bigger; //어지간하면 변수는 선언하고 아무값이든 초기화를 해놓고 하는것이 좋다.
         // <= 이것은 괜찮지만 조금 아쉬운 코드.......
+        // 정수 -> 0
+        // 실수 -> 0.0
+        // boolean -> false.
+        // 참조 타입 -> null.
         System.out.printf("%d VS %d\n",x,y);
         if(x>=y) {
             bigger = x;
