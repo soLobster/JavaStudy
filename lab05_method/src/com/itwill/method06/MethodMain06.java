@@ -43,6 +43,7 @@ public class MethodMain06 {
         System.out.printf("%d VS %d\n",x,y);
         return (x>y) ? x:y;
         
+        
 //        
 //        System.out.printf("%d VS %d\n",x,y);
 //        if(x>=y) {
