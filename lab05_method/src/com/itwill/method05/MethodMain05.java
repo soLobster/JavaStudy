@@ -15,6 +15,8 @@ public class MethodMain05 {
 			scores[i] = sc.nextInt(); 
 					//Integer.parseInt(sc.nextLine());
 		}
+		
+		
 
 		//int[] scores = {70, 60, 100, 50, 81};
 
@@ -36,6 +38,13 @@ public class MethodMain05 {
 
 	} // end main...
 
+	
+	/**
+     * 아규먼트로 전달받은 정수들의 1차원 배열의 모든 원소들의 합계를 리턴하는 메서드다
+     * @param num
+     * @return
+     */
+	
 	public static int sum(int[] num) {
 		int sumArr = 0;
 		for(int x : num) {
@@ -71,6 +80,8 @@ public class MethodMain05 {
 		return min;
 	} // end min...
 
+	
+	
 	public static int index(int[] num) {
 		Scanner sc = new Scanner(System.in);
 		int index = 0;
