@@ -19,13 +19,25 @@ public class MethodMain06 {
     public static String parseGenderCode(int num) {
         String gender = " ";
         
-        if(num==1||num==3) {
-            gender = "M";
-        } else if(num==2||num==4) {
-            gender = "F";
-        } else {
-            gender = "UnKnown";
-        }
+//        if(num==1||num==3) {
+//            gender = "M";
+//        } else if(num==2||num==4) {
+//            gender = "F";
+//        } else {
+//            gender = "UnKnown";
+//        }
+        
+        switch (num) {
+                case 1,3: 
+                    gender = "M";
+                    break;
+                case 2,4:
+                    gender = "F";
+                    break;
+                default:
+                    gender = "UnKnown";
+                    break;
+            }
         
         return gender;
     }//end parseGenderCode...
