@@ -21,7 +21,7 @@ public class Subject {
     }
     
     //아규먼트를 갖는 생성자. - 아규먼트의 값들로 필드를 초기화한다.
-    public Subject(int java,int sql,int js) { //this!
+    public Subject(int java,int sql,int js) { //this! 파라미터가 달라야 한다 메서드 오버로딩
        this.java = java;
        this.sql =sql;
        this.js =js;
