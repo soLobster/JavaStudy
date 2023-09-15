@@ -34,7 +34,8 @@ public class MethodMain06 {
     }
 
     public static int whoIsBigger(int x, int y) {
-        int bigger;
+        int bigger; //어지간하면 변수는 선언하고 아무값이든 초기화를 해놓고 하는것이 좋다.
+        // <= 이것은 괜찮지만 조금 아쉬운 코드.......
         System.out.printf("%d VS %d\n",x,y);
         if(x>=y) {
             bigger = x;
@@ -46,7 +47,8 @@ public class MethodMain06 {
 
 
     public static boolean isEven(int num) {
-        boolean result  = false;
+        boolean result  = false; //초기화 되어있지 않은 변수를 프린트 혹은 리턴하려 하면 에러가 난다.
+        // result; 로 초기화 한다면 밑에 else 블럭이 무조건 있어야한다.
         System.out.println("input Number = "+num);
         if( num % 2 == 0) {
             result = true;
