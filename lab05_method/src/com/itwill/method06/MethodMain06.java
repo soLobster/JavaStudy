@@ -41,12 +41,16 @@ public class MethodMain06 {
         // boolean -> false.
         // 참조 타입 -> null.
         System.out.printf("%d VS %d\n",x,y);
-        if(x>=y) {
-            bigger = x;
-        } else {
-            bigger = y;
-        }
-        return bigger;
+        return (x>y) ? x:y;
+        
+//        
+//        System.out.printf("%d VS %d\n",x,y);
+//        if(x>=y) {
+//            bigger = x;
+//        } else {
+//            bigger = y;
+//        }
+//        return bigger;
     }
 
 
