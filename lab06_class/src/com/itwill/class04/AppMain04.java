@@ -36,6 +36,13 @@ public class AppMain04 {
 //        System.out.println(std1.score.getTotal());
 //        System.out.println(std1.score.getMean());
         std1.studentInfo();
+        
+        Student std2 = new Student(24,"james",score2);
+        std2.studentInfo();
+        
+        Student std3 = new Student(30,"silva",new Score(40,60,70));
+        std3.studentInfo();
+        
     }
 
 }
