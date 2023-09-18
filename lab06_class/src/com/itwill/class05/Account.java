@@ -1,5 +1,5 @@
 package com.itwill.class05;
-//은행계좌라는 클래
+//은행계좌라는 클래스 
 /**
  * 은행계좌정보
  * 속성: 계좌번호(int), 잔고(int)
@@ -17,6 +17,7 @@ public class Account {
 		this.accountNum = accountNum;
 		this.balance = balance;
 	}
+
 	
 	//메소드
 	/**
@@ -25,9 +26,11 @@ public class Account {
 	 * @return 입금 후 잔액
 	 * 
 	 */
-	public int deposit() {
-		
-		balance += amount;
+	public int deposit(int amount) {
+		System.out.print("입금 한 금액 >> "+amount);
+		balance = balance + amount;
+		System.out.println();
+		System.out.print("입금 후 잔액 >> ");
 		return balance;
 	}
 	/**
@@ -35,19 +38,26 @@ public class Account {
 	 * @param amount 출금액
 	 * @return 출금 후 잔액.
 	 */
-	public int withdraw() {
-		balance -= amount;
+	public int withdraw(int amount) {
+		System.out.print("출금 할 금액 >> "+amount);
+		balance = balance - amount;
+		System.out.println();
+		System.out.print("출금 후 잔액 >> ");
 		return balance;
 	}
 	
 	/**
-	 * transfer(이체).
+	 * transfer(이체). 내 계좌에서는 잔액에 amount를 더해주고, 상대방 계좌에서는 잔액에 amount를 빼준다.
 	 * @param to 이체할 계좌(Account 타입(계좌)).
 	 * @param amount 이체할 금액.
 	 * @return true.boolean (이체 성공,실패). 무조건 true를 리턴하자...
 	 */
-	public boolean transfer() {
-		
+	public boolean transfer(int accountNum, int amount) {
+		if(accountNum!=0) {
+		balance = balance - amount;
+		System.out.print("이체 후 잔액 >> "+balance);
+		System.out.println();
+		}
 		return true;
 	}
 	
@@ -56,8 +66,9 @@ public class Account {
 	 * 계좌번호, 현재 잔액을 출력.
 	 */
 	public void info() {
-		System.out.println("계좌번호 : "+accountNum);
-		System.out.println("현재잔액 : "+balance);
+		System.out.println("---ac1 계좌 안내---");
+		System.out.println("계좌번호 >> "+accountNum);
+		System.out.println("현재잔액 >> "+balance);
 	}
 	
 }
