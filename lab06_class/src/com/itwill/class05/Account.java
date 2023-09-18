@@ -8,14 +8,14 @@ package com.itwill.class05;
 public class Account {
 	//필드 
 	int accountNum;
-	int balance = 0;
-	int amount = 0;
+	int balance;
+	int amount;
 	
 	//생성자(기본 생성자 X) 
 	//argument 2개 갖는 생성자..
 	public Account(int accountNum, int balance){
 		this.accountNum = accountNum;
-		this.balance = balance;
+		this.balance= balance;
 	}
 
 	
@@ -27,10 +27,10 @@ public class Account {
 	 * 
 	 */
 	public int deposit(int amount) {
-		System.out.print("입금 한 금액 >> "+amount);
+		System.out.print("입금한 금액 >> "+amount);
 		balance = balance + amount;
 		System.out.println();
-		System.out.print("입금 후 잔액 >> ");
+		System.out.print("입금후 잔고 >> ");
 		return balance;
 	}
 	/**
@@ -39,10 +39,10 @@ public class Account {
 	 * @return 출금 후 잔액.
 	 */
 	public int withdraw(int amount) {
-		System.out.print("출금 할 금액 >> "+amount);
+		System.out.print("출금할 금액 >> "+amount);
 		balance = balance - amount;
 		System.out.println();
-		System.out.print("출금 후 잔액 >> ");
+		System.out.print("출금후 잔액 >> ");
 		return balance;
 	}
 	
@@ -52,12 +52,13 @@ public class Account {
 	 * @param amount 이체할 금액.
 	 * @return true.boolean (이체 성공,실패). 무조건 true를 리턴하자...
 	 */
-	public boolean transfer(int accountNum, int amount) {
-		if(accountNum!=0) {
-		balance = balance - amount;
-		System.out.print("이체 후 잔액 >> "+balance);
+	public boolean transfer(Account anoterAcc, int amount) {
+		System.out.print("이체한 금액 >> "+amount);
 		System.out.println();
-		}
+		this.balance = this.balance - amount;
+	
+		System.out.print("이체후 잔액 >> "+balance);
+		System.out.println();
 		return true;
 	}
 	
@@ -66,7 +67,7 @@ public class Account {
 	 * 계좌번호, 현재 잔액을 출력.
 	 */
 	public void info() {
-		System.out.println("---ac1 계좌 안내---");
+		System.out.println("---userOne 계좌 안내---");
 		System.out.println("계좌번호 >> "+accountNum);
 		System.out.println("현재잔액 >> "+balance);
 	}

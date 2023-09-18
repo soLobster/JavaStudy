@@ -6,23 +6,45 @@ public class AppMain05 {
 
 	public static void main(String[] args) {
 		// Account
+
+		//123456 계좌 초기 잔고 0.
+		Scanner sc = new Scanner(System.in);
 		
-    Account ac1 = new Account(123456, 50000);
-    System.out.println("ac1 의 초기 잔고 >> "+ac1.balance);
-    //123456 계좌 초기 잔고 50000.
-    
-    System.out.println(ac1.deposit(20000));
-    //123456계좌 입금 20000원.
-    System.out.println("==============");
-    
-    System.out.println(ac1.withdraw(10000));
-    //123456 계좌 출금 10000원.
-    System.out.println("==============");
-    Account ac2 = new Account(654321, 0);
-    System.out.println(ac1.transfer(654321, 20000));
+		
+		System.out.print("계좌번호를 입력해주세요. >> ");
+		int accountNum1 = Integer.parseInt(sc.nextLine());
+		Account userOneAcc = new Account(accountNum1, 0);
+		
 	
-    System.out.println("==============");
-    ac1.info();
+		
+		System.out.print("userOne 의 초기 잔고 >> "+userOneAcc.balance);	
+		System.out.println();
+		System.out.println("==============");
+		//입금 .
+		System.out.print("입금할 금액을 입력해주세요 >> ");
+		int amount = Integer.parseInt(sc.nextLine());
+		System.out.println(userOneAcc.deposit(amount));
+
+		System.out.println("==============");
+		
+		//출금 15000.
+		System.out.print("출금할 금액을 입력해주세요 >> ");
+		amount = Integer.parseInt(sc.nextLine());
+		System.out.println(userOneAcc.withdraw(amount));
+		
+		System.out.println("==============");
+		System.out.print("입금할 계좌를 입력해주세요 >> ");
+		int accountNum2 = Integer.parseInt(sc.nextLine());
+		
+		
+		System.out.print("송금할 금액을 입력해주세요 >> ");
+		amount = Integer.parseInt(sc.nextLine());
+		
+		Account userTwoAcc = new Account(accountNum2, 20000);
+		System.out.println(userOneAcc.transfer(userTwoAcc, amount));
+		System.out.println("**************************");
+		
+		userOneAcc.info();
 	}
 
 }
