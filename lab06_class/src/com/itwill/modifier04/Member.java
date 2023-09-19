@@ -10,7 +10,7 @@ public class Member {
     public Member(String memberId, String memberPwd) {
         this.memberId = memberId;
         this.memberPwd = memberPwd;
-    }//Member 생성자.....
+    }//Member 생성자.....클래스 이름과 같아야한다....
     
     
     //getter /setter 

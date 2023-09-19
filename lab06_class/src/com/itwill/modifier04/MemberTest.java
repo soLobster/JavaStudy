@@ -10,7 +10,7 @@ public class MemberTest {
         Member user1 = new Member("kooj0526", "0000");
         System.out.println("user1의 아이디 >> "+user1.getMemberId());
         System.out.println("user1의 비밀번호 >> "+user1.getMemeberPwd());
-        user1.setMemberPwd("1q2w3r1234!");
+        user1.setMemberPwd("1q2w3e4r1234!");
         System.out.println("user1의 비밀번호 변경 후 >> "+user1.getMemeberPwd());
     }
 
