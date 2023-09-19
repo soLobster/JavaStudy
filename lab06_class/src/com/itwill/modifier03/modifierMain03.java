@@ -21,6 +21,9 @@ public class modifierMain03 {
 
         p1.setAge(20);
         System.out.println("4년 후 오쌤의 나이 >> "+p1.getAge());
+        
+        p1.setAge(-20);
+        System.out.println("4년 후 오쌤의 나이 >> "+p1.getAge());
     }
 
 }
