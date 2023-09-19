@@ -24,7 +24,6 @@ public class AppMain05 {
 		System.out.print("입금할 금액을 입력해주세요 >> ");
 		int amount = Integer.parseInt(sc.nextLine());
 		System.out.println(userOneAcc.deposit(amount));
-
 		System.out.println("==============");
 		
 		//출금 15000.
@@ -45,6 +44,9 @@ public class AppMain05 {
 		System.out.println("**************************");
 		
 		userOneAcc.info();
+		System.out.println("**************************");
+		userTwoAcc.info();
+		sc.close();
 	}
 
 }
