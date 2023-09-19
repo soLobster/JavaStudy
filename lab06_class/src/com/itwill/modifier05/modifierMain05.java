@@ -8,7 +8,7 @@ package com.itwill.modifier05;
  * 하나의 자바 파일 안에서 클래스를 여러개 선언 하는 것은 가능하지만,
  * public class는 파일 안에서 단 하나만 있어야한다....!!!!
  * 한개의 파일에서 클래스를 여러개 선언했을 때, 컴파일 후에는 각각의 클래스 파일(바이트코드)이 생성된다....
- * 
+ * 바이트 코드: JVM이 실행할 수 있는 명령어 SET.....
  */
 
 import com.itwill.modifier06.PublicClass; //public 클래스만 보인다....!!!
