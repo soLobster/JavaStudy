@@ -10,6 +10,9 @@ package com.itwill.modifier01;
  *     ex) 필드에 선언된 것들....
  * 3. protected 같은 패키지에 있거나 또는 상속하는 클래스에서 보이는(사용 가능한) 멤버.
  * 4. public 어디서든 보이는 (사용 가능한) 멤버
+ * 
+ * -> 데이터 캡슐화.....!
+ * 
  */
 
 public class modifierMain01 {
