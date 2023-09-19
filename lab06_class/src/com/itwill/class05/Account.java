@@ -64,8 +64,29 @@ public class Account {
 	public boolean transfer(Account anoterAcc, int amount) {
 		System.out.print("이체한 금액 >> "+amount);
 		System.out.println();
-		this.balance = this.balance - amount; //내 계좌에서 출금....
+		this.balance -= amount; //내 계좌에서 출금....
 		anoterAcc.balance += amount;
+		/**
+		 * this.balance -= amount;
+		 * another.balance += amount;
+		 * this.withdraw(amount);
+		 * another.deposit(amount);
+		 * 
+		 * 
+		 * boolean result =false; //이체 실패했을 때 return값...
+		 * if(amount>0) {
+    	 *     if(amount <= this.balance){
+    	 *         this.withdraw(amount);
+    	 *         another.deposit(amount);
+    	 *         result = true; //이체 성공 반환 값.
+         *          } else {
+         *              System.out.println("이체하기 위한 잔고가 부족합니다....")
+         *           }
+		 *    } else {
+		 *            System.out.println("이체할 금액은 0보다 커야 합니다....")
+		 *        }
+		 * return result;
+		 */
 		System.out.print("이체후 잔액 >> "+balance);
 		System.out.println();
 		return true;
@@ -76,7 +97,7 @@ public class Account {
 	 * 계좌번호, 현재 잔액을 출력.
 	 */
 	public void info() {
-		System.out.println("---"+accountNum+"계좌 안내---");
+		System.out.println("---계좌 안내---");
 		System.out.println("계좌번호 >> "+this.accountNum);
 		System.out.println("현재잔액 >> "+this.balance);
 	}
