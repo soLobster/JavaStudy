@@ -45,9 +45,27 @@ public final class ModifierMain08 { //final class
         this.n = n; //final 필드를 명시적으로 초기화....
     }
     
+    
+    public void test() {
+        System.out.println("ModifierMain08 인스턴스 메서드");
+    }
+    
+    public static void test2() {
+        System.out.println("ModifierMain08 스테틱 메서드");
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        test2();
         final int x = 1;
+
+        ModifierMain08 app = new ModifierMain08(1);
+        
+        app.test();
+        
+        System.out.println(app.s);
+        System.out.println(app.n);
+        
         //x = 2; cannot assign 할당할 수 없음....! 컴파일 에러
         //final 지역 변수는 값을 할당(저장)할 수 없음....
         
