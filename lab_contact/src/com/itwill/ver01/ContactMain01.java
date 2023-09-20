@@ -2,8 +2,6 @@ package com.itwill.ver01;
 
 import java.util.Scanner;
 
-import javax.sound.midi.Soundbank;
-
 public class ContactMain01 {
     public static final int MAX_LENGTH = 5; //배열의 길이(원소 개수).
 
@@ -15,11 +13,11 @@ public class ContactMain01 {
     public static void main(String[] args) {
         System.out.println("---------*****---------연락처 v0.1-----------*****--------");
         ContactMain01 app = new ContactMain01();
-        
+
         boolean run = true; //프로그램 실행/종료 여부......
 
         while(run) {
-            
+
             int menu = app.showMainMenu();
 
             switch (menu) {
@@ -40,17 +38,17 @@ public class ContactMain01 {
             default:
                 System.out.println("올바른 메뉴를 선택해주세요(0~4) :) ");
             }//end of switch...
-            
+
         }//end of while...
 
-       
+
 
 
 
         System.out.println();
         System.out.println("--------*****---------^^좋은하루^^---------*****---------");
     }//end of main...
-    
+
     private void readAllContacts() {
         System.out.println("저장된 연락처를 표기합니다.");
         System.out.println();
@@ -60,28 +58,25 @@ public class ContactMain01 {
         }
         System.out.println("-------------------");
     }//end of readAllContacts method....
-    
-    
-    
-    
+
+
     private void createContact() {
         for(int i=0; i<contacts.length; i++) {
             for(int j=i; j<count; j++) {
-            System.out.println("연락처를 저장합니다.");
-            System.out.print("이름을 입력해주세요 >> ");
-            String name = scanner.nextLine();
-            System.out.print("번호를 입력해주세요 >> ");
-            String number = scanner.nextLine();
-            System.out.print("E-Mail을 입력해주세요 >> ");
-            String email = scanner.nextLine();
+                System.out.println("연락처를 저장합니다.");
+                System.out.print("이름을 입력해주세요 >> ");
+                String name = scanner.nextLine();
+                System.out.print("번호를 입력해주세요 >> ");
+                String number = scanner.nextLine();
+                System.out.print("E-Mail을 입력해주세요 >> ");
+                String email = scanner.nextLine();
+            }
         }
-     }
-        
+
         count++;
     }
-    
-    
-    
+
+
     private int showMainMenu() {
         System.out.println("----------------------------------------------------------");
         System.out.println("  0.종료 | 1.목록 | 2.새 연락처 | 3.인덱스 검색 | 4.수정  ");
@@ -91,6 +86,6 @@ public class ContactMain01 {
         int menu = Integer.parseInt(scanner.nextLine());
         return menu;
     }
-    
+
 
 }//end of class...
