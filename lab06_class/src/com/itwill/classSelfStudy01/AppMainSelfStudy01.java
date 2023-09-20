@@ -8,7 +8,7 @@ public class AppMainSelfStudy01 {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("계좌번호1(을/를) 입력하세요 >> ");
 		String accountNumber1 = scanner.nextLine();
-		System.out.print("계좌번호2(을/를) 입력하세요 >> ");
+		System.out.print("계좌번호(을/를) 입력하세요 >> ");
 		String accountNumber2 = scanner.nextLine();
 		
 		// 계좌 생성

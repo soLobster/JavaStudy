@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ContactMain01 {
     public static final int MAX_LENGTH = 5; //배열의 길이(원소 개수).
+    // static final 멤버 변수들은 전부 대문자로 하는게 관례이다....
 
     private Scanner scanner = new Scanner(System.in); //입력 도구....
     private Contact[] contacts = new Contact[MAX_LENGTH]; //연락처들을 저장할 배열...
@@ -66,8 +67,6 @@ public class ContactMain01 {
             String number = scanner.nextLine();
             System.out.print("E-Mail을 입력해주세요 >> ");
             String email = scanner.nextLine();
-
-            scanner.nextLine();
             
             Contact c = new Contact(name, number, email); //String 3개를 저장하는 객체 C....
             contacts[count] = c; //연락처 객체를 배열에 저장...
