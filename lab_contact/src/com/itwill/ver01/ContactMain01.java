@@ -41,10 +41,6 @@ public class ContactMain01 {
 
         }//end of while...
 
-
-
-
-
         System.out.println();
         System.out.println("--------*****---------^^좋은하루^^---------*****---------");
     }//end of main...
@@ -60,19 +56,18 @@ public class ContactMain01 {
     }//end of readAllContacts method....
 
 
-    private void createContact() {
-        for(int i=0; i<contacts.length; i++) {
-            for(int j=i; j<count; j++) {
-                System.out.println("연락처를 저장합니다.");
-                System.out.print("이름을 입력해주세요 >> ");
-                String name = scanner.nextLine();
-                System.out.print("번호를 입력해주세요 >> ");
-                String number = scanner.nextLine();
-                System.out.print("E-Mail을 입력해주세요 >> ");
-                String email = scanner.nextLine();
-            }
-        }
-
+    private void createContact() { 
+        System.out.println("연락처를 저장합니다.");
+        System.out.print("이름을 입력해주세요 >> ");
+        String name = scanner.nextLine();
+        System.out.print("번호를 입력해주세요 >> ");
+        String number = scanner.nextLine();
+        System.out.print("E-Mail을 입력해주세요 >> ");
+        String email = scanner.nextLine();
+        
+        Contact c = new Contact(name, number, email);
+        contacts[count] = c; //연락처 객체를 배열에 저장...
+        
         count++;
     }
 
