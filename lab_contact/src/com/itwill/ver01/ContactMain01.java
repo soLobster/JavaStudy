@@ -48,11 +48,12 @@ public class ContactMain01 {
     private void readAllContacts() {
         System.out.println("저장된 연락처를 표기합니다.");
         System.out.println();
-        System.out.println("----연락처 목록----");
+        System.out.println("연락처 목록----");
         for(int i = 0; i<count; i++) { //배열에 실제로 저장된 연락처 개수만큼 반복....
-            System.out.printf("[%d] %s",i,contacts[i].toString()).println();
+            System.out.printf("%d) %s",i,contacts[i].toString()).println();
         }
-        System.out.println("-------------------");
+        System.out.println("---------------");
+        System.out.println();
     }//end of readAllContacts method....
 
 
@@ -65,11 +66,10 @@ public class ContactMain01 {
         System.out.print("E-Mail을 입력해주세요 >> ");
         String email = scanner.nextLine();
         
-        Contact c = new Contact(name, number, email);
+        Contact c = new Contact(name, number, email); //String 3개를 저장하는 객체 C....
         contacts[count] = c; //연락처 객체를 배열에 저장...
-        
-        count++;
-    }
+        count++; //배열에 저장된 연락처 개수를 1 증가...!!!
+    }//end of createContact....
 
 
     private int showMainMenu() {
@@ -80,7 +80,7 @@ public class ContactMain01 {
         System.out.print("메뉴를 선택하세요 >> ");
         int menu = Integer.parseInt(scanner.nextLine());
         return menu;
-    }
+    }//end of showMainMenu....
 
 
 }//end of class...
