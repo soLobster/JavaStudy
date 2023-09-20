@@ -20,6 +20,8 @@ public class Product {
         return this.productCode;
     }//getter.....
     
+
+
     public String getProductName() {
         return this.productName;
     }//getter.....
