@@ -10,8 +10,8 @@ public class Test {
     //참조변수가 있어야 호출가능한 메서드.
     public void printVariables() {
         System.out.println("----인스턴스 메서드----");
-        System.out.println("instanceVar >> "+instanceVar); //this.instanceVar
-        System.out.println("staticVar >> "+staticVar); //Test.staticVar
+        System.out.println("instanceVar >> "+instanceVar); //(=this.instanceVar)
+        System.out.println("staticVar >> "+staticVar); //(=Test.staticVar)
         System.out.println("-----------------------");
     }
     //static 메서드 수식어는 무조건 리턴타입 앞에 와야한다....

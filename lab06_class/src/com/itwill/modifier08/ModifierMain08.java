@@ -62,11 +62,22 @@ public final class ModifierMain08 { //final class
         
         System.out.println();
         
-        Test t = new Test();
-        System.out.println(t.instanceVar);
-        t.instanceVar = 100;
-        t.printVariables();
-        //System.out.println(t.printVariables());
+        Test t1 = new Test();
+        t1.instanceVar = 100;
+        t1.printVariables();
+        
+        System.out.println();
+        
+        Test t2 = new Test();
+        t2.instanceVar = 1010;
+        t2.staticVar = 12345; 
+        //-> 경고 발생 스태틱 필드를 마치 인스턴스 변수처럼 사용하고 있음(나쁜 코드)...
+        //   좋은 코드 :  Test.staticVar = 12345;
+        //   자바가 허용한다.....글로벌 변수(전역변수)....
+        t2.printVariables();
+        
+        t1.printVariables(); //Line 73에서 변경한 값이 메서드 호출에 영향을 미친다.
+        
         
     }
 
