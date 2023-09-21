@@ -61,46 +61,62 @@ public class BasicTv {
     }//end of powerOnOff...
 
     public int channelUp() {
-        if(channel < MAX_CHANNEL) {
-            channel++;
-        } else /*if(channel == MAX_CHANNEL)*/ {
-            channel = MIN_CHANNEL;
+        if(powerOn == true) {
+            if(channel < MAX_CHANNEL) {
+                channel++;
+            } else /*if(channel == MAX_CHANNEL)*/ {
+                channel = MIN_CHANNEL;
+            }
+        } else {
+            System.out.println("TV가 꺼져있어요!!");
         }
         //System.out.println("현재 채널 >> "+channel);
         return channel;
     }//end of channelUp...
 
     public int channelDown() {
-        if(MAX_CHANNEL >= channel && channel > MIN_CHANNEL) {
-            channel--;
-        } else /* if(channel == MIN_CHANNEL) */{
-            channel = MAX_CHANNEL;
+        if(powerOn==true) {
+            if(MAX_CHANNEL >= channel && channel > MIN_CHANNEL) {
+                channel--;
+            } else /* if(channel == MIN_CHANNEL) */{
+                channel = MAX_CHANNEL;
+            }
+        } else {
+            System.out.println("TV가 꺼져있어요!!");
         }
         //System.out.println("현재 채널 >> "+channel);
         return channel;
     }//end of channelDown....
 
     public int volumeUp() {
-        if(volume < MAX_VOLUME) {
-            volume++;
-        } else /*if(volume == MAX_VOLUME)*/ {
-            volume = MAX_VOLUME;
+        if(powerOn == true) {
+            if(volume < MAX_VOLUME) {
+                volume++;
+            } else /*if(volume == MAX_VOLUME)*/ {
+                volume = MAX_VOLUME;
+            } 
+        } else {
+            System.out.println("TV가 꺼져있어요!!");
         }
         //System.out.println("현재 볼륨 >> "+volume);
         return volume;
     }//end of volumeUp...
 
     public int volumeDown() {
-        if(MAX_VOLUME >= volume && volume > MIN_VOLUME) {
-            volume--;
-        }else /* if(volume == MIN_VOLUME) */ {
-            volume = MIN_VOLUME;
+        if(powerOn == true) {
+            if(MAX_VOLUME >= volume && volume > MIN_VOLUME) {
+                volume--;
+            }else /* if(volume == MIN_VOLUME) */ {
+                volume = MIN_VOLUME;
+            } 
+        }  else {
+            System.out.println("TV가 꺼져있어요!!");
         }
         //System.out.println("현재 볼륨 >> "+volume);
         return volume;
     }//end of volumeDown...
-    
-    
+
+
     public String toString() {
         return "BasicTv(powerOn = "+this.powerOn
                 +", channel = "+this.channel
