@@ -28,7 +28,7 @@ public class InheritanceMain01 {
         //System.out.println("현재 tv 채널은?? >> "+tv.getChannel()); //2
         tv.channelUp(); //++ 
         System.out.println(tv.toString());
-        
+
         //System.out.println("현재 tv 채널은?? >> "+tv.getChannel()); //0
 
         tv.channelUp();
@@ -48,8 +48,8 @@ public class InheritanceMain01 {
         //System.out.println("현재 tv 채널은?? >> "+tv.getChannel()); //2
         tv.powerOnOff();
         System.out.println();
-      
-        
+
+
         System.out.println();
         System.out.println("===volume Test===");
         System.out.println();
@@ -66,6 +66,7 @@ public class InheritanceMain01 {
         tv.volumeDown();
         System.out.println(tv.toString());
         //System.out.println("현재 tv 볼륨은?? >> "+tv.getVolume()); //1
+        tv.powerOnOff();
         tv.volumeDown();
         System.out.println(tv.toString());
         //System.out.println("현재 tv 볼륨은?? >> "+tv.getVolume()); //0
@@ -73,10 +74,10 @@ public class InheritanceMain01 {
         System.out.println(tv.toString());
         //System.out.println("현재 tv 볼륨은?? >> "+tv.getVolume()); //변동 없어야함..
         System.out.println();
-  
+
         tv.powerOnOff();
         System.out.println(tv.toString());
-        
+
     }//end of Main....
 
 }//end of InheritanceMain01 class..
