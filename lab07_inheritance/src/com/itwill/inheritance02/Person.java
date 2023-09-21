@@ -8,11 +8,14 @@ public class Person {
     //사람이라는 객체가 가져야하는 속성 필드로 정의
     private String name;
     
-    public Person() {}//기본 생성자...
+    public Person() {
+        System.out.println("Person() 호출");
+    }//기본 생성자...
     
     
     public Person(String name) {
         this.name = name;
+        System.out.println("Person(name) 호출");
     }//생성자....
 
     //getter, setter
