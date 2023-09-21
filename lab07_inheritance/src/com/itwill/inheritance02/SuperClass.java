@@ -4,9 +4,9 @@ public class SuperClass {
 
     private int a;
 
-//          public SuperClass() {
-//            this(0);
-//          } //기본 생성자..
+    //          public SuperClass() {
+    //            this(0);
+    //          } //기본 생성자..
 
     public SuperClass(int a) {
         //this(); -> 위의 기본 생성자를 호출하는 의미...[overLoading] 기본 생성자 호출.
