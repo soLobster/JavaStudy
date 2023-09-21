@@ -67,7 +67,7 @@ public class BasicTv {
             channel = MIN_CHANNEL;
         }
         return channel;
-    }
+    }//end of channelUp...
 
     public int channelDown() {
         if(MAX_CHANNEL >= channel && channel > MIN_CHANNEL) {
@@ -76,7 +76,7 @@ public class BasicTv {
             channel = MAX_CHANNEL;
         }
         return channel;
-    }
+    }//end of channelDown....
 
     public int volumeUp() {
         if(volume < MAX_VOLUME) {
@@ -85,7 +85,7 @@ public class BasicTv {
             volume = MAX_VOLUME;
         }
         return volume;
-    }
+    }//end of volumeUp...
 
     public int volumeDown() {
         if(MAX_VOLUME >= volume && volume > MIN_VOLUME) {
@@ -94,5 +94,5 @@ public class BasicTv {
             volume = MIN_VOLUME;
         }
         return volume;
-    }
-}
+    }//end of volumeDown...
+}//end of BasicTv class..

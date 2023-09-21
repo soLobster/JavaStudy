@@ -46,6 +46,6 @@ public class InheritanceMain01 {
         System.out.println("현재 tv 볼륨은?? >> "+tv.getVolume());
         tv.volumeDown();
         System.out.println("현재 tv 볼륨은?? >> "+tv.getVolume()); //변동 없어야함..
-    }
+    }//end of Main....
 
-}
+}//end of InheritanceMain01 class..
