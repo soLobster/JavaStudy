@@ -16,17 +16,21 @@ public class InheritanceMain02 {
         
         
         System.out.println("==inheritance==");
+        System.out.println("====s1=====");
         Student s1 = new Student(); //객체가 연속된 공간에 저장된다...(메모리)....
         System.out.println("s1 이름 >> "+s1.getName()); //superclass Person에서 상속받은 getter...
         System.out.println("s1 학교 >> "+s1.getSchoolName()); //subclass Student에서 작성한 getter...
         
-        s1.setName("Lebron James Jr");
-        s1.setSchoolName("LA Lakers");
-        System.out.println("======");
-        System.out.println("s1 이름 >> "+s1.getName());
-        System.out.println("s1 학교 >> "+s1.getSchoolName());
+//        s1.setName("Lebron James Jr");
+//        s1.setSchoolName("LA Lakers");
+//        System.out.println("======");
+//        System.out.println("s1 이름 >> "+s1.getName());
+//        System.out.println("s1 학교 >> "+s1.getSchoolName());
+//        
+        System.out.println("====s2=====");
         
         Student s2 = new Student("denver Nuggets");
+        System.out.println("s2 이름 >> "+s2.getName());
         System.out.println("s2 학교 >> "+s2.getSchoolName());
     }
 

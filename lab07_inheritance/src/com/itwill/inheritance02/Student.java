@@ -37,6 +37,14 @@ public class Student extends Person {
         this.schoolName = schoolName;
     }//아규먼트를 갖는 생성자 생성.....!
 
+    //2) 아규먼트 2개를 갖는 생성자....
+    public Student(String name, String SchoolName) {
+        super(name); // 상위 클래스의 아규먼트를 갖는 생성자를 명시적으로 호출...
+        //private는 상속을 해줘도 보이지 않는다...
+        this.schoolName = schoolName;
+        //super(name) super의 호출이 무조건 첫번째로 가야한다....컴파일 에러남.
+    }
+    
     //getter, setter.
     public String getSchoolName() {
         return schoolName;
