@@ -50,7 +50,7 @@ public class BasicTv {
 
     //Tv의 기능 메서드로 만들자...!
     public boolean powerOnOff() {
-        if(powerOn==true) {
+        if(powerOn) { //boolean 변수는 굳이 비교 연산자를 쓸 필요가 없당.
             powerOn = false;
             //System.out.println("TV 꺼짐");
         } else {
@@ -63,36 +63,48 @@ public class BasicTv {
     public int channelUp() {
         if(channel < MAX_CHANNEL) {
             channel++;
-        } else if(channel == MAX_CHANNEL) {
+        } else /*if(channel == MAX_CHANNEL)*/ {
             channel = MIN_CHANNEL;
         }
+        //System.out.println("현재 채널 >> "+channel);
         return channel;
     }//end of channelUp...
 
     public int channelDown() {
         if(MAX_CHANNEL >= channel && channel > MIN_CHANNEL) {
             channel--;
-        } else if(channel == MIN_CHANNEL) {
+        } else /* if(channel == MIN_CHANNEL) */{
             channel = MAX_CHANNEL;
         }
+        //System.out.println("현재 채널 >> "+channel);
         return channel;
     }//end of channelDown....
 
     public int volumeUp() {
         if(volume < MAX_VOLUME) {
             volume++;
-        } else if(volume==MAX_VOLUME){
+        } else /*if(volume == MAX_VOLUME)*/ {
             volume = MAX_VOLUME;
         }
+        //System.out.println("현재 볼륨 >> "+volume);
         return volume;
     }//end of volumeUp...
 
     public int volumeDown() {
         if(MAX_VOLUME >= volume && volume > MIN_VOLUME) {
             volume--;
-        }else if(volume==MIN_VOLUME) {
+        }else /* if(volume == MIN_VOLUME) */ {
             volume = MIN_VOLUME;
         }
+        //System.out.println("현재 볼륨 >> "+volume);
         return volume;
     }//end of volumeDown...
+    
+    
+    public String toString() {
+        return "BasicTv(powerOn = "+this.powerOn
+                +", channel = "+this.channel
+                +", volume = "+this.volume
+                +")";
+    }//end of toString.
 }//end of BasicTv class..
