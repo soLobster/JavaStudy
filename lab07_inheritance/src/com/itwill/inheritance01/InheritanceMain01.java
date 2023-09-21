@@ -1,5 +1,9 @@
 package com.itwill.inheritance01;
 //상속....!
+/*
+ * 부모 클래스가 가지고 있는 속성이나 여러가지를 그대로 물려받는다.
+ * 자식 클래스는 그것을 토대로 확장하겠다.....
+ */
 public class InheritanceMain01 {
 
     public static void main(String[] args) {
@@ -77,6 +81,13 @@ public class InheritanceMain01 {
 
         tv.powerOnOff();
         System.out.println(tv.toString());
+        
+        System.out.println("==================");
+        
+        //SmartTv 타입의 객체 생성
+        
+        SmartTv tv2 = new SmartTv();
+        System.out.println(tv2.toString());
 
     }//end of Main....
 
