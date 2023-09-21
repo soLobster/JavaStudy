@@ -35,7 +35,8 @@ public class ContactMain01 {
             case 3: //index 검색...
                 app.readContactByIndex();
                 break;
-            case 4:
+            case 4: //연락처 수정 기능...
+                app.updateContact();
                 break;
             default:
                 System.out.println("올바른 메뉴를 선택해주세요(0~4) :) ");
@@ -70,7 +71,7 @@ public class ContactMain01 {
             System.out.println("저장할 수 있는 최대 용량을 초과했습니다....");
             return;  //리턴 타입이 void니까 return을 해버리면 아예 밑에 코드들이 실행되지 않는다.....!!
         }
-        
+
         System.out.println("연락처를 저장합니다.");
         System.out.print("이름을 입력해주세요 >> ");
         String name = scanner.nextLine();
@@ -104,6 +105,49 @@ public class ContactMain01 {
         }
 
     }//end of readContactByIndex...
+
+    private void updateContact() {
+        System.out.println("---연락처 수정---");
+        System.out.print("수정할 인덱스를 입력해주세요 >> "); //인덱스를 입력받아서 이름,번호,메일 수정...
+        //인덱스를 찾아서 수정한다....
+        int index = Integer.parseInt(scanner.nextLine());
+        if(index < 0 || index >= count) { //에러값을 미리 찾아서 setting...! 인덱스가 정상 범위 밖인 경우....!
+            System.out.println();
+            System.out.println("수정하고자 하는 인덱스값이 없어요...");
+            System.out.println("정확한 값을 입력해 주세요...");
+            return; //메서드 종료!
+        }         
+        
+        System.out.println("수정 전 >> "+contacts[index].toString());
+        
+        
+        //Contact[] contacts = new Contact[MAX_LENGTH];
+        
+        System.out.print("이름 >> ");
+        String name = scanner.nextLine();
+        
+        
+        System.out.print("번호 >> ");
+        String phone = scanner.nextLine();
+        
+        System.out.print("이메일 >> ");
+        String email = scanner.nextLine();
+        
+//        방법 1) setter 사용...! 이 경우 이름, 번호, 메일중 한가지만 바꾸고자 할 때 적합해보임...!
+//        contacts[index].setName(name);
+//        contacts[index].setPhone(phone);
+//        contacts[index].setEmail(email);
+
+//        방법 2) 새 객체로 변경...! 
+        contacts[index] = new Contact(name, phone, email);
+        
+        System.out.println("수정 후 >> "+contacts[index].toString());
+        System.out.println("연락처 수정 성공....!");
+        
+    }//end of updateContact....
+
+
+
     private int showMainMenu() {
 
         System.out.println("----------------------------------------------------------");
