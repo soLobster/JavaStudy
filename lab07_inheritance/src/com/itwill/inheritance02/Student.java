@@ -17,6 +17,16 @@ public class Student extends Person {
      * 상위 클래스의 아규먼트(들)을 갖는 생성자는 자동으로 호출되지 않음.
      * 상위 클래스의 아규먼트(들)을 갖는 생성자를 이용하려면 명시적으로 super(...)를 호출해야 함...
      * super(...) 호출은 생성자 안에서 가장 먼저 작성되어야 함.
+     * 
+     * this의 의미
+     * 1) 생성된 객체 주소(참조값) >> this.field, this.method()
+     * 2) overloading 된 생성자를 의미 >> this(), this(arg) -> 자기 클래스에서 만들어진 다른 생성자들을 호출할 때 사용한다.
+     * 
+     * 
+     * 
+     * super의 의미
+     * 1) 생성된 부모 타입 객체 주소(참조값) >> super.field, super.method() 부모를 찾아간다. 부모가 공개한 필드, 메서드.
+     * 2) 상위 클래스의 생성자: super(), super(arg)..부모의 생성자를 호출.
      */
     
     //생성자 생성...고민 곰곰...
@@ -38,10 +48,11 @@ public class Student extends Person {
     }//아규먼트를 갖는 생성자 생성.....!
 
     //2) 아규먼트 2개를 갖는 생성자....
-    public Student(String name, String SchoolName) {
+    public Student(String name, String schoolName) {
         super(name); // 상위 클래스의 아규먼트를 갖는 생성자를 명시적으로 호출...
         //private는 상속을 해줘도 보이지 않는다...
         this.schoolName = schoolName;
+        System.out.println("Student(name,schoolName) 생성자 호출");
         //super(name) super의 호출이 무조건 첫번째로 가야한다....컴파일 에러남.
     }
     

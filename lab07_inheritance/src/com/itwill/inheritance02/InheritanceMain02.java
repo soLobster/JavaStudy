@@ -32,6 +32,10 @@ public class InheritanceMain02 {
         Student s2 = new Student("denver Nuggets");
         System.out.println("s2 이름 >> "+s2.getName());
         System.out.println("s2 학교 >> "+s2.getSchoolName());
+        System.out.println("====s3=====");
+        Student s3 = new Student("Curry", "Golden State Warriors");
+        System.out.println("s3 이름 >> "+s3.getName());
+        System.out.println("s3 학교 >> "+s3.getSchoolName());
     }
 
 }
