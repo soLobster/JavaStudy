@@ -26,6 +26,7 @@ public class InheritanceMain03 {
         //실제 객체는 HybridCar이지만, Car타입으로 선언 했기 때문에 
         //Car 타입의 메서드들만 사용가능한거다.
         System.out.println("=======");
+        
         ((HybridCar) car3).charger(100); //이케 하면 car3. 해도 HybridCar로 나온다...
         //케스팅 했을 때만 하이브리드의 메서드를 사용할 수 있는것 
         //그 밑으로는 사용 불가 !....는 아니다 어떤 변수에 저장하면 쓸 수는 있음.
