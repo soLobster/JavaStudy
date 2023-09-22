@@ -3,7 +3,6 @@ package com.itwill.inheritance01;
 public class InheritanceMain01 {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         BasicTv tv = new BasicTv();
 
         System.out.println("전원이 켜져 있는가? >> "+tv.isPowerOn());
