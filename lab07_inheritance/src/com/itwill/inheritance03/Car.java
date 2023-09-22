@@ -30,7 +30,7 @@ public class Car {
     }
     
     public void drive() {
-        System.out.println("speed >> "+speed);
-        System.out.println("fuel >> "+fuel);
+        System.out.println("speed >> "+this.speed);
+        System.out.println("fuel >> "+this.fuel);
     }
 }
