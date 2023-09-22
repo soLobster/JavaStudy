@@ -23,7 +23,7 @@ public class User {
     //ToDo = equals 재정의...- Id만 일치하면 같은 객채.
     //일치 true / false.
     
-    //ToDO hashCode 재정의...
+    //ToDO hashCode 재정의...String 해쉬코드 재정의....가 제일 쉬울거임
     
     
 }
