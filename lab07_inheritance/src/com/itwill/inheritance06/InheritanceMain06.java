@@ -15,24 +15,41 @@ public class InheritanceMain06 {
 		System.out.println("=========================================");
 
 		User user1 = new User();
-		user1 = new User("aaa", "2222");
-		System.out.println("user1."+user1);
-		System.out.println("user1."+user1.toString());
+
+		user1 = new User("abc","2222"); //id는 같고 비밀번호는 다르게
+
+		System.out.println("user1."+user1); //toString의 재정의...
+		//System.out.println("user1."+user1.toString());
 
 		//User user2 = new User("ABC");
 		//System.out.println("user2 >> "+user2);
 		//System.out.println("user2 >> "+user2.toString());
 
 		System.out.println();
-		User user3 = new User("abc","1234");
 
+		User user3 = new User("abc","3333");//id는 같고 비밀번호는 다르게
+
+		System.out.println("user3."+user3); //toString의 재정의...
+		//System.out.println("user3."+user3.toString());
+		System.out.println();
 		System.out.println("user1 Id equals user3 Id??");
-		System.out.println("answer >> "+user1.equals(user3));
+		System.out.println("answer >> "+user1.equals(user3)); //equas의 재정의....
 
 		System.out.println();
-		System.out.println("user3."+user3);
-		System.out.println("user3."+user3.toString());
+		System.out.println("HASHCODE");
+		System.out.println("user1 >> "+user1.hashCode()); //hashCode()의 재정의...
+		System.out.println("user3 >> "+user3.hashCode()); //hashCode()의 재정의...
 
+		System.out.println();
+		System.out.println("===========user3 Id 변화===========");
+		System.out.println();
+
+		user3 = new User("cba", "3333"); //user3 의 아이디 변화......
+		System.out.println("user1 Id equals user3 Id??");
+		System.out.println("answer >> "+user1.equals(user3));
+		System.out.println();
+		System.out.println("user1 >> "+user1.hashCode()); 
+		System.out.println("user3 >> "+user3.hashCode());
 		//System.out.print("user1 equals user2 ?? >> ");
 		//System.out.println(user1.equals(user2));
 		//System.out.print("user1 equals user3 ?? >> ");

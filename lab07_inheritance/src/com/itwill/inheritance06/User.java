@@ -1,5 +1,7 @@
 package com.itwill.inheritance06;
 
+import java.net.Inet4Address;
+
 public class User {
 	//field
 	private String id;
@@ -36,6 +38,8 @@ public class User {
 
 
 	//ToDO hashCode 재정의...String 해쉬코드 재정의....가 제일 쉬울거임
-
-
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
 }
