@@ -17,10 +17,39 @@ package com.itwill.inheritance04;
 final class Super {}
 //class Sub extends Super{} // 컴파일 에러... Super는 파이널로 선언 된 클래스라 상속 받지 못한다.
 
+class A {
+    public void test1() {
+        System.out.println("test1");
+    }
+    public final void test2() {
+        System.out.println("test2");
+    }
+}
+
+class B extends A {
+    @Override //-> 파이널이 아닌 메서드는 하위 클래스에서 재정의할 수 있음....
+    public void test1() {
+        System.out.println("test1");
+    }
+    
+//    public final void test2() { //상위 타입의 final 메서드는 재정의 할 수 없음....컴파일 에러...
+//        System.out.println("test2");
+//    }
+}
+
 public class InheritanceMain04 {
 
+    public static final int MAX = 100;
+    //파이널 초기화...............명시...................!!!!!!
+    private final int n;
+    
+    public InheritanceMain04(int n) {
+        this.n = n;
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+       
 
     }
 
