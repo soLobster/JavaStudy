@@ -14,6 +14,7 @@ public interface MemberDao {
      * @return Member 배열(Member[]).
      */
     Member[] read(); //Model 패키지에 있는 Member를 임포트한다.
+    //public abstract(생략)....
 
     //멤버 저장하기
     /*
