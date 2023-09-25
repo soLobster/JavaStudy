@@ -1,5 +1,13 @@
 package com.itwill.interface01;
 
+import com.itwill.database.DatabaseModule;
+import com.itwill.database.OracleDatabase;
+
+import static com.itwill.database.DatabaseModule.DB_VERSION;
+//import static 문장...
+//인터페이스 또는 클래스에서 static으로 선언된 필드 또는 메서드 이름을 임포트하는 문장...
+
+//import static 문장...
 /*
  * 인터페이스(interface)
  * 사용하는 목적....팀이나 회사간의 분업이나 협업을 하기 위해서 
@@ -19,7 +27,21 @@ package com.itwill.interface01;
 public class InterfaceMain01 {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+        // OracleDatabase 타입의 객체 생성.
+        // OracleDatabase db = new OracleDatabase();
+
+        DatabaseModule db = new OracleDatabase();
+        //SuperType var = new SubType() 다형성.....
+
+
+        int result = db.insert("데이터");
+        System.out.println("삽입 결과 >> "+result);
+
+        result = db.select();
+        System.out.println("검색 결과 >> "+result);
+
+        //DatabaseModule.DB_VERSION = 2; -> 컴파일 에러: final 변수는 변경 불가...
+        
 
     }
 

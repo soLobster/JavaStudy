@@ -4,14 +4,14 @@ public class OracleDatabase implements DatabaseModule {
 
     @Override
     public int select() {
-        // TODO Auto-generated method stub
-        return 0;
+        System.out.println("Oracle 테이블 검색.");
+        return 1;
     }
 
     @Override
     public int insert(String value) {
-        // TODO Auto-generated method stub
-        return 0;
+        System.out.println("Oracle 테이블 삽입.");
+        return 1;
     }
 
 }

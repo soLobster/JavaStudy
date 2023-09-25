@@ -19,6 +19,4 @@ public interface DatabaseModule {
     
     int insert(String value);
     
-    
-    
 }
