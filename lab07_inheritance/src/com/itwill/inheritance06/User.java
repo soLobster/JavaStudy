@@ -1,7 +1,5 @@
 package com.itwill.inheritance06;
 
-import java.net.Inet4Address;
-
 public class User {
 	//field
 	private String id;
@@ -16,7 +14,7 @@ public class User {
 		this.id = id;
 		this.pwd =pwd;
 	} //fin....
-
+	
 	//ToDo = toString 재정의...
 	@Override
 	public String toString() {
