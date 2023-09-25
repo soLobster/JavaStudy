@@ -12,7 +12,8 @@ package com.itwill.interface01;
  * 인터페이스 자체는 객체를 생성할 수 없고, 인터페이스를 "구현"하는 클래스를 작성해서 객체를 생성할 수 있다.
  * -> class 클래스이름 implements 인터페이스 {.....} 
  * 클래스는 단일 상속만 가능하지만, 인터페이스 구현은 개수 제한이 없다.
- * 
+ * 인터페이스는 상위 인터페이스를 상속(확장)할 수도 있음...
+ * interface 하위 인터페이스 extends 상위 인터페이스 {...}
  */
 
 public class InterfaceMain01 {
