@@ -41,13 +41,32 @@ class Fish extends Animal{
     }
 }
 
+class Bird extends Animal {
+    @Override
+    public void move() {
+        System.out.println("새들은 새새새....");
+    }
+
+}
+
 public class InheritanceMain07 {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         // 추상클래스 Animal 타입으로 객체 생성.
         //Animal a = new Animal();//Cannot instantiate...인스턴스화 할 수 없다...객체를 생성할 수 없다. 컴파일 에러.
-        System.out.println();
+
+        //다형성 
+        Animal[] animals = {
+                new Dog(),
+                new Fish(),
+                new Bird()
+        }; //애니멀 배열 선언.
+      
+        for(Animal a : animals) {
+            a.move();
+        }
+        
     }
 
 }
