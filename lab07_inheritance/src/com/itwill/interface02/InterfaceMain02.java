@@ -20,15 +20,28 @@ package com.itwill.interface02;
 interface Test { //상수만 멤버로 가진다...
     //1. [public static final] 필드를 멤버로 가진다.
     int VERSION = 1;
+    
     //2. [public abstract] 메서드
     void test();
+    
     //3. [public] static 메서드
     static void staticMethod() {
         System.out.println("공개 스태틱 메서드");
     }; 
+    
     //4. [public] default 메서드...
     default void defaultMethod() { //static이 아니라 호출 불가.
         System.out.println("공개 기본 메서드");
+    }
+    
+    //5. private static 메서드
+    private static void privateStaticMethod() {
+        System.out.println("비공개 스태틱 메서드");
+    }
+    
+    //6. private 메서드
+    private void privateMethod() {
+        System.out.println("비공개 바디가 구현된 메서드...");
     }
     
 }//end interface....
