@@ -49,7 +49,7 @@ public class MemberMain {
         System.out.println("\n-------비밀번호 수정하기-------");
         System.out.print("비밀번호를 수정할 회원 인덱스를 입력하세요...>> ");
         int index = Integer.parseInt(scanner.nextLine());
-        System.out.print("바꿀 비밀번호를 입력해 주세요...>> ");
+        System.out.print("새로운 비밀번호를 입력해 주세요...>> ");
         String pwd = scanner.nextLine();
         int result = dao.update(index, pwd);
 
