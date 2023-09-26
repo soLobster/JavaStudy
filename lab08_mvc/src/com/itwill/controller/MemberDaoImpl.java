@@ -44,6 +44,19 @@ public class MemberDaoImpl implements MemberDao{
         return index >=0 && index < count;
     }
     
+    /**
+     * 회원정보를 저장할 수 있는 배열에 빈 공간이 있으면 true
+     * 그렇지 않으면 false를 리턴하는 method.
+     * 
+     * 배열(members)에 현재까지 저장된 원소 개수(count)가 배열의 길이보다 작으면 true...
+     * 
+     * @return true or false.
+     */
+    
+    public boolean isMemoryAvail() { //빈 공간이 남아있으면 true 아님 false...
+        return count < MAX_LENGTH;
+    }
+    
     
     @Override
     public Member[] read() {
@@ -59,7 +72,7 @@ public class MemberDaoImpl implements MemberDao{
     @Override
     public int create(Member member) {
         int result = 0; //실패...
-        if(count < MAX_LENGTH) { //배열의 전체 길이보다 카운트가 작다. 연락처 추가 가능하다는 의미.
+        if(isMemoryAvail()) { //배열의 전체 길이보다 카운트가 작다. 연락처 추가 가능하다는 의미.
             members[count] = member;
             count++;
             result = 1;

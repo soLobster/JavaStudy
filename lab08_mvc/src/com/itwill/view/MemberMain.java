@@ -49,7 +49,8 @@ public class MemberMain {
         System.out.println("\n-------비밀번호 변경하기-------");
         System.out.print("비밀번호를 변경할 회원 인덱스를 입력하세요...>> ");
         int index = Integer.parseInt(scanner.nextLine());
-
+        //index >= 0 && index < dao.getCount(); -> 유효한 인덱스(정상)...
+        //index < 0 || index >= dao.getCount(); -> 유효하지 않은 인덱스...
         if(!dao.isValidIndex(index)) {
             System.out.println("> 해당 인덱스는 없는 회원 정보임....");
             return; //메서드 종료...
