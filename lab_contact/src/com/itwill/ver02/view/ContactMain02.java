@@ -9,11 +9,11 @@ public class ContactMain02 {
 
     private Scanner scanner = new Scanner(System.in);
     private ContactDaoImpl dao = ContactDaoImpl.getInstance();
-    
+
     public static void main(String[] args) {
         System.out.println("------연락처 ver 0.2 ------");
         ContactMain02 app = new ContactMain02();
-       
+
         boolean run = true;
 
         while(run) {
@@ -28,6 +28,7 @@ public class ContactMain02 {
                 app.readAllContacts();
                 break;
             case 2: // 새 연락처 추가하기....
+                app.createContact();
                 break;
             case 3: // 저장된 연락처 검색하기....
                 break;
@@ -41,15 +42,43 @@ public class ContactMain02 {
         System.out.println("------연락처 ver 0.2 ------");
     }//end of main...
 
-    private void readAllContacts() {
-        System.out.println("=> 저장된 연락처(들)을/를 불러옵니다.....\n");
-        System.out.println("-------연락처 목록-------");
-        
-        Contact[] contacts = dao.read();
-        for(int i = 0; i<contacts.length; i++) {
-            System.out.printf("%d) %s",i,contacts[i]).println();
+    private void createContact() {
+        if(!dao.isMemoryAvail()) {
+            System.out.println("연락처가 꽉_찼습니다.....!\n");
+            return;
         }
-        System.out.println("-------------------------\n");
+        System.out.println("=> 새로운 연락처를 저장합니다.....");
+        System.out.print("이름을 입력하세요....>> ");
+        String name = scanner.nextLine();
+        System.out.print("번호를 입력하세요....>> ");
+        String phone = scanner.nextLine();
+        System.out.print("E-mail을 입력하세요....>> ");
+        String email = scanner.nextLine();
+
+        Contact person = new Contact(name, phone, email);
+        int result = dao.create(person);
+        
+        if(result==1) {
+            System.out.println("=> 연락처 저장 성공....!\n");
+        } else {
+            System.out.println("=> 연락처 저장 실패....!\n");
+        }
+        
+    }//end createContact Method....
+
+    private void readAllContacts() {
+        if(dao.getCount()==0) {
+            System.out.println("=> 저장된 연락처가 없습니다.");
+        } else if(dao.getCount()!=0) {
+            System.out.println("=> 저장된 연락처(들)을/를 불러옵니다.....\n");
+            System.out.println("-------연락처 목록-------");
+
+            Contact[] contacts = dao.read();
+            for(int i = 0; i<contacts.length; i++) {
+                System.out.printf("%d) %s",i,contacts[i]).println();
+            }
+            System.out.println("-------------------------\n");
+        }
     }//end readAllContacts Method....
 
     private int showMainMenu() {
@@ -62,7 +91,7 @@ public class ContactMain02 {
         int menu = Integer.parseInt(scanner.nextLine());
         return menu;
 
-    }//end of showMainMenu....
+    }//end of showMainMenu Method....
 
 
 }//end of class...

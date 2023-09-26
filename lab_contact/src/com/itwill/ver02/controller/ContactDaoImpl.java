@@ -17,9 +17,9 @@ public class ContactDaoImpl implements ContactDao {
             instance = new ContactDaoImpl();
         }
         return instance;
-    }//singlton....
+    }//singleton....
     
-    public static final int MAX_LENGTH = 5; //연락처 배열 최대 길이...
+    public static final int MAX_LENGTH = 1; //연락처 배열 최대 길이...
     
     private Contact[] contacts = new Contact[MAX_LENGTH];
     
@@ -27,6 +27,10 @@ public class ContactDaoImpl implements ContactDao {
     
     public int getCount() {
         return count;
+    }
+    
+    public boolean isMemoryAvail() { //빈 배열 확인... 
+        return count < MAX_LENGTH;
     }
     
     @Override
@@ -40,8 +44,13 @@ public class ContactDaoImpl implements ContactDao {
 
     @Override
     public int create(Contact contact) {
-        // TODO Auto-generated method stub
-        return 0;
+        int result = 0; // 연락처 저장 실패...
+        if(count < MAX_LENGTH) { //실제 저장된 배열의 길이(count)를 최대 저장소와 비교한다.
+            contacts[count] = contact;
+            count++;
+            result = 1;
+        }
+        return result;
     }
 
     @Override

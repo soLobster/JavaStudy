@@ -13,7 +13,7 @@ public class Contact {
     //constructor
     public Contact() {} // 기본 생성자....
     
-    public Contact(String name, String Phone, String email) {
+    public Contact(String name, String phone, String email) {
         this.name = name;
         this.phone = phone;
         this.email = email;
