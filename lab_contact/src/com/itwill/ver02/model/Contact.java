@@ -45,7 +45,7 @@ public class Contact {
         this.email = email;
     }
     
-    public String toString() {
+    public String toString() { //연락처 정보(이름,번호,메일)을 문자열로 만들어서 리턴하는 메서드....
         return "Contact ( name = "+this.name+
                 ", phone = "+this.phone+
                 ", email = "+this.email+
