@@ -39,11 +39,11 @@ public class MemberDaoImpl implements MemberDao{
      * @param index 유효한지 검사할 인덱스.(int).
      * @return. 유효하면 true 또는 false....
      */
-    
+
     public boolean isValidIndex(int index) {
         return index >=0 && index < count;
     }
-    
+
     /**
      * 회원정보를 저장할 수 있는 배열에 빈 공간이 있으면 true
      * 그렇지 않으면 false를 리턴하는 method.
@@ -52,12 +52,12 @@ public class MemberDaoImpl implements MemberDao{
      * 
      * @return true or false.
      */
-    
+
     public boolean isMemoryAvail() { //빈 공간이 남아있으면 true 아님 false...
         return count < MAX_LENGTH;
     }
-    
-    
+
+
     @Override
     public Member[] read() {
         // TODO Auto-generated method stub
@@ -73,9 +73,9 @@ public class MemberDaoImpl implements MemberDao{
     public int create(Member member) {
         int result = 0; //실패...
         if(isMemoryAvail()) { //배열의 전체 길이보다 카운트가 작다. 연락처 추가 가능하다는 의미.
-            members[count] = member;
-            count++;
-            result = 1;
+            members[count] = member; //members[count]에 member를 할당.
+            count++;    //count 하나 증가.
+            result = 1; //성공
         }
         return result;
     }

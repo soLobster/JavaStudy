@@ -87,6 +87,10 @@ public class MemberMain {
         System.out.println("\n-------신규 회원 등록 하기-------");
 
         //id, pwd 입력전에 이미 배열이 꽉 찼는지 확인해주는 것이 필요
+        if(!dao.isMemoryAvail()) {
+            System.out.println("> 저장 공간이 꽉_찼습니다....");
+            return;
+        }
 
         System.out.print("Id를 입력하세요...>> ");
         String id = scanner.nextLine();
@@ -102,7 +106,7 @@ public class MemberMain {
             System.out.println(">> 신규 회원 등록 실패...!");
         }
 
-    }//end registerNewMember...
+    }//end createNewMember...
 
 
     public void readAllMembers() {
