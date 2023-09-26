@@ -10,13 +10,13 @@ public class Member {
 
     public Member() {}
     //기본 생성자...
-    
+
     public Member(String id, String pwd) {
         this.id = id;
         this.pwd = pwd;
     }//아규먼트 생성자...
 
-    
+
     //getter/setter
     public String getId() {
         return id;
@@ -33,11 +33,11 @@ public class Member {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-    
+
     @Override
     public String toString() {
-        
-        return "Member [id = "+this.id+", pwd = "+this.pwd+"]";
+
+        return "Member ( id = "+this.id+", pwd = "+this.pwd+" )";
     }//over_ride toString.
-    
+
 }

@@ -19,13 +19,13 @@ public class MemberDaoImpl implements MemberDao{
         }
         return instance;
     }
-    
+
     public static final int MAX_LENGTH = 2; // 배열 최대 길이(원소 개수)
-    
+
     private Member[] members = new Member[MAX_LENGTH]; // 회원 정보 배열.
-    
+
     private int count = 0; // private으로 카운트 선언...!
-    
+
     public int getCount() { // public으로 count getter...!  -> setter는 제공하지 않는다...
         return count;       // 값을 변경할 수 없다 -> 이것이 데이터의 캡슐화..
     }
@@ -43,20 +43,32 @@ public class MemberDaoImpl implements MemberDao{
 
     @Override
     public int create(Member member) {
-        // TODO Auto-generated method stub
-        return 0;
+        int result = 0; //실패...
+        if(count < MAX_LENGTH) { //배열의 전체 길이보다 카운트가 작다. 연락처 추가 가능하다는 의미.
+            members[count] = member;
+            count++;
+            result = 1;
+        }
+        return result;
     }
 
     @Override
     public Member read(int index) {
-        // TODO Auto-generated method stub
-        return null;
+        if(index >= 0 && index < count) {
+            return members[index];   
+        } else {
+            return null;
+        }
     }
 
     @Override
     public int update(int index, String pwd) {
-        // TODO Auto-generated method stub
-        return 0;
+        int result = 0;
+        if(index >= 0 && index < count) {
+            members[index].setPwd(pwd);
+            result = 1;
+        } 
+        return result;
     }
 
 }
