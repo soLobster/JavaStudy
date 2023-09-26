@@ -3,6 +3,7 @@ package com.itwill.view;
 import java.util.Scanner;
 
 import com.itwill.controller.MemberDaoImpl;
+import com.itwill.model.Member;
 
 //MVC(Model-View-Controller) 아키텍쳐에서 view 역할 담당 클래스. - UI (입/출)
 
@@ -24,6 +25,7 @@ public class MemberMain {
                 run = false;
                 break;
             case 1: // 회원정보 전체 목록 보기.
+                app.readAllMembers();
                 break;
             case 2:
                 break;
@@ -38,7 +40,16 @@ public class MemberMain {
         }//end while...
         
         System.out.println("*** 프로그램 종료 ***");
-    }//end main main...
+    }//end main...
+
+    public void readAllMembers() {
+        System.out.println("\n-----회원 전체 목록 보기 ------");
+        Member[] members = dao.read();
+        for(Member m : members) {
+            System.out.println(m);
+        }
+        System.out.println("--------------------------------");
+    }//end readAllMembers Method...
 
     public int selectMainMenu() {
         System.out.println("\n-------------------------------------------------------------------------------");
@@ -48,6 +59,8 @@ public class MemberMain {
         System.out.print("선택 >> ");
         int menu = Integer.parseInt(scanner.nextLine());
         return menu;
-    }
+    }//end of selectMainMenu Method...
+    
+    
     
 }//end class MemberMain...
