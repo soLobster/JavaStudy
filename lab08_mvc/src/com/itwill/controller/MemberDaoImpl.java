@@ -30,6 +30,21 @@ public class MemberDaoImpl implements MemberDao{
         return count;       // 값을 변경할 수 없다 -> 이것이 데이터의 캡슐화..
     }
 
+    /*
+     * 아규먼트 index가 유효한 범위의 인덱스인 지를 검사.
+     * 
+     * index >= 0 이고, index가 배열의 저장된 원소 개수(count)보다 작으면 true 
+     * 그렇지 않으면 false가 된다.
+     * 
+     * @param index 유효한지 검사할 인덱스.(int).
+     * @return. 유효하면 true 또는 false....
+     */
+    
+    public boolean isValidIndex(int index) {
+        return index >=0 && index < count;
+    }
+    
+    
     @Override
     public Member[] read() {
         // TODO Auto-generated method stub
@@ -54,7 +69,7 @@ public class MemberDaoImpl implements MemberDao{
 
     @Override
     public Member read(int index) {
-        if(index >= 0 && index < count) {
+        if(isValidIndex(index)) {
             return members[index];   
         } else {
             return null;
@@ -64,7 +79,7 @@ public class MemberDaoImpl implements MemberDao{
     @Override
     public int update(int index, String pwd) {
         int result = 0;
-        if(index >= 0 && index < count) {
+        if(isValidIndex(index)) {
             members[index].setPwd(pwd);
             result = 1;
         } 

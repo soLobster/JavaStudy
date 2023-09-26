@@ -78,6 +78,9 @@ public class MemberMain {
 
     public void createNewMember() {
         System.out.println("\n-------신규 회원 등록 하기-------");
+        
+        //id, pwd 입력전에 이미 배열이 꽉 찼는지 확인해주는 것이 필요
+        
         System.out.print("Id를 입력하세요...>> ");
         String id = scanner.nextLine();
         System.out.print("pwd를 입력하세요...>> ");
