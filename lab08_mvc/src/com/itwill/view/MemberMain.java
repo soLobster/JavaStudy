@@ -46,20 +46,26 @@ public class MemberMain {
     }//end main...
 
     private void updatePassword() {
-        System.out.println("\n-------비밀번호 수정하기-------");
-        System.out.print("비밀번호를 수정할 회원 인덱스를 입력하세요...>> ");
+        System.out.println("\n-------비밀번호 변경하기-------");
+        System.out.print("비밀번호를 변경할 회원 인덱스를 입력하세요...>> ");
         int index = Integer.parseInt(scanner.nextLine());
+
+        if(!dao.isValidIndex(index)) {
+            System.out.println("> 해당 인덱스는 없는 회원 정보임....");
+            return; //메서드 종료...
+        }
+
         System.out.print("새로운 비밀번호를 입력해 주세요...>> ");
         String pwd = scanner.nextLine();
         int result = dao.update(index, pwd);
 
         if(result == 1) {
-            System.out.println("> 비밀번호 수정 성공....!");
+            System.out.println("> 비밀번호 변경 성공....!");
         }else {
-            System.out.println("> 비밀번호 수정 실패....!");
-        }
+            System.out.println("> 비밀번호 변경 실패....!");
 
-    }
+        }
+    }//end updatePassword....
 
     public void readMemberByIndex() { //main에서만 사용할거면 접근 제어잘를 private 해도 상관 없다.
         System.out.println("\n-------회원 인덱스 검색하기-------");
@@ -74,13 +80,13 @@ public class MemberMain {
         }
 
         System.out.println("----------------------------------");
-    }
+    }//end readMemberByIndex...
 
     public void createNewMember() {
         System.out.println("\n-------신규 회원 등록 하기-------");
-        
+
         //id, pwd 입력전에 이미 배열이 꽉 찼는지 확인해주는 것이 필요
-        
+
         System.out.print("Id를 입력하세요...>> ");
         String id = scanner.nextLine();
         System.out.print("pwd를 입력하세요...>> ");

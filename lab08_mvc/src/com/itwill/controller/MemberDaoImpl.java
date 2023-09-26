@@ -30,7 +30,7 @@ public class MemberDaoImpl implements MemberDao{
         return count;       // 값을 변경할 수 없다 -> 이것이 데이터의 캡슐화..
     }
 
-    /*
+    /**
      * 아규먼트 index가 유효한 범위의 인덱스인 지를 검사.
      * 
      * index >= 0 이고, index가 배열의 저장된 원소 개수(count)보다 작으면 true 
