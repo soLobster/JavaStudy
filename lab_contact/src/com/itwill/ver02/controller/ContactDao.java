@@ -39,8 +39,9 @@ public interface ContactDao {
    /**
     * 연락처 수정하기...
     * 기존의 연락처를 수정(update)하는 기능.
-    * 배열의 특정 인덱스의 연락처 중 이메일, 번호를 수정하는 메서드.
+    * 배열의 특정 인덱스의 연락처 중 이름, 이메일, 번호를 수정하는 메서드.
     * @param index -> (int) 수정할 연락처의 인덱스.
+    * @param name -> (String) 수정할 연락처의 이름.
     * @param phone -> (String) 수정할 번호.
     * @param email -> (String) 수정할 이메일.
     * @return 수정에 성공하면 1, 실패시 0 리턴...
