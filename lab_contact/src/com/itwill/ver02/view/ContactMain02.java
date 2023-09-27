@@ -58,13 +58,14 @@ public class ContactMain02 {
 				System.out.println("정확한 값을 입력해 주세요...");
 				return; //메서드 종료!
 			}
-			
+			System.out.print("새로운 이름을 입력해주세요...>> ");
+			String name = scanner.nextLine();
 			System.out.print("새로운 번호를 입력해주세요...>> ");
 			String phone = scanner.nextLine();
 			System.out.print("새로운 이메일을 입력해주세요...>> ");
 			String email = scanner.nextLine();
 			
-			int result = dao.update(index, phone, email);
+			int result = dao.update(index,name,phone,email);
 			
 			if(result==1) {
 				System.out.println("연락처 수정에 성공했습니다....!");

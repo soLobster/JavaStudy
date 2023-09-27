@@ -46,5 +46,5 @@ public interface ContactDao {
     * @return 수정에 성공하면 1, 실패시 0 리턴...
     */
    
-   int update(int index, String phone, String email);
+   int update(int index, String name , String phone, String email);
 }

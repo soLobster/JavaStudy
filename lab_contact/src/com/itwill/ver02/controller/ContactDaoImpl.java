@@ -63,9 +63,10 @@ public class ContactDaoImpl implements ContactDao {
 	}//Over_ride read(int index)
 
 	@Override
-	public int update(int index, String phone, String email) {
+	public int update(int index,String name, String phone, String email) {
 		int result = 0;
 		if(index >= 0 && index < count) {
+			contacts[index].setName(name);
 			contacts[index].setPhone(phone);
 			contacts[index].setEmail(email);
 			result = 1;
