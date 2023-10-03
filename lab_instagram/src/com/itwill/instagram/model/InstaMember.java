@@ -8,14 +8,16 @@ public class InstaMember {
 	private String password;
 	private String email;
 	private String phone;
-
+	private String name;
+	
 	//constructor
 	public InstaMember() {}
 
-	public InstaMember(String id, String password, String email, String phone) {
+	public InstaMember(String id, String password, String email, String name, String phone) {
 		this.id = id;
 		this.password = password;
 		this.email = email;
+		this.name = name;
 		this.phone = phone;
 	}//아규먼트를 갖는 생성자....
 
@@ -51,11 +53,20 @@ public class InstaMember {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String toString() {
 		return "Instagram Account ( Id = "+this.id+
 				", Password = "+this.password+
 				", E-mail = "+this.email+
+				", Name = "+this.name+
 				", Phone = "+this.phone+
 				" )";
 	}//toString over_ride...

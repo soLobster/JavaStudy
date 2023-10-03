@@ -14,7 +14,15 @@ public class InstaMemberDaoImpl implements InstaMemberDao{
 		return instance;
 	}//singleton...
 	
+	public static final int MAX_LENGTH = 1;
 	
+	private InstaMember[] members = new InstaMember[MAX_LENGTH];
+	
+	private int count = 0;
+	
+	public int getCount() {
+		return count;
+	}
 	
 	@Override
 	public InstaMember[] read() {
@@ -24,8 +32,19 @@ public class InstaMemberDaoImpl implements InstaMemberDao{
 
 	@Override
 	public int create(InstaMember instaMember) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		if(count < MAX_LENGTH) {
+			members[count] = instaMember;
+			count++;
+			result = 1;
+		}
+		return result;
 	}//Over_ride create...
+
+	@Override
+	public InstaMember read(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }//end class InstaMemberDaoImpl....

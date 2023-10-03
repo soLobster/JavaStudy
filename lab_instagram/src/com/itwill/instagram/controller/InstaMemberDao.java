@@ -21,6 +21,15 @@ public interface InstaMemberDao {
 	 */
 	
 	int create(InstaMember instaMember);
+
+	/**
+	 * 회원 검색하기....
+	 * 
+	 * 찾고자 하는 회원의 아이디. 
+	 * @param index
+	 * @return
+	 */
 	
+	InstaMember read(int index);
 	
 }
