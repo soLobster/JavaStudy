@@ -20,18 +20,21 @@ public class InstagramMain {
 			int choice = app.firstWindow();
 
 			switch(choice) {
-			case 0:
+			case 0: //exit instagram...
 				run = false;
 				System.out.println("EXIT INSTAGRAM :)");
 				break;
-			case 1:
+			case 1: //log in instagram....
 				app.signInMethod();
 				break;
-			case 2:
+			case 2: //sign up instagram....
 				app.signUpMethod();
 				break;
-			case 3:
+			case 3: //find Id or Password...
 				app.findIdPwd();
+				break;
+			case 100:
+				app.showAllMember();
 				break;
 			default:
 				System.out.println("Choose Wrong Menu Number");
@@ -43,6 +46,20 @@ public class InstagramMain {
 		}//end of while...
 
 	}//end of main...
+
+	private void showAllMember() {
+		if(dao.getCount()==0) {
+			System.out.println(" >> No Account...");
+		} else if(dao.getCount()!=0) {
+			System.out.println("Account List....");
+			
+			InstaMember[] members = dao.read();
+			for(int i = 0; i<members.length; i++) {
+				System.out.printf("%d) %s",i,members[i]);
+			}
+		}
+		System.out.println();
+	}//end showAllMember...
 
 	private void findIdPwd() {
 		// TODO Auto-generated method stub
@@ -73,7 +90,12 @@ public class InstagramMain {
 	} // end of signUpMethod...
 
 	private void signInMethod() {
-		// TODO Auto-generated method stub
+		System.out.println("Sign-In.....");
+		System.out.print("Type Id.... >> ");
+		String id = scanner.nextLine();
+		System.out.print("Type Password....>> ");
+		String password = scanner.nextLine();
+		
 		
 	}
 
@@ -89,4 +111,5 @@ public class InstagramMain {
 		return choice;
 	}//end of firstWindow()...
 
+	
 }//end of class InstagramMain...

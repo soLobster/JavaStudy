@@ -26,8 +26,11 @@ public class InstaMemberDaoImpl implements InstaMemberDao{
 	
 	@Override
 	public InstaMember[] read() {
-		// TODO Auto-generated method stub
-		return null;
+		InstaMember[] memberArray = new InstaMember[count];
+		for(int i = 0; i<count; i++) {
+			memberArray[i] = members[i];
+		}
+		return memberArray;
 	}//Over_ride read()...
 
 	@Override
