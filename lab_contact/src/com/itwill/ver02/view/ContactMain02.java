@@ -64,9 +64,9 @@ public class ContactMain02 {
 			String phone = scanner.nextLine();
 			System.out.print("새로운 이메일을 입력해주세요...>> ");
 			String email = scanner.nextLine();
-			
+
 			int result = dao.update(index,name,phone,email);
-			
+
 			if(result==1) {
 				System.out.println("연락처 수정에 성공했습니다....!");
 			} else {
