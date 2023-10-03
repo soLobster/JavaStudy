@@ -17,7 +17,7 @@ public class InstagramMain {
 		boolean run = true;
 
 		while(run) {
-			int choice = app.loginWindow();
+			int choice = app.firstWindow();
 
 			switch(choice) {
 			case 0:
@@ -77,7 +77,7 @@ public class InstagramMain {
 		
 	}
 
-	private int loginWindow() {
+	private int firstWindow() {
 		System.out.println("Welcome to Instagram Console App");
 		System.out.println("1. Sign In");
 		System.out.println("2. Sign Up");
@@ -87,6 +87,6 @@ public class InstagramMain {
 		int choice = Integer.parseInt(scanner.nextLine());
 
 		return choice;
-	}//end of loginWindow()...
+	}//end of firstWindow()...
 
 }//end of class InstagramMain...
