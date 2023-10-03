@@ -1,6 +1,8 @@
 package com.itwill.instagram.model;
 
-public class InstaMembers {
+//DTO....
+
+public class InstaMember {
 	//field...
 	private String id;
 	private String password;
@@ -8,9 +10,9 @@ public class InstaMembers {
 	private String phone;
 
 	//constructor
-	public InstaMembers() {}
+	public InstaMember() {}
 
-	public InstaMembers(String id, String password, String email, String phone) {
+	public InstaMember(String id, String password, String email, String phone) {
 		this.id = id;
 		this.password = password;
 		this.email = email;
