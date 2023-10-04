@@ -42,7 +42,7 @@ public class ContactMain02 {
         System.out.println("------연락처 ver 0.2 ------");
     }//end of main...
 
-    private void createContact() {
+    private void createContact() { //새로운 연락처를 저장하는 메서드.....
         if(!dao.isMemoryAvail()) {
             System.out.println("연락처가 꽉_찼습니다.....!\n");
             return;
@@ -66,7 +66,7 @@ public class ContactMain02 {
         
     }//end createContact Method....
 
-    private void readAllContacts() {
+    private void readAllContacts() { //저장된 연락처를 불러오는 메서드...
         if(dao.getCount()==0) {
             System.out.println("=> 저장된 연락처가 없습니다.");
         } else if(dao.getCount()!=0) {
@@ -81,7 +81,7 @@ public class ContactMain02 {
         }
     }//end readAllContacts Method....
 
-    private int showMainMenu() {
+    private int showMainMenu() { //메인 메뉴 표시 메서드....
 
         System.out.println("--------------------------------------------------------------");
         System.out.println("| 0) 종료 | 1) 목록 | 2) 새 연락처 | 3) 인덱스 검색 | 4)수정 |");
