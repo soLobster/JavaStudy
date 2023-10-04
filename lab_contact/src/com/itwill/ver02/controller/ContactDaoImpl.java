@@ -35,6 +35,7 @@ public class ContactDaoImpl implements ContactDao {
 
 	@Override
 	public Contact[] read() {
+	    //NULL이 아닌 배열 원소들만 복사하자...
 		Contact[] contactArray = new Contact[count];
 		for(int i = 0; i < count; i++) {
 			contactArray[i] = contacts[i];

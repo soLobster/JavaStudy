@@ -73,7 +73,7 @@ public class ContactMain02 {
    
 
 	private void readContactByIndex() {
-		if(dao.getCount() == 0) {
+		if(dao.getCount() == 0) { 
 			System.out.println("=> 저장된 연락처가 없습니다.");
 			return;//메서드 종료...
 		} else if (dao.getCount()!=0) {
