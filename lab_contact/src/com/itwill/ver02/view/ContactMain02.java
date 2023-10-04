@@ -44,20 +44,7 @@ public class ContactMain02 {
 		System.out.println("------연락처 ver 0.2 ------");
 	}//end of main...
 
-<<<<<<< HEAD
-    private void createContact() { //새로운 연락처를 저장하는 메서드.....
-        if(!dao.isMemoryAvail()) {
-            System.out.println("연락처가 꽉_찼습니다.....!\n");
-            return;
-        }
-        System.out.println("=> 새로운 연락처를 저장합니다.....");
-        System.out.print("이름을 입력하세요....>> ");
-        String name = scanner.nextLine();
-        System.out.print("번호를 입력하세요....>> ");
-        String phone = scanner.nextLine();
-        System.out.print("E-mail을 입력하세요....>> ");
-        String email = scanner.nextLine();
-=======
+
 	private void updateContact() {
 		if(dao.getCount()==0) {
 			System.out.println("=> 저장된 연락처가 없습니다.");
@@ -78,32 +65,12 @@ public class ContactMain02 {
 			String phone = scanner.nextLine();
 			System.out.print("새로운 이메일을 입력해주세요...>> ");
 			String email = scanner.nextLine();
->>>>>>> 14d96e86fc58ef34c0b620f6c8b084e5640df7b9
 
 			int result = dao.update(index,name,phone,email);
-
-<<<<<<< HEAD
-    private void readAllContacts() { //저장된 연락처를 불러오는 메서드...
-        if(dao.getCount()==0) {
-            System.out.println("=> 저장된 연락처가 없습니다.");
-        } else if(dao.getCount()!=0) {
-            System.out.println("=> 저장된 연락처(들)을/를 불러옵니다.....\n");
-            System.out.println("-------연락처 목록-------");
-=======
-			if(result==1) {
-				System.out.println("연락처 수정에 성공했습니다....!");
-			} else {
-				System.out.println("연락처 수정에 실패했습니다....!");
-			}
 		}
->>>>>>> 14d96e86fc58ef34c0b620f6c8b084e5640df7b9
+	}
 
-
-<<<<<<< HEAD
-    private int showMainMenu() { //메인 메뉴 표시 메서드....
-=======
-	}//end updateContact()
->>>>>>> 14d96e86fc58ef34c0b620f6c8b084e5640df7b9
+   
 
 	private void readContactByIndex() {
 		if(dao.getCount() == 0) {
