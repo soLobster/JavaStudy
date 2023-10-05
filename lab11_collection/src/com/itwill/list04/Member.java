@@ -35,6 +35,8 @@ public class Member {
                 ", PWD = "+this.password+"]";
     }
     
+  
+    
     @Override
     //id가 일치하면 equals는 true, 그렇지 않으면 false 리턴.
     public boolean equals(Object obj) {
