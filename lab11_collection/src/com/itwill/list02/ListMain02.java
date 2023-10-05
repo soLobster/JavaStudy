@@ -11,7 +11,9 @@ public class ListMain02 {
         LinkedList<Integer> numbers = new LinkedList<Integer>();
         //2.numbers에 정수 (난수 범위 0이상 100미만) 20개를 저장.
         for(int i=0; i<20; i++) {
-            numbers.add(random.nextInt(100));
+            numbers.add(random.nextInt(100)); //nextInt는 int 타입 반환이지만 자동으로 래핑해준다.
+            //numbers.add(Integer.valueOf(random.nextInt(100))); 원래는 이렇게 해야한다. 
+            //그렇지만 너무 복잡해.
         }
         //3.numbers를 출력..
         System.out.println(numbers);
@@ -26,6 +28,17 @@ public class ListMain02 {
         }
         //6.odds를 출력
         System.out.println(odds);
+        
+        
+        //numbers의 정수들 중에서 짝수들의 제곱을 저장하는 리스트....
+        LinkedList<Integer> evenSquares = new LinkedList<Integer>();
+        for(int i=0; i<numbers.size(); i++) {
+            if(numbers.get(i)%2==0) {
+                
+                evenSquares.add(numbers.get(i)*numbers.get(i));
+            }
+        }
+        System.out.println(evenSquares);
     }//end of main...
 
 }//end of class...
