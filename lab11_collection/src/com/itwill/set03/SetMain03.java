@@ -14,5 +14,16 @@ public class SetMain03 {
             num.add(random.nextInt(10));
         }
         System.out.println(num);
+        
+        boolean run = true;
+        while(run) {
+            if(num.size()!=5) {
+                num.add(random.nextInt(10));
+            } else if(num.size() == 5) {
+                run = false;
+                break;
+            }
+        }
+        System.out.println(num);
     } //end main
 }//end class
