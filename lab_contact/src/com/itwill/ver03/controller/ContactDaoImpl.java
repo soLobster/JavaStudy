@@ -9,23 +9,28 @@ import com.itwill.ver02.model.Contact;
 public class ContactDaoImpl implements ContactDao {
 
     private static ContactDaoImpl instance = null;
-    
+
     private ContactDaoImpl() {}
-    
+
     public static ContactDaoImpl getInstance() {
         if(instance == null) {
             instance = new ContactDaoImpl();
         }
         return instance;
     }
-       
+
     private List<Contact> contacts = new ArrayList<Contact>(); 
-   
-    @Override
-    public List<Contact> read() {
-       return contacts;
+
+    public boolean isValidIndex(int index) {
+        return index >= 0 && index < contacts.size();
     }
     
+    
+    @Override
+    public List<Contact> read() {
+        return contacts;
+    }//read()
+
     @Override
     public int create(Contact contact) {
         //새로운 연락처 정보를 리스트에 저장
@@ -38,21 +43,29 @@ public class ContactDaoImpl implements ContactDao {
         }
         // 저장 성공  1 리턴
         return result;
-    }
+    }//end int create(Contact contact)
 
     @Override
     public Contact read(int index) {
-        
-
-    }
-
-   
+        if(isValidIndex(index)) {
+            return contacts.get(index);
+        } else {
+            return null;
+        }
+    }//end Contact read(int index)....
 
     @Override
     public int update(int index, Contact contact) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+        int result = 0;
+ 
+        if(isValidIndex(index)) {
+           contacts.set(index, contact);
+            result = 1;
+        } else {
+            result = 0;   
+        }
+        return result;
+    }//end update()....
 
     @Override
     public int delete(int index) {
