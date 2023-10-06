@@ -24,13 +24,24 @@ public class ContactDaoImpl implements ContactDao {
     public boolean isValidIndex(int index) {
         return index >= 0 && index < contacts.size();
     }
-    
+    public boolean isContainContacts() {
+    	return contacts.size() > 0;
+    }
     
     @Override
     public List<Contact> read() {
         return contacts;
     }//List<Contact> read()
 
+    @Override
+    public Contact read(int index) {
+        if(isValidIndex(index)) {
+            return contacts.get(index);
+        } else {
+            return null;
+        }
+    }//end Contact read()....
+    
     @Override
     public int create(Contact contact) {
         //새로운 연락처 정보를 리스트에 저장
@@ -44,15 +55,6 @@ public class ContactDaoImpl implements ContactDao {
         // 저장 성공  1 리턴
         return result;
     }//end create(Contact contact)
-
-    @Override
-    public Contact read(int index) {
-        if(isValidIndex(index)) {
-            return contacts.get(index);
-        } else {
-            return null;
-        }
-    }//end Contact read()....
 
     @Override
     public int update(int index, Contact contact) {
@@ -79,4 +81,4 @@ public class ContactDaoImpl implements ContactDao {
         return result;
     }//end delete()...
 
-}//end implements
+}//end implements ContactDaoImpl
