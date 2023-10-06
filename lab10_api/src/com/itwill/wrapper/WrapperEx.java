@@ -19,7 +19,11 @@ public class WrapperEx {
         // Integer 타입 객체 : int 값을 Integer 객체로 생성.
         Integer number1 = Integer.valueOf(1111); //Integer 객체 임을 주의!!
         System.out.println(number1);
-        
+
+        Hash
+
+
+
         Integer number2 = Integer.valueOf("100"); //String 값을 Integer 객체로 생성.
         System.out.println(number2);
         

@@ -1,6 +1,7 @@
 package com.itwill.map01;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /*
  * Map<K, V>
@@ -61,6 +62,12 @@ public class MapMain01 {
         //2) key가 map에 있는 경우, 해당 키에 매핑되어 있는 값(value)를 변경.
         map.put(10, "허균");
         System.out.println(map);
+        
+        //map과 반복문.
+        Set<Integer> kset = map.keySet();
+        for(Integer k : kset) {
+            System.out.println(k+ "=" + map.get(k));
+        }
     }
 
 }
