@@ -17,21 +17,20 @@ public class SetMain03 {
         }
         System.out.println(num1);
         System.out.println("count = "+count1);
-        
+
         boolean run = true;
         HashSet<Integer> num2 = new HashSet<Integer>();
         int count2 = 0;
         while(run) {
-            if(num2.size()!=5) {
+            if(num2.size() != 5) {
                 num2.add(random.nextInt(10));
                 count2 ++;
             } else if(num2.size() == 5) {
                 run = false;
-                break;
+                //break;
             }
         }
         System.out.println(num2);
         System.out.println("count = "+count2);
-        
     } //end main
 }//end class
