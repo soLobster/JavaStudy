@@ -2,7 +2,7 @@ package com.itwill.ver03.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 import com.itwill.ver02.model.Contact;
 
@@ -29,7 +29,7 @@ public class ContactDaoImpl implements ContactDao {
     @Override
     public List<Contact> read() {
         return contacts;
-    }//read()
+    }//List<Contact> read()
 
     @Override
     public int create(Contact contact) {
@@ -43,7 +43,7 @@ public class ContactDaoImpl implements ContactDao {
         }
         // 저장 성공  1 리턴
         return result;
-    }//end int create(Contact contact)
+    }//end create(Contact contact)
 
     @Override
     public Contact read(int index) {
@@ -52,7 +52,7 @@ public class ContactDaoImpl implements ContactDao {
         } else {
             return null;
         }
-    }//end Contact read(int index)....
+    }//end Contact read()....
 
     @Override
     public int update(int index, Contact contact) {
@@ -77,6 +77,6 @@ public class ContactDaoImpl implements ContactDao {
 			result = 0;
 		}
         return result;
-    }
+    }//end delete()...
 
-}
+}//end implements
