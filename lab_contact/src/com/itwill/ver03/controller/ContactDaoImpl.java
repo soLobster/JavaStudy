@@ -69,8 +69,14 @@ public class ContactDaoImpl implements ContactDao {
 
     @Override
     public int delete(int index) {
-        // TODO Auto-generated method stub
-        return 0;
+        int result = 0;
+        if(isValidIndex(index)) {
+        	contacts.remove(index);
+        	result = 1;
+        } else {
+			result = 0;
+		}
+        return result;
     }
 
 }
