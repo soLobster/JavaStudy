@@ -38,6 +38,7 @@ public class MapMain03 {
                 wordCount.put(splitSentence[i], wordCount.get(splitSentence[i])+1);
                 System.out.println("현재 : "+wordCount);
                 System.out.println("------------");
+                
             } else { //단어가 Map에 key로 존재하지 않으면,
                 
                  //"단어=1"을 map에 저장.
@@ -48,8 +49,17 @@ public class MapMain03 {
                 System.out.println("-------------");
             }
         }
-        
         System.out.println("최종: "+wordCount);
-       
+        System.out.println();
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        HashMap<String, Integer> wordCount2 = new HashMap<String, Integer>();
+        System.out.println(wordCount2);
+        for(String w : splitSentence) {
+            Integer count = wordCount2.getOrDefault(w, 0);
+            wordCount2.put(w, count+1);
+            System.out.println(wordCount2);
+        }
+        System.out.println("최종: "+wordCount2);
+        
     }
 }
