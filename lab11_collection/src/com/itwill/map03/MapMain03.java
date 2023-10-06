@@ -17,7 +17,11 @@ public class MapMain03 {
         //sentence 문자열을 공백으로 구분해서 단어들로만 이루어진 배열을 만듦.
         String[] splitSentence = sentence.split(" ");
  
-        System.out.println("splitSentence : "+Arrays.toString(splitSentence));
+        for(String s : splitSentence) {
+            System.out.print(s + " ");
+            
+        }
+        System.out.println();
         System.out.println("====================");
         // splitSentence : [하늘, 바다, 땅, 하늘, 땅, 사람, 하늘, sky, sky]
         // splitSentence:    0     1    2    3    4    5    6     7     8
