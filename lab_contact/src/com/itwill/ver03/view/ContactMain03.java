@@ -54,7 +54,7 @@ public class ContactMain03 {
 			int index = Integer.parseInt(scanner.nextLine());
 
 			int removeContact = dao.delete(index);
-
+			
 			if(removeContact==1) {
 				System.out.println(">> 연락처 삭제 성공....!");
 			} else {
