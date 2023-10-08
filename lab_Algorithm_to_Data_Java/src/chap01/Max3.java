@@ -1,6 +1,5 @@
 package chap01;
 
-import java.security.PublicKey;
 import java.util.Scanner;
 
 public class Max3 {
