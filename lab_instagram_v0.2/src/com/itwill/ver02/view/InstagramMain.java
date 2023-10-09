@@ -1,6 +1,7 @@
 package com.itwill.ver02.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.itwill.ver02.controller.InstagramDao;
@@ -10,7 +11,7 @@ public class InstagramMain {
 
     private Scanner scanner = new Scanner(System.in);
     private InstagramDao dao = InstagramDao.getInstance();
-    private ArrayList<Instagram> instagrams = new ArrayList<Instagram>();
+    private HashMap<String, Instagram> instaMap = new HashMap<String, Instagram>();
 
     public static void main(String[] args) {
 
@@ -27,6 +28,9 @@ public class InstagramMain {
             case 1://인스터 회원 가입....
                 app.InstaSignUp();
                 break;
+            case 2://인스타 로그인....
+                app.InstaLogIn();
+                break;
             case 3://인스타 아이디, 비밀번호 조회
                 app.InstaFindIdOrPwd();
                 break;
@@ -37,12 +41,50 @@ public class InstagramMain {
 
     }//main
 
+    private void InstaLogIn() {
+        System.out.println("Instagram Log In");
+        System.out.print("Enter E-mail >> ");
+        String email = scanner.nextLine();
+        System.out.print("Enter Password >> ");
+        String password = scanner.nextLine();
+
+        boolean idCheck = dao.login(email, password);
+
+        if(idCheck) {} 
+        else {
+            System.out.println("Sorry Your Id or Password is Wrong...");
+        }
+
+    }//end InstaLogin()
+
     private void InstaFindIdOrPwd() {
-        System.out.println("Find your Id , Password...");
-        System.out.print("Please Enter Your Sign-Up Email >> ");
+        System.out.println("Find your email, Password...");
+        System.out.println("Find email -> Type 1");
+        System.out.println("Reset Password -> Type 2");
+        int num = Integer.parseInt(scanner.nextLine());
+
+        boolean run = true;
+        while(run) {
+            switch(num) {
+            case 1:
+                System.out.println("Find E-mail");
+                System.out.print("Type Your name >> ");
+                String name = scanner.nextLine();
+                System.out.print("Type Your phone >> ");
+                String phone = scanner.nextLine();
+                
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Type Correct Number 1 or 2");
+            }
+        }
+
+        System.out.print("Please Enter Your Sign-Up E-mail >> ");
         String email = scanner.nextLine();
         Instagram findIdOrPwd = dao.read(email);
-        
+
         if(findIdOrPwd != null) {
             System.out.println("your register Info >> ");
             System.out.println(findIdOrPwd);
@@ -63,9 +105,9 @@ public class InstagramMain {
         String phone = scanner.nextLine();
         System.out.print("Enter User Name >> ");
         String name = scanner.nextLine();
-        
+
         int result = dao.create(id, password, email, phone, name);
-        
+
         if(result==1) {
             System.out.println(">> HELLO "+id+" Wellcome to Instagram :)");
         } else {
