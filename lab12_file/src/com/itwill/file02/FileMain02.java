@@ -23,6 +23,7 @@ public class FileMain02 {
 
             long startTime = System.currentTimeMillis(); // 파일 복사 시작 시간.
             
+<<<<<<< HEAD
             
             while(true) {
            //    int read = in.read(); //1) 파일에서 1바이트 읽음.
@@ -34,6 +35,13 @@ public class FileMain02 {
                 
                 if(read == -1) { //end of file (EOF) 
                    break;
+=======
+            while(true) {
+                int read = in.read(); //1) 파일에서 1바이트 읽음.
+
+                if(read == -1) { //end of file (EOF) 
+                    break;
+>>>>>>> f52446d43c80d7a825ff5dc6ec5a33221b16609d
                 }
 
                 //out.write(read); // 1) 파일에 1바이트를 씀.
