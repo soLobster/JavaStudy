@@ -45,7 +45,7 @@ public class FileMain01 {
             // 1. FIS 객체 생성.
             in = new FileInputStream(fileName);
             //FOS 객체 생성.
-            out = new FileOutputStream(copyFile);
+            out = new FileOutputStream(copyFile); //기존 파일에 내용이 있다면 전부 삭제 후 복사.
 
             boolean run = true;
 
