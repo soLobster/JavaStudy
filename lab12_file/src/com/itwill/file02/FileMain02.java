@@ -22,15 +22,23 @@ public class FileMain02 {
             out = new FileOutputStream(dest);
 
             long startTime = System.currentTimeMillis(); // 파일 복사 시작 시간.
-            boolean run = true;
-            while(run) {
-                int read = in.read(); //1) 파일에서 1바이트 읽음.
-
+            
+            
+            while(true) {
+           //    int read = in.read(); //1) 파일에서 1바이트 읽음.
+                byte[] buffer = new byte[4*1024]; //4kb = 4096byte.
+                int read = in.read(buffer); // 파일에서 4kb씩 읽음.
+                //buffer : 파일에서 읽은 내용을 저장하기 위한 바이트 배열.
+                //return 값 >> 파일에서 실제로 읽은 바이트 수.
+                
+                
                 if(read == -1) { //end of file (EOF) 
-                    run = false;
+                   break;
                 }
 
-                out.write(read); // 1) 파일에 1바이트를 씀.
+                //out.write(read); // 1) 파일에 1바이트를 씀.
+                
+                out.write(buffer); // 2) 파일에 4kb 씩 씀.
             }
 
             long endTime = System.currentTimeMillis(); //파일 복사 종료 시간.
