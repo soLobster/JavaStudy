@@ -22,12 +22,12 @@ public class FileMain02 {
             out = new FileOutputStream(dest);
 
             long startTime = System.currentTimeMillis(); // 파일 복사 시작 시간.
-            boolean run = true;
-            while(run) {
+            
+            while(true) {
                 int read = in.read(); //1) 파일에서 1바이트 읽음.
 
                 if(read == -1) { //end of file (EOF) 
-                    run = false;
+                    break;
                 }
 
                 out.write(read); // 1) 파일에 1바이트를 씀.
