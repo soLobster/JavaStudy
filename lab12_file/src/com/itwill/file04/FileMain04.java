@@ -40,7 +40,7 @@ public class FileMain04 {
             }
             System.out.println(dest+"파일 복사 성공.");
         }catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
     }
