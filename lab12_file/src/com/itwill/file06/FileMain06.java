@@ -20,19 +20,23 @@ public class FileMain06 {
         // FileOutputStream, BufferedOutputStream, ObjectOutputStream 사용.
         // ArrayList를 파일에 쓰는 시간을 측정하고 출력.
         String file = "data/product1.dat";
-
+        List<Product> products = new ArrayList<Product>(1_000_000);
+        Product p = new Product(0, " ", 0);
+        
         try(
                 //리소스 생성.
                 FileOutputStream out = new FileOutputStream(file);
                 BufferedOutputStream bout = new BufferedOutputStream(out);
                 ObjectOutputStream oout = new ObjectOutputStream(bout);
                 ) {
-            //파일에 쓸 Product ArrayList 객체 생성.
-            List<Product> products = new ArrayList<Product>(1_000_000);
-            Product p = new Product(0, file, 0);
+            //파일에 쓸 Product ArrayList 객체 생성.    
             long start = System.currentTimeMillis();
             
             for(int i=0; i<products.size(); i++) {
+                int id = i;
+                String name = null;
+                int price = i;
+                p = new Product(id, name , price);
                 products.add(i, p);
             }
 
