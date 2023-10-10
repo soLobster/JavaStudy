@@ -20,31 +20,29 @@ public class FileMain06 {
         // FileOutputStream, BufferedOutputStream, ObjectOutputStream 사용.
         // ArrayList를 파일에 쓰는 시간을 측정하고 출력.
         String file = "data/product1.dat";
-        List<Product> products = new ArrayList<Product>(1_000_000);
-        Product p = new Product(0, " ", 0);
-        
+        //파일에 쓸 Product ArrayList 객체 생성.    
+        List<Product> products = new ArrayList<Product>();
+        // 타입 객체 백만개 저장 for 문...
+        for(int i=0; i<1000000; i++) {
+            products.add(new Product(i, "SAMPLE ["+i+"]" , i*5));
+        }
+        //try-catch 
         try(
                 //리소스 생성.
                 FileOutputStream out = new FileOutputStream(file);
                 BufferedOutputStream bout = new BufferedOutputStream(out);
                 ObjectOutputStream oout = new ObjectOutputStream(bout);
                 ) {
-            //파일에 쓸 Product ArrayList 객체 생성.    
-            long start = System.currentTimeMillis();
-            
-            for(int i=0; i<products.size(); i++) {
-                int id = i;
-                String name = null;
-                int price = i;
-                p = new Product(id, name , price);
-                products.add(i, p);
-            }
+            long start = System.currentTimeMillis(); //시작 타임.
 
             //자바 객체를 쓴다..
             oout.writeObject(products);
-            long end = System.currentTimeMillis();
+            
+            long end = System.currentTimeMillis(); //끝나는 타임.
+            
             System.out.println("파일 작성 성공");
-            System.out.println("Write Time >> "+(end - start)+"ms");
+            System.out.println("Write Time >> "+(end - start)+"ms"); //시간 계산.
+            
         } catch (Exception e) {
             e.printStackTrace();
         } 
@@ -62,12 +60,17 @@ public class FileMain06 {
             bin = new BufferedInputStream(in);
             oin = new ObjectInputStream(bin);
 
-            long start = System.currentTimeMillis();
-            Object prod =  oin.readObject();
-            System.out.println(prod);
-            long end = System.currentTimeMillis();
+            long start = System.currentTimeMillis(); // 읽기 시작 타임.
             
+            Object prod =  oin.readObject();
+            
+            System.out.println(prod);
+            System.out.println();
+            
+            long end = System.currentTimeMillis(); //  읽기 끝나는 시간.
+
             System.out.println("Read Time >> "+(end-start)+"ms");
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
