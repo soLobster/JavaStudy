@@ -7,8 +7,6 @@ import java.io.IOException;
 public class FileMain02 {
 
     public static void main(String[] args) {
-
-
         // 대용량 파일 복사.
         // data/ratings.dat 파일을 읽고, data/ratings_copy.dat 파일에 복사.
         // 1) read() 한바이트씩. , write(int b) 사용할 때 시간 측정.
@@ -19,6 +17,7 @@ public class FileMain02 {
 
         FileInputStream in = null;  //파일 읽기 통로.
         FileOutputStream out = null; //파일 쓰기 통로.
+
         try {
             in = new FileInputStream(origin);
             out = new FileOutputStream(dest);
@@ -36,6 +35,12 @@ public class FileMain02 {
                     break;
                 }
                 out.write(buffer,0,read);
+                /*
+                 * write(byte[] b, int off, int len)
+                 * b: byte 배열. 파일에 쓸 데이터를 가지고 있는 바이트 배열.
+                 * off: offset. 배열에 b에서 읽기 시작할 인덱스.
+                 * len: length 파일에 쓸 바이트 수. 
+                 */
             }
 
             long end = System.currentTimeMillis();
