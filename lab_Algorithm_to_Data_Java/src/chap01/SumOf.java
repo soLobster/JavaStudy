@@ -11,6 +11,8 @@ public class SumOf {
         int a = scanner.nextInt();
         System.out.print("Enter b >> ");
         int b = scanner.nextInt();
+        
+        
 
         System.out.println("Sum of "+a+" ~ "+b+" = "+sumof(a, b));
     }
@@ -20,6 +22,8 @@ public class SumOf {
         int max = 0;
         int min = 0;
 
+        
+        
         if(a>b) {
             max = a;
             min = b;

@@ -11,34 +11,33 @@ public class ContactMain03 {
 
 	private Scanner scanner = new Scanner(System.in);
 	private ContactDaoImpl dao = ContactDaoImpl.getInstance();
-	private ArrayList<Contact> contacts = new ArrayList<Contact>();
-
+	
 	public static void main(String[] args) {
 
 		ContactMain03 app = new ContactMain03();
 
 		boolean run = true;
 		while(run) {
-			int menu = app.showMainMenu();
+			MainMenu menu = app.showMainMenu();
 
 			switch(menu) {
-			case 0:// 프로그램 종료...
+			case QUIT:// 프로그램 종료...
 				run = false;
 				System.out.println("=> 프로그램을 종료 합니다....!\n");
 				break;
-			case 1: // 연락처 목록 불러오기....            
+			case SELECT_ALL: // 연락처 목록 불러오기....            
 				app.readAllContacts();
 				break;
-			case 2: // 새 연락처 추가하기....
+			case CREATE: // 새 연락처 추가하기....
 				app.createContact();
 				break;
-			case 3: // 저장된 연락처 검색하기....
+			case SELECT_BY_INDEX: // 저장된 연락처 검색하기....
 				app.readContactByIndex();
 				break;
-			case 4: // 저장된 연락처 수정하기....
+			case UPDATE: // 저장된 연락처 수정하기....
 				app.updateContact();
 				break;
-			case 5: //연락처 삭제....
+			case DELETE: //연락처 삭제....
 				app.deleteContact();
 				break;
 			default: 
@@ -47,6 +46,7 @@ public class ContactMain03 {
 		}
 	}//end of main...
 
+	
 	private void deleteContact() {
 		if(dao.isContainContacts()) {
 			System.out.println(">> 연락처를 삭제합니다....");
@@ -140,7 +140,7 @@ public class ContactMain03 {
 		}
 	}//end readAllContacts....
 
-	private int showMainMenu() {
+	private MainMenu showMainMenu() {
 		System.out.println("Welcome to CONTACT 0.3v");
 		System.out.println("1. Read All Contacts");
 		System.out.println("2. Add New Contact");
@@ -149,9 +149,24 @@ public class ContactMain03 {
 		System.out.println("5. Delete Contact");
 		System.out.println("0. Exit CONTACT 0.3v");
 		System.out.print("Enter your choice >> ");
-		int menu = Integer.parseInt(scanner.nextLine());
+		int n = InputInteger();
 
-		return menu;
+		return MainMenu.getMenu(n);
 	}//end showMainMenu()....
+
+
+    private int InputInteger() {
+        int n = 0;
+        while (true) {
+            try {
+                n = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("정수 입력> ");
+            }
+        }
+        
+        return n;
+    }
 
 }//end of class...

@@ -20,14 +20,14 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     private List<Contact> contacts = new ArrayList<Contact>(); 
-
+    //List는 인터페이스 객체를 생성할 수 없기에 ArrayList로 선언.
     public boolean isValidIndex(int index) {
         return index >= 0 && index < contacts.size();
     }
     public boolean isContainContacts() {
-    	return contacts.size() > 0;
+        return contacts.size() > 0;
     }
-    
+
     @Override
     public List<Contact> read() {
         return contacts;
@@ -41,7 +41,7 @@ public class ContactDaoImpl implements ContactDao {
             return null;
         }
     }//end Contact read()....
-    
+
     @Override
     public int create(Contact contact) {
         //새로운 연락처 정보를 리스트에 저장
@@ -59,9 +59,17 @@ public class ContactDaoImpl implements ContactDao {
     @Override
     public int update(int index, Contact contact) {
         int result = 0;
- 
+
         if(isValidIndex(index)) {
-           contacts.set(index, contact);
+            contacts.set(index, contact);
+
+            /*
+             * Contact c =contacts.get(index) -> 업데이트 전의 연락처.
+             * c.setName(contact.getName()); -> 이름 업데이트
+             * c.setName(contact.getPhone()); -> 번호 업데이트
+             * c.setEmail(contact.getEmail()): -> 메일 업데이트.
+             */
+
             result = 1;
         } else {
             result = 0;   
@@ -73,11 +81,11 @@ public class ContactDaoImpl implements ContactDao {
     public int delete(int index) {
         int result = 0;
         if(isValidIndex(index)) {
-        	contacts.remove(index);
-        	result = 1;
+            contacts.remove(index);
+            result = 1;
         } else {
-			result = 0;
-		}
+            result = 0;
+        }
         return result;
     }//end delete()...
 

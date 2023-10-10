@@ -21,8 +21,6 @@ public class SumGauss {
             System.out.println("1부터 입력한 n 정수 까지의 합 = "+sum/2);
             
         }
-        
-        
 
     } //end main
 
