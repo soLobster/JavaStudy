@@ -1,6 +1,12 @@
 package com.itwill.ver04.fileutil;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +18,10 @@ public class FileUtil {
     // 상수 정의
     public static final String DATA_DIR = "data"; // 데이터 파일을 저장하는 폴더 이름
     public static final String DATA_FILE = "contacts.dat"; // 데이터 파일 이름
-    
+
     // private 생성자 -> 다른 클래스에서는 객체 생성할 수 없음.
     private FileUtil() {}
-    
+
     /**
      * 연락처 데이터 파일을 저장하는 폴더가 만들어져 있지 않으면, 폴더를 새로 생성하고
      * File 객체를 리턴. 이미 폴더가 만들어져 있으면, 그 폴더의 File 객체를 리턴.
@@ -25,10 +31,15 @@ public class FileUtil {
     public static File initDataDir() {
         File dir = new File(DATA_DIR);
         // TODO: 폴더가 없는 경우, 폴더를 만들기.
-        
+        if(!dir.exists()) {
+            dir.mkdir();
+            System.out.println("폴더 생성 성공");
+        } else {
+            System.out.println("폴더가 이미 존재 합니다.");
+        }
         return dir;
     }
-    
+
     /**
      * 파일에 저장된 연락처 정보를 읽고, 그 결과를 List<Contact> 타입 객체로 리턴.
      * 
@@ -36,15 +47,32 @@ public class FileUtil {
      */
     public static List<Contact> readDataFromFile() {
         List<Contact> list = null;
-        
-//        String file = DATA_DIR + File.separator + DATA_FILE; //-> "data/contacts.dat"
+
+        //        String file = DATA_DIR + File.separator + DATA_FILE; //-> "data/contacts.dat"
         File file = new File(DATA_DIR, DATA_FILE); //-> data/contacts.dat 파일 객체
-        
+
         // TODO: 파일을 읽어서 List<Contact>를 생성.
-        
+        if(file.exists()) {
+            try (
+                    FileInputStream fin = new FileInputStream(file);
+                    BufferedInputStream bin = new BufferedInputStream(fin);
+                    ObjectInputStream oin = new ObjectInputStream(bin);
+                    ){
+
+                list = (List<Contact>) oin.readObject();
+                
+//                System.out.println("Contacts Count : "+list.size());
+//                for(Contact f : list) {
+//                    System.out.println(f);
+//                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return list;
     }
-    
+
     /**
      * 연락처들의 리스트를 파일에 쓰기.
      * 
@@ -52,10 +80,23 @@ public class FileUtil {
      */
     public static void writeDataToFile(List<Contact> list) {
         File file = new File(DATA_DIR, DATA_FILE);
-        
+
         // TODO: list를 file에 write
+        try(
+                FileOutputStream fout = new FileOutputStream(file);
+                BufferedOutputStream bout = new BufferedOutputStream(fout);
+                ObjectOutputStream oout = new ObjectOutputStream(bout);
+                ) {
+            
+            oout.writeObject(list);
+            
+            System.out.println("작성 성공....!");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
     /**
      * 연락처 파일이 있으면, 파일의 내용을 읽어서 리스트를 생성하고 리턴.
      * 연락처 파일이 없으면, 빈 리스트를 리턴.
@@ -64,12 +105,12 @@ public class FileUtil {
      */
     public static List<Contact> initData() {
         File file = new File(DATA_DIR, DATA_FILE);
-        
+
         List<Contact> list = new ArrayList<>();
         if (file.exists()) { // 데이터 파일이 만들어져 있으면
             list = readDataFromFile();
         }
-        
+
         return list;
     }
 

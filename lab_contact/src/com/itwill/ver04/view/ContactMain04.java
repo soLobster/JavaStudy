@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.itwill.ver03.controller.ContactDaoImpl;
-import com.itwill.ver02.model.Contact;
+import com.itwill.ver04.controller.ContactDaoImpl;
+import com.itwill.ver04.model.Contact;
 
-public class ContactMain03 {
+public class ContactMain04 {
 
 	private Scanner scanner = new Scanner(System.in);
 	private ContactDaoImpl dao = ContactDaoImpl.getInstance();
 	
 	public static void main(String[] args) {
 
-		ContactMain03 app = new ContactMain03();
+		ContactMain04 app = new ContactMain04();
 
 		boolean run = true;
 		while(run) {
@@ -78,7 +78,7 @@ public class ContactMain03 {
 				System.out.print("새로운 이메일을 입력해주세요...>> ");
 				String email = scanner.nextLine();
 
-				Contact afterInfo = new Contact(name, phone, email);
+				Contact afterInfo = new Contact(0, name, phone, email);
 
 				int result = dao.update(index, afterInfo);
 
@@ -119,7 +119,7 @@ public class ContactMain03 {
 		System.out.print("E-mail을 입력하세요....>> ");
 		String email = scanner.nextLine();
 
-		int result = dao.create(new Contact(name, phone, email));
+		int result = dao.create(new Contact(0, name, phone, email));
 
 		if(result == 1) {
 			System.out.println(">> 연락처 저장 성공.....!\n");
@@ -141,13 +141,13 @@ public class ContactMain03 {
 	}//end readAllContacts....
 
 	private MainMenu showMainMenu() {
-		System.out.println("Welcome to CONTACT 0.3v");
+		System.out.println("Welcome to CONTACT 0.4v");
 		System.out.println("1. Read All Contacts");
 		System.out.println("2. Add New Contact");
 		System.out.println("3. Search Contact");
 		System.out.println("4. Update Contact");
 		System.out.println("5. Delete Contact");
-		System.out.println("0. Exit CONTACT 0.3v");
+		System.out.println("0. Exit CONTACT 0.4v");
 		System.out.print("Enter your choice >> ");
 		int n = InputInteger();
 

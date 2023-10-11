@@ -32,6 +32,10 @@ public class ContactDaoImpl implements ContactDao {
         return index >= 0 && index < contacts.size();
     }
     
+    public boolean isContainContacts() {
+        return contacts.size() > 0;
+    }
+    
     @Override
     public List<Contact> read() {
         return contacts;
@@ -55,7 +59,7 @@ public class ContactDaoImpl implements ContactDao {
     public int create(Contact contact) {
         contacts.add(contact);
         // TODO: 바뀐 리스트를 파일에 쓰기.
-        
+        FileUtil.writeDataToFile(contacts);
         return 1;
     }
 
@@ -72,7 +76,7 @@ public class ContactDaoImpl implements ContactDao {
         c.setEmail(contact.getEmail()); // 이메일 업데이트
         
         // TODO: 바뀐 리스트를 파일에 쓰기.
-        
+        FileUtil.writeDataToFile(contacts);
         return 1;
     }
 
@@ -85,7 +89,7 @@ public class ContactDaoImpl implements ContactDao {
         contacts.remove(index);
         
         // TODO: 바뀐 리스트를 파일에 쓰기.
-        
+        FileUtil.writeDataToFile(contacts);
         return 1;
     }
 
