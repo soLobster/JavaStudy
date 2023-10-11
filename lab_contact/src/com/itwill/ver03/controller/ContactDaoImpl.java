@@ -21,6 +21,8 @@ public class ContactDaoImpl implements ContactDao {
 
     private List<Contact> contacts = new ArrayList<Contact>(); 
     //List는 인터페이스 객체를 생성할 수 없기에 ArrayList로 선언.
+    
+    
     public boolean isValidIndex(int index) {
         return index >= 0 && index < contacts.size();
     }

@@ -56,7 +56,22 @@ public class FileMain09 {
         System.out.println("생성 여부 : "+f.exists());
         System.out.println("파일 여부 : "+f.isFile());
         System.out.println("폴더 여부 : "+f.isDirectory());
-
+        System.out.println("파일 크기 : "+f.length() + "byte");
+        
+        File newFolder = new File("data", "test"); //File(상위폴더, 하위폴더/파일)
+        if(newFolder.exists()) {
+            System.out.println("폴더가 이미 존재 합니다.");
+        }else {
+            newFolder.mkdir(); //폴더 생성 메서드
+            System.out.println("폴더 생성 성공");
+        }
+        
+        //폴더 삭제하기.
+        if(newFolder.exists()) {
+            newFolder.delete();
+        } else {
+            System.out.println("삭제할 폴더가 없습니다.");
+        }
     }
 
 }
