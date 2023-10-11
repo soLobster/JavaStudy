@@ -1,6 +1,5 @@
 package com.itwill.ver04.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
