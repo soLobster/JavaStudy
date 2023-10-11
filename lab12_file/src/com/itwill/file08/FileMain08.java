@@ -2,7 +2,9 @@ package com.itwill.file08;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 /*
  * IO Stream... 바이트 스트림. 읽기/쓰기의 기본단위는 byte 단위.
@@ -55,7 +57,38 @@ public class FileMain08 {
                 }
                 System.out.print((char) read); //char 캐스팅
             }
+            
+            System.out.println();
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        // Java 11 버전부터 FileReader, FileWriter 객체에서 인코딩 방식을 설정할 수 있게 됨. ★★★ 버전 체크 중요함.
+        try(
+                //1. FileReader 객체를 생성할 때 인코딩 방식을 설정.
+                FileReader reader = new FileReader(utf8FIle, Charset.forName("UTF-8"));
+                //2. 읽기 속도를 빠르게 하기 위해서 BufferedReader 객체를 생성한다.(option)
+                BufferedReader br = new BufferedReader(reader);
+
+                ) {
+
+//            while(true) {
+//                int read = br.read();
+//                if(read == -1) {
+//                    break;
+//                }
+//                System.out.print((char) read);
+//            }
+            
+            while(true) {
+                String line = br.readLine();
+                if(line == null) { //End Of File (파일 끝).
+                    break;
+                }
+                System.out.println(line);
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
