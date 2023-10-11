@@ -1,5 +1,7 @@
 package com.itwill.file09;
 
+import java.io.File;
+
 /*
  * 파일, 폴더(디렉토리) 관리 - 정보, 생성, 삭제.
  * 
@@ -15,14 +17,32 @@ package com.itwill.file09;
  * - 현재 작업 디렉토리(CWD, Current Working Directory)를 기준으로 파일 또는 폴더 위치를 찾아가는 방식.
  * ex) data\ansi.txt (win)
  * ex) data/ansi.txt (mac)
+ * - 현재 디렉토리 : . (ex) ./data/ansi.txt
+ * - 상위 디렉토리 : ..(ex) ../src/com/itwill
+ * 
+ *  
+ * 
  * 
  */
 
 public class FileMain09 {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
+        // Java Runtime이 프로그램을 실행하고 있는 현재 디렉토리 찾기.
+        String cwd = System.getProperty("user.dir");
+        System.out.println(cwd);
+        
+        String path = "C:\\work_space\\lab_java\\JavaStudy\\lab12_file"; //Windows에서의 절대 경로 표현.
+        System.out.println(path);
+        
+        String path2 = "data\\ansi.txt"; //windows에서의 상대 경로.
+        //현재는 os 구분없이 "data/ansi.txt"로 표현해도 됨.
+        
+        System.out.println(path2);
+        
+        String path3 = "data"+File.separator+"ansi.txt";
+        
+        System.out.println(path3);
     }
 
 }
