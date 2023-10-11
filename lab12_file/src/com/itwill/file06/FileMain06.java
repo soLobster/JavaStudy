@@ -21,13 +21,13 @@ public class FileMain06 {
         // ArrayList를 파일에 쓰는 시간을 측정하고 출력.
         String file = "data/product1.dat";
         //파일에 쓸 Product ArrayList 객체 생성.    
-        List<Product> products = new ArrayList<Product>();
+        ArrayList<Product> products = new ArrayList<Product>();
         // 타입 객체 백만개 저장 for 문...
-        for(int i=0; i<1000000; i++) {
+        for(int i=0; i<1000; i++) {
             products.add(new Product(i, "SAMPLE ["+i+"]" , i*5));
         }
         //try-catch 
-        try(
+        try(//try with resource
                 //리소스 생성.
                 FileOutputStream out = new FileOutputStream(file);
                 BufferedOutputStream bout = new BufferedOutputStream(out);
@@ -62,10 +62,9 @@ public class FileMain06 {
 
             long start = System.currentTimeMillis(); // 읽기 시작 타임.
             
-            Object prod =  oin.readObject();
+            ArrayList<Product> prod = (ArrayList<Product>) oin.readObject();
             
             System.out.println(prod);
-            System.out.println();
             
             long end = System.currentTimeMillis(); //  읽기 끝나는 시간.
 
