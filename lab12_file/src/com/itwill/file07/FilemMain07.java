@@ -18,15 +18,12 @@ public class FilemMain07{
 
         //Student를 원소로하는 ArrayList를 생성, 1_000_000개의 Student 객체를 저장.
         ArrayList<Student> students = new ArrayList<Student>();
-
-        for(int i = 0; i<1000; i++) {
-            Score scores = new Score();
-            
-            for(int j = 0; j<100; j++) {
-                Random random = new Random();
+        Score scores = new Score();
+        Random random = new Random();
+        for(int i = 0; i<1_000; i++) {
+            for(int j = 0; j<100; j++) {     
                 scores = new Score(random.nextInt(100), random.nextInt(100), random.nextInt(100));
             }
-            
             students.add(new Student(i, "student_"+i, scores));
         }
 
