@@ -8,6 +8,7 @@ public class Button {
     
     //field 
     private String btnName;
+    
     private onClickListener listener; //인터페이스 타입으로 변수 선언.
     
     //constructor
