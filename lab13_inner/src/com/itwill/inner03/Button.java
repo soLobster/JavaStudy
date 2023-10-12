@@ -9,6 +9,7 @@ public class Button {
     //field 
     private String btnName;
     private onClickListener listener; //인터페이스 타입으로 변수 선언.
+    
     //constructor
     public Button(String btnName) {
         this.btnName = btnName;
@@ -21,7 +22,7 @@ public class Button {
     
     //method
     public void click() {
-        System.out.println(btnName+"버튼: ");
+        System.out.print(btnName+"버튼: ");
         listener.onClick();
     }
     
