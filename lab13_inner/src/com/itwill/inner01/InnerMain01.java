@@ -3,6 +3,7 @@ package com.itwill.inner01;
 import java.util.Random;
 //내부 클래스  이름을 임포트...
 import com.itwill.inner01.Outer.Inner;
+import com.itwill.inner01.Enclosing.Nested;
 
 /*
  * 내부 클래스, 내부 인터페이스.
@@ -63,8 +64,27 @@ public class InnerMain01 {
         Outer outer2 = new Outer(0, 0, "점심시간");
         System.out.println(outer2);
         
+        //import 문장이 있는 경우
         Outer.Inner inner3 = outer2.new Inner(24); 
         inner3.info();
+        
+        System.out.println("=====");
+        //Enclosing 클래스의 static 멤버 사용. ClassName.member
+        System.out.println(Enclosing.var);
+        Enclosing.test();
+        
+        //Enclosing 타입 객체 생성
+        Random random = new Random();
+        Enclosing en = new Enclosing(random.nextInt(10));
+        System.out.println(en); //en.toString
+        
+        //Enclosing.Nested 타입 객체 생성.
+        Enclosing.Nested enNested = new Enclosing.Nested(123); //중첩 클래스.
+        enNested.info();
+        
+        //import 문장이 있는 경우. 중첩인지 아닌지 알 수 가 없다.
+        Nested nested2 = new Nested(222);
+        nested2.info();
     }
 
 }
