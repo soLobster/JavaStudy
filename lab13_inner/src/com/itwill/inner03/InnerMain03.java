@@ -61,9 +61,11 @@ public class InnerMain03 {
         btnCancel.setOnClickListener(new onClickListener() {
             @Override
             public void onClick() {
-                System.out.println("파일 취소 실행....!");
+                System.out.println("파일 취소....!");
             }
         });
+        //3. 버튼 클릭.
+        btnCancel.click();
         
     }//end main.
 
