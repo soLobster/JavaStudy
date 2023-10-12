@@ -33,9 +33,9 @@ public class FileUtil {
         // TODO: 폴더가 없는 경우, 폴더를 만들기.
         if(!dir.exists()) {
             dir.mkdir();
-            System.out.println("폴더 생성 성공");
+            //System.out.println("폴더 생성 성공");
         } else {
-            System.out.println("폴더가 이미 존재 합니다.");
+            //System.out.println("폴더가 이미 존재 합니다.");
         }
         return dir;
     }
