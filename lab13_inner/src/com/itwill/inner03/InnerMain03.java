@@ -9,7 +9,7 @@ public class InnerMain03 {
         Button btnOpen = new Button("OPEN");
 
         //2.버튼이 할 일(메서드)을 가지고 있는 객체(listener).
-        OpenButtonListener openListener = new OpenButtonListener();
+        OpenButtonListener openListener = new OpenButtonListener(); // 외부 클래스
         
         //3. 리스너 객체를 버튼에 등록. - 버튼에 버튼이 할 일을 설정.
         btnOpen.setOnClickListener(openListener);
