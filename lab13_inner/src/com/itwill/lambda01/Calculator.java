@@ -3,6 +3,7 @@ package com.itwill.lambda01;
 public class Calculator {
     //중첩 인터페이스(내부 인터페이스) static은 생략 가능.
     //함수형 인터페이스(functional interface) : 추상 메서드를 오직 한개만 갖는 인터페이스.
+    
     @FunctionalInterface
     public interface Calculable{
         double calculate(double x, double y);

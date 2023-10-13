@@ -1,5 +1,12 @@
 package com.itwill.lambda01;
 
-public class Adder {
+import com.itwill.lambda01.Calculator.Calculable;
+
+public class Adder implements Calculable{
+
+    @Override
+    public double calculate(double x, double y) {
+        return x+y;
+    }
 
 }
