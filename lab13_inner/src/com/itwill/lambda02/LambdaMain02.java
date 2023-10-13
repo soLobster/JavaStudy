@@ -40,6 +40,20 @@ public class LambdaMain02 {
 
         List<Object> odds = app.filter(numbers, x -> (Integer) x % 2 == 1);
         System.out.println(odds);
+        
+        List<Object> languages = Arrays.asList("Java","SQL","JavaScript","HTML","Servlet");
+        System.out.println(languages);
+        
+        //languages의 원소들 중에서 5글자 이상인 문자열들로 이루어진 리스트를 만들고 출력.
+        List<Object> fiveString = app.filter(languages, new MyFilter() {
+            
+            @Override
+            public boolean test(Object x) {
+               return ((String) x).length() >= 5 ; //((String) x)에서 괄호를 꼭 써야한다.
+            }
+        });
+        
+        System.out.println(fiveString);
     }
 
 }
