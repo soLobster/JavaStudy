@@ -41,6 +41,10 @@ public class LambdaMain03 {
         
         List<Integer> listSquares = numbers.stream().map((x) -> x * x).toList(); //map
         System.out.println(listSquares);
+        
+        //numbers의 원소들 중에서 홀수들의 제곱을 저장하는 리스트를 만들고 출력.
+        List<Integer> listOddSquare = numbers.stream().filter((x) -> x%2 == 1).map((x) -> x*x).toList();
+        System.out.println(listOddSquare);
     }
 
 }
