@@ -46,10 +46,10 @@ public class LambdaMain04 {
         codingTeamSalMean = codingTeamSalSum/codingTeamEmpCount;
         System.out.println("개발 1,2팀 급여의 평균 >> " +codingTeamSalMean);
         
-        OptionalDouble codingTeamSalMean2;
+        double codingTeamSalMean2;
         codingTeamSalMean2 = employees.stream().filter((x) -> x.getDept().equals("개발1팀") || x.getDept().equals( "개발2팀"))
-                .mapToDouble((x) -> x.getSalary()).average();
-        System.out.println(codingTeamSalMean2);
+                .mapToDouble((x) -> x.getSalary()).average().getAsDouble();
+        System.out.println("개발 1,2팀 급여의 평균(avarge().getAsDouble) >> "+codingTeamSalMean2);
         
         // 4. 직급이 "사원"인 직원들의 급여 합계, 평균을 출력.
         System.out.println("4. 직급이 \"사원\"인 직원들의 급여 합계, 평균을 출력.");
