@@ -3,7 +3,6 @@ package com.itwill.lambda04;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalDouble;
 
 public class LambdaMain04 {
 
