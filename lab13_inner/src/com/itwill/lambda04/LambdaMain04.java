@@ -69,6 +69,11 @@ public class LambdaMain04 {
         
         System.out.printf("사원들의 연봉 총합 = %.1f 과 평균 = %.1f",saWonSalSum,saWonSalMean).println();
         
+        double titleSawonMean2 = employees.stream().filter((x) -> x.getEmpTitile().equals("사원")).mapToDouble((x) -> x.getSalary()).average().getAsDouble();
+        double titleSawonSum2 = employees.stream().filter((x) -> x.getEmpTitile().equals("사원")).mapToDouble((x) -> x.getSalary()).sum();
+        System.out.println("사원들의 연봉 총합(sum()) >> "+titleSawonSum2);
+        System.out.println("사원들의 연봉 평균(average().getAsDouble) >> "+titleSawonMean2);
+        
         // 5. 급여가 1_000을 초과하는 사원들의 정보를 한줄에 한 명씩 출력.
         System.out.println("5. 급여가 1_000을 초과하는 사원들의 정보를 한줄에 한 명씩 출력.");
         List<Employee> allEmployeesOver1000 = employees.stream().filter((x)-> x.getSalary() > 1_000).toList();
@@ -77,6 +82,10 @@ public class LambdaMain04 {
         // 6. 개발 1팀 사원들의 급여를 10% 인상하고, 인상한 급여의 평균을 출력.
         System.out.println("6. 개발 1팀 사원들의 급여를 10% 인상하고, 인상한 급여의 평균을 출력.");
         List<Double> codingOneTeam = employees.stream().filter((x)-> x.getDept().equals("개발1팀")).map((x)-> x.getSalary()*1.1).toList();
+        double codingOnTeam2 = employees.stream().filter((x) -> x.getDept().equals("개발1팀")).mapToDouble((x) -> x.getSalary()*1.1).average().getAsDouble();
+       
+        System.out.println("개발1팀의 인상한 급여의 평균(getAsDouble) >> "+codingOnTeam2);
+
         //System.out.println(codingOneTeam);
         double codingOneTeamSalSum = 0;
         for(double x : codingOneTeam) {
