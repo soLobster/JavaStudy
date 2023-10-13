@@ -17,6 +17,13 @@ public class LambdaMain02 {
         return result;
     }//filter method
 
+    public List<Object> map(List<Object> list, MyMapper mapper){
+        List<Object> result = new ArrayList<Object>();
+        for(Object x : list) {
+            result.add(mapper.transform(x));
+        }
+        return result;
+    }//map method
 
     public static void main(String[] args) {
         // LambdaMain02 타입 객체 생성
@@ -40,20 +47,62 @@ public class LambdaMain02 {
 
         List<Object> odds = app.filter(numbers, x -> (Integer) x % 2 == 1);
         System.out.println(odds);
-        
+
         List<Object> languages = Arrays.asList("Java","SQL","JavaScript","HTML","Servlet");
         System.out.println(languages);
-        
+
         //languages의 원소들 중에서 5글자 이상인 문자열들로 이루어진 리스트를 만들고 출력.
         List<Object> fiveString = app.filter(languages, new MyFilter() {
-            
+
             @Override
             public boolean test(Object x) {
-               return ((String) x).length() >= 5 ; //((String) x)에서 괄호를 꼭 써야한다.
+                return ((String) x).length() >= 5 ; //((String) x)에서 괄호를 꼭 써야한다.
             }
         });
-        
+
         System.out.println(fiveString);
+
+        List<Object> lambdafiveString = app.filter(languages, (x) -> ((String) x).length() >= 5);
+        System.out.println(lambdafiveString);
+        
+        
+        // 리스트 numbers의 원소가 짝수이면 "even", 홀수이면 "odd"를 저장하는 리스트를 만들고 리턴.
+        List<Object> checkNum = app.map(numbers, new MyMapper() {
+            
+            @Override
+            public Object transform(Object x) {
+                return ((Integer) x%2==0) ? "even" : "odd" ;
+            }
+        });
+        System.out.println(checkNum);
+        
+        List<Object> checkNum2 = app.map(numbers, (x) -> ((Integer) x%2==0) ? "even":"odd");
+        System.out.println(checkNum2);
+        
+        // numbers의 원소들의 제곱을 저장하는 리스트를 만들고 리턴.
+        List<Object> squares = app.map(numbers, new MyMapper() {
+            
+            @Override
+            public Object transform(Object x) {
+                return (Integer) x * (Integer) x;
+            }
+        });
+        System.out.println(squares);
+        
+        List<Object> squares2 = app.map(numbers, (x) -> ((Integer)x * (Integer)x));
+        System.out.println(squares2);
+        
+        //languages의 문자열들을 모두 대문자로 변환한 리스트를 만들고 출력.
+        List<Object> upperCases = app.map(languages, new MyMapper() {
+            @Override
+            public Object transform(Object x) {
+                return ((String) x).toUpperCase();
+            }
+        });
+        System.out.println(upperCases);
+        
+        List<Object> upperCases2 = app.map(languages, (x) -> ((String) x).toUpperCase()); 
+        System.out.println(upperCases2);
     }
 
 }
