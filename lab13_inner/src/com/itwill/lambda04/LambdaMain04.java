@@ -3,6 +3,7 @@ package com.itwill.lambda04;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalDouble;
 
 public class LambdaMain04 {
 
@@ -23,24 +24,33 @@ public class LambdaMain04 {
         
         // 2. 개발(1,2팀)에서 일하는 사원들의 급여 합계를 출력.
         System.out.println("2. 개발(1,2팀)에서 일하는 사원들의 급여 합계를 출력.");
-        List<Double> codingOneTwo = employees.stream()
+        List<Double> codingTeam = employees.stream()
                 .filter((x) -> x.getDept().equals("개발1팀") || x.getDept().equals( "개발2팀"))
                 .map((x) -> x.getSalary()).toList();
         
-        //System.out.println(codingOne);
-        double codingTeamsalSum = 0;
-        for(double x : codingOneTwo) {
-            codingTeamsalSum += x;
+      //System.out.println(codingOne);
+        double codingTeamSalSum = 0;
+        for(double x : codingTeam) {
+            codingTeamSalSum += x;
         }
-        System.out.println("개발 1,2팀 급여의 합 >> " + codingTeamsalSum);
+        System.out.println("개발 1,2팀 급여의 합 >> " + codingTeamSalSum);
+        
+        double condingTeamSalSum2 = employees.stream().filter((x) -> x.getDept().equals("개발1팀") || x.getDept().equals( "개발2팀"))
+                .mapToDouble((x) -> x.getSalary()).sum();
+        System.out.println("개발 1,2팀 급여의 합(mapToDouble) >> "+condingTeamSalSum2);
         
         // 3. 개발팀에서 일하는 사원들의 급여 평균을 출력.
         System.out.println("3. 개발팀에서 일하는 사원들의 급여 평균을 출력.");
-        double codingTeamsalMean = 0;
-        int codingTeamEmpCount = codingOneTwo.size();
-        codingTeamsalMean = codingTeamsalSum/codingTeamEmpCount;
-        System.out.println("개발 1,2팀 급여의 평균 >> " +codingTeamsalMean);
-       
+        double codingTeamSalMean = 0;
+        int codingTeamEmpCount = codingTeam.size();
+        codingTeamSalMean = codingTeamSalSum/codingTeamEmpCount;
+        System.out.println("개발 1,2팀 급여의 평균 >> " +codingTeamSalMean);
+        
+        OptionalDouble codingTeamSalMean2;
+        codingTeamSalMean2 = employees.stream().filter((x) -> x.getDept().equals("개발1팀") || x.getDept().equals( "개발2팀"))
+                .mapToDouble((x) -> x.getSalary()).average();
+        System.out.println(codingTeamSalMean2);
+        
         // 4. 직급이 "사원"인 직원들의 급여 합계, 평균을 출력.
         System.out.println("4. 직급이 \"사원\"인 직원들의 급여 합계, 평균을 출력.");
         List<Double> titleSawon = employees.stream()
