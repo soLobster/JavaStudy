@@ -215,6 +215,8 @@ public class AppMain03 {
             number1 = Double.parseDouble(textInputNum1.getText());
             number2 = Double.parseDouble(textInputNum2.getText());
             
+            
+            
         } catch (NumberFormatException ex) {
             textResult.setText("number1 또는 number2는 숫자여야 합니다.");
             return; // 메서드 종료
@@ -243,6 +245,8 @@ public class AppMain03 {
         
         textResult.setText(msg);
         
+        textInputNum1.setText("");
+        textInputNum2.setText("");
 //        String num1 = textInputNum1.getText();
 //        String num2 = textInputNum2.getText();
 //        
