@@ -8,11 +8,13 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;  
+import javax.swing.SwingConstants;
+import javax.swing.JButton;  
 
 public class AppMain01 {
 
     private JFrame frame;
+    private JTextField textField;
 
     /**
      * Launch the application.
@@ -45,12 +47,19 @@ public class AppMain01 {
         frame = new JFrame(); //JFrame 객체 생성, 필드 초기화.
         frame.setBounds(100, 100, 800, 540); //JFrame의 시작 좌표(x,y) 와 크기(가로, 세로).
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //-> JFrame 우상단에 있는 닫기 버튼의 기능을 설정 -> 프로그램 종료.
         
-        JLabel lblMessage = new JLabel("Hello, Swing...!");
-        lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMessage.setFont(new Font("D2Coding", Font.BOLD | Font.ITALIC, 24));
-        frame.getContentPane().add(lblMessage, BorderLayout.CENTER);
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+        
+        textField = new JTextField("Type....");
+        textField.setFont(new Font("D2Coding", Font.BOLD | Font.ITALIC, 24));
+        textField.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.getContentPane().add(textField, BorderLayout.CENTER);
+        textField.setColumns(10);
+        
+        JButton btnNewButton = new JButton("New button");
+        frame.getContentPane().add(btnNewButton, BorderLayout.SOUTH);
     }
 
 }
