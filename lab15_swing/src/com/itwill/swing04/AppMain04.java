@@ -13,11 +13,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AppMain04 {
-
+//이미지 파일의 경로를 저장하는 배열.
+    private static final String[] IMAGEPATHS = {
+            "Images/ds.jpg",
+            "Images/kt.jpg",
+            "Images/lg.jpg",
+            "Images/nc.jpg",
+            "Images/ssg.jpg"
+    };
+    
     private JFrame frame;
     private JButton btnPreviousImage;
     private JButton btnNextImage;
-    private String[] imagePaths;
     private int imageIndex = 0;
     private JLabel lblImages;
     /**
@@ -48,22 +55,16 @@ public class AppMain04 {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 614, 460);
+        frame.setBounds(100, 100, 800, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        lblImages = new JLabel("Image-Viewer");
+        lblImages = new JLabel("");
+        //lblImages = new JLabel(new ImageIcon(IMAGES[imageIndex]));
         lblImages.setHorizontalAlignment(SwingConstants.CENTER);
-        lblImages.setBounds(79, 6, 450, 350);
+        lblImages.setBounds(64, 30, 640, 640);
         frame.getContentPane().add(lblImages);
 
-        imagePaths = new String[] {
-                "Images/ds.jpg",
-                "Images/kt.jpg",
-                "Images/lg.jpg",
-                "Images/nc.jpg",
-                "Images/ssg.jpg"
-        };
 
         imageIndex = 0;
         
@@ -72,13 +73,9 @@ public class AppMain04 {
 
 
         btnPreviousImage = new JButton("<");
-        btnPreviousImage.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showPreviousImage();
-            }
-        });
+        btnPreviousImage.addActionListener((e) -> showPreviousImage());
         btnPreviousImage.setFont(new Font("D2Coding", Font.BOLD, 15));
-        btnPreviousImage.setBounds(89, 379, 117, 29);
+        btnPreviousImage.setBounds(242, 659, 120, 64);
         frame.getContentPane().add(btnPreviousImage);
 
         btnNextImage = new JButton(">");
@@ -88,31 +85,36 @@ public class AppMain04 {
             }
         });
         btnNextImage.setFont(new Font("D2Coding", Font.BOLD, 15));
-        btnNextImage.setBounds(412, 379, 117, 29);
+        btnNextImage.setBounds(399, 659, 120, 64);
         frame.getContentPane().add(btnNextImage);
     }
 
     private void showNextImage() {
-        if(imageIndex < imagePaths.length -1) {
+        if(imageIndex < IMAGEPATHS.length -1) {
             imageIndex++;
-            displayImage();
+            //displayImage();
+        } else {
+            imageIndex = 0;
         }
+        lblImages.setIcon(new ImageIcon(IMAGEPATHS[imageIndex]));
     }
 
     private void showPreviousImage() {
         if(imageIndex > 0) {
             imageIndex--;
-            displayImage();
+            //displayImage();
+        } else {
+            imageIndex = IMAGEPATHS.length - 1;
         }
-        
+        lblImages.setIcon(new ImageIcon(IMAGEPATHS[imageIndex]));
     }
 
-    private void displayImage() {
-        String imagePath = imagePaths[imageIndex];
-        ImageIcon imageIcon = new ImageIcon(imagePath);
-        lblImages.setIcon(imageIcon);
-        
-    }
+//    private void displayImage() {
+//        String imagePath = IMAGEPATHS[imageIndex];
+//        ImageIcon imageIcon = new ImageIcon(imagePath);
+//        lblImages.setIcon(imageIcon);
+//        
+//    }
     
 
 }
