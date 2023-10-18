@@ -109,6 +109,12 @@ public class ContactMain05 {
         buttonPanel.add(btnDelete);
 
         btnSearch = new JButton("검색");
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchContact();
+            }
+        });
         btnSearch.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnSearch);
 
@@ -125,6 +131,11 @@ public class ContactMain05 {
         table.setRowHeight(40);
         scrollPane.setViewportView(table);
     }//initialize()
+
+    private void searchContact() {
+       ContactSearchFrame.showContactSearchFrame(frame);
+       //todo
+    }
 
     private void updateContact() {
         int index = table.getSelectedRow();
@@ -192,4 +203,11 @@ public class ContactMain05 {
         JOptionPane.showMessageDialog(frame, "연락처 수정 성공...!");
     }
 
+    public void searchContactPhoneNumber() {
+        List<Contact> contacts = dao.read();
+        for(Contact c : contacts) {
+            
+        }
+    }
+    
 }//class

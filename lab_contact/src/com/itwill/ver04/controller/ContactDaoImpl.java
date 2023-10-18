@@ -28,7 +28,7 @@ public class ContactDaoImpl implements ContactDao {
         return instance;
     }
 
-    private List<Contact> contacts;
+    public List<Contact> contacts;
     
     public boolean isValidIndex(int index) {
         return index >= 0 && index < contacts.size();
