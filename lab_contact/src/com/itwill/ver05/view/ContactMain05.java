@@ -31,7 +31,6 @@ public class ContactMain05 {
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
-
     //controller
     private ContactDaoImpl dao = ContactDaoImpl.getInstance(); // 초기화.
 
@@ -88,9 +87,8 @@ public class ContactMain05 {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = 0;
-                ContactUpdateFrame.showContactUpdateFrame(frame, index);
-                updateContact();
+                int index = table.getSelectedRow();
+                ContactUpdateFrame.showContactUpdateFrame(frame, index, ContactMain05.this);
             }
 
         });
@@ -130,13 +128,14 @@ public class ContactMain05 {
 
     private void updateContact() {
         int index = table.getSelectedRow();
+        
         if(index == -1) {
             JOptionPane.showMessageDialog(frame, "수정하려는 행을 선택하세요", "연락처 수정", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        ContactUpdateFrame.showContactUpdateFrame(frame, index);
-        
+        ContactUpdateFrame.showContactUpdateFrame(frame, index, this);
+ 
     }
 
     private void deleteContact() {
@@ -185,6 +184,12 @@ public class ContactMain05 {
         loadContactData();
         //새롭게 만들어진 테이블 모델을 테이블에 세팅.
         table.setModel(model);
+    }
+
+    public void notifyContactUpdated() {
+        // TODO Auto-generated method stub
+        resetTableModel();
+        JOptionPane.showMessageDialog(frame, "연락처 수정 성공...!");
     }
 
 }//class

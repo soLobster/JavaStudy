@@ -5,11 +5,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.itwill.ver04.controller.ContactDaoImpl;
+import com.itwill.ver04.model.Contact;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -30,17 +37,19 @@ public class ContactUpdateFrame extends JFrame {
 
     private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
     
+    private ContactDaoImpl dao = ContactDaoImpl.getInstance();
+    private ContactMain05 app;
     private JLabel lblEmail;
     private int index;
     
     /**
      * Launch the application.
      */
-    public static void showContactUpdateFrame(Component parent, int index) {
+    public static void showContactUpdateFrame(Component parent, int index, ContactMain05 app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactUpdateFrame frame = new ContactUpdateFrame(parent, index);
+                    ContactUpdateFrame frame = new ContactUpdateFrame(parent, index, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,9 +59,10 @@ public class ContactUpdateFrame extends JFrame {
     }
     
     // constructor. 생성자.
-    public ContactUpdateFrame(Component parent, int index) {
+    public ContactUpdateFrame(Component parent, int index, ContactMain05 app) {
         this.parent = parent; // 필드 초기화.
         this.index = index;
+        this.app = app;
         initialize(); // Swing 컴포넌트 생성 & 초기화.
     }
 
@@ -123,11 +133,30 @@ public class ContactUpdateFrame extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
         
         btnUpdate = new JButton("업데이트");
+        btnUpdate.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateContact();
+            }
+        });
         btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 14));
         buttonPanel.add(btnUpdate);
         
         btnCancel = new JButton("취소");
+        btnCancel.addActionListener((e) -> dispose());
         btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 14));
         buttonPanel.add(btnCancel);
     }
-}
+
+    private void updateContact() {
+        String name = textName.getText();
+        String phone = textPhone.getText();
+        String email = textEmail.getText();
+        
+        Contact contact = new Contact(0, name, phone, email);
+        dao.update(index, contact);
+        app.notifyContactUpdated();
+        dispose();
+    }
+}//class
