@@ -31,8 +31,12 @@ public class ContactMain05 {
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
+    
+    
     //controller
     private ContactDaoImpl dao = ContactDaoImpl.getInstance(); // 초기화.
+
+
 
     /**
      * Launch the application.
@@ -88,9 +92,12 @@ public class ContactMain05 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = table.getSelectedRow();
-                ContactUpdateFrame.showContactUpdateFrame(frame, index, ContactMain05.this);
+                if(index != -1) {
+                    ContactUpdateFrame.showContactUpdateFrame(frame, index, ContactMain05.this);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다. ", "경고", JOptionPane.WARNING_MESSAGE);
+                }
             }
-
         });
 
         btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 28));
@@ -101,10 +108,15 @@ public class ContactMain05 {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteContact();
-
+                int index = table.getSelectedRow();
+                if(index != -1) {
+                    deleteContact();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다. ", "경고", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
+        
         btnDelete.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnDelete);
 
@@ -112,7 +124,12 @@ public class ContactMain05 {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ContactSearchFrame.showContactSearchFrame(frame, ContactMain05.this);
+                int index = table.getSelectedRow();
+                if(index != -1) {
+                    ContactSearchFrame.showContactSearchFrame(frame, ContactMain05.this);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다.","경고" , JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         btnSearch.setFont(new Font("D2Coding", Font.PLAIN, 28));
@@ -132,23 +149,6 @@ public class ContactMain05 {
         scrollPane.setViewportView(table);
     }//initialize()
 
-    private void searchContact() {
-       ContactSearchFrame.showContactSearchFrame(frame,this);
-       //todo
-    }
-
-    private void updateContact() {
-        int index = table.getSelectedRow();
-        
-        if(index == -1) {
-            JOptionPane.showMessageDialog(frame, "수정하려는 행을 선택하세요", "연락처 수정", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        ContactUpdateFrame.showContactUpdateFrame(frame, index, this);
- 
-    }
-
     private void deleteContact() {
         //테이블에서 선택된 행의 인덱스를 찾아야한다.
         int index = table.getSelectedRow();
@@ -156,13 +156,13 @@ public class ContactMain05 {
             JOptionPane.showMessageDialog(frame, "삭제하려는 행을 선택하세요", "연락처 삭제", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         int confirm = JOptionPane.showConfirmDialog(frame, "정말로 삭제하나요?", "확인", JOptionPane.YES_NO_OPTION);
-        
+
         if(confirm == JOptionPane.YES_OPTION) {
             dao.delete(index); // 연락처 1개의 정보를 삭제하고, 파일에 저장.
             model.removeRow(index); // 선택된 테이블의 행을 테이블 모델에서 삭제.
-            
+
             JOptionPane.showMessageDialog(frame, "삭제 성공!");
         }
     }
@@ -203,11 +203,4 @@ public class ContactMain05 {
         JOptionPane.showMessageDialog(frame, "연락처 수정 성공...!");
     }
 
-    public void searchContactPhoneNumber() {
-        List<Contact> contacts = dao.read();
-        for(Contact c : contacts) {
-            System.out.println(c);
-        }
-    }
-    
 }//class
