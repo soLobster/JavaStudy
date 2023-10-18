@@ -29,16 +29,18 @@ public class ContactUpdateFrame extends JFrame {
     private JTextField textEmail;
 
     private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
+    
     private JLabel lblEmail;
+    private int index;
     
     /**
      * Launch the application.
      */
-    public static void showContactUpdateFrame(Component parent) {
+    public static void showContactUpdateFrame(Component parent, int index) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactUpdateFrame frame = new ContactUpdateFrame(parent);
+                    ContactUpdateFrame frame = new ContactUpdateFrame(parent, index);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,8 +50,9 @@ public class ContactUpdateFrame extends JFrame {
     }
     
     // constructor. 생성자.
-    public ContactUpdateFrame(Component parent) {
+    public ContactUpdateFrame(Component parent, int index) {
         this.parent = parent; // 필드 초기화.
+        this.index = index;
         initialize(); // Swing 컴포넌트 생성 & 초기화.
     }
 

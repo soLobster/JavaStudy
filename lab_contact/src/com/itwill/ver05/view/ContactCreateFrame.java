@@ -30,21 +30,24 @@ public class ContactCreateFrame extends JFrame {
     private JButton btnSave;
     private JLabel lblName;
     private JLabel lblPhone;
+    private JLabel lblEmail;
     private JTextField textName;
     private JTextField textPhone;
     private JTextField textEmail;
-    private JLabel lblEmail;
+    
     
     private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
+    
     private ContactDaoImpl dao = ContactDaoImpl.getInstance();
+    private ContactMain05 app;
     /**
      * Launch the application.
      */
-    public static void showContactCreateFrame(Component parent) {
+    public static void showContactCreateFrame(Component parent, ContactMain05 app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactCreateFrame frame = new ContactCreateFrame(parent);
+                    ContactCreateFrame frame = new ContactCreateFrame(parent, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,8 +57,9 @@ public class ContactCreateFrame extends JFrame {
     }
     
     // constructor. 생성자.
-    public ContactCreateFrame(Component parent) {
+    public ContactCreateFrame(Component parent, ContactMain05 app) {
         this.parent = parent; // 필드 초기화.
+        this.app = app;
         initialize(); // Swing 컴포넌트 생성 & 초기화.
     }
 
@@ -153,8 +157,10 @@ public class ContactCreateFrame extends JFrame {
         Contact contact = new Contact(0, name, phone, email);
         // 3. 연락처 데이터 파일에 저장.
         dao.create(contact);
-        
+        // 4. ContactMain05 윈도우에게 연락처 저장이 성공했음을 알려줌.
+        app.notifyContactCreate();
         // 현재 창 닫기
         dispose();
-    }
-}
+    }//createNewContact()
+    
+}//class
