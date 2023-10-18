@@ -32,14 +32,16 @@ public class ContactSearchFrame extends JFrame {
     private JButton btnCancel;
     private JLabel lblPhoneNum;
     private Component parent;
+    private ContactMain05 app;
+    private ContactDaoImpl dao = ContactDaoImpl.getInstance();
     /**
      * Launch the application.
      */
-    public static void showContactSearchFrame(Component parent) {
+    public static void showContactSearchFrame(Component parent, ContactMain05 app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactSearchFrame frame = new ContactSearchFrame(parent);
+                    ContactSearchFrame frame = new ContactSearchFrame(parent, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,8 +50,9 @@ public class ContactSearchFrame extends JFrame {
         });
     }
 
-    public ContactSearchFrame(Component parent) {
+    public ContactSearchFrame(Component parent, ContactMain05 app) {
         this.parent = parent;
+        this.app = app;
         initialize();
     }
 
@@ -110,8 +113,8 @@ public class ContactSearchFrame extends JFrame {
     }
 
     private void searchContact() {
-        // TODO Auto-generated method stub
-        
+        app.searchContactPhoneNumber();
+        dao.read();
     }
 
     

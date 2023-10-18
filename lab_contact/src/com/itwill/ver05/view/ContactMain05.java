@@ -112,7 +112,7 @@ public class ContactMain05 {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                searchContact();
+                ContactSearchFrame.showContactSearchFrame(frame, ContactMain05.this);
             }
         });
         btnSearch.setFont(new Font("D2Coding", Font.PLAIN, 28));
@@ -133,7 +133,7 @@ public class ContactMain05 {
     }//initialize()
 
     private void searchContact() {
-       ContactSearchFrame.showContactSearchFrame(frame);
+       ContactSearchFrame.showContactSearchFrame(frame,this);
        //todo
     }
 
@@ -206,7 +206,7 @@ public class ContactMain05 {
     public void searchContactPhoneNumber() {
         List<Contact> contacts = dao.read();
         for(Contact c : contacts) {
-            
+            System.out.println(c);
         }
     }
     
