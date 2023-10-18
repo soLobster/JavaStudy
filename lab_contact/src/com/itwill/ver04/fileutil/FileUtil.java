@@ -33,9 +33,9 @@ public class FileUtil {
         // TODO: 폴더가 없는 경우, 폴더를 만들기.
         if(!dir.exists()) {
             dir.mkdir();
-            //System.out.println("폴더 생성 성공");
+            System.out.println("폴더 생성 성공");
         } else {
-            //System.out.println("폴더가 이미 존재 합니다.");
+            System.out.println("폴더가 이미 존재 합니다.");
         }
         return dir;
     }
@@ -60,12 +60,12 @@ public class FileUtil {
                     ){
 
                 list = (List<Contact>) oin.readObject();
-                
-//                System.out.println("Contacts Count : "+list.size());
-//                for(Contact f : list) {
-//                    System.out.println(f);
-//                }
-                
+
+                //                System.out.println("Contacts Count : "+list.size());
+                //                for(Contact f : list) {
+                //                    System.out.println(f);
+                //                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -87,11 +87,11 @@ public class FileUtil {
                 BufferedOutputStream bout = new BufferedOutputStream(fout);
                 ObjectOutputStream oout = new ObjectOutputStream(bout);
                 ) {
-            
+
             oout.writeObject(list);
-            
+
             System.out.println("작성 성공....!");
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

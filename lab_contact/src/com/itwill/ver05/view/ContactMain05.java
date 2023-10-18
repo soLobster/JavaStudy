@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -70,10 +72,26 @@ public class ContactMain05 {
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         
         btnCreate = new JButton("새 연락처");
+        btnCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContactCreateFrame.showContactCreateFrame(frame);
+            }
+        });
+        
         btnCreate.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnCreate);
         
         btnUpdate = new JButton("업데이트");
+        btnUpdate.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContactUpdateFrame.showContactUpdateFrame(frame);
+            }
+            
+        });
+        
         btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnUpdate);
         
@@ -94,7 +112,8 @@ public class ContactMain05 {
         // TODO: 테이블 컬럼 이름 폰트 변경
         table.getTableHeader().setFont(new Font("D2Coding", Font.PLAIN, 18));
         // TODO: 테이블 데이터 행의 폰트 변경
-        table.setFont(new Font ("D2Coding",Font.PLAIN, 15));
+        table.setFont(new Font ("D2Coding",Font.PLAIN, 18));
+        table.setRowHeight(40);
         scrollPane.setViewportView(table);
     }
 

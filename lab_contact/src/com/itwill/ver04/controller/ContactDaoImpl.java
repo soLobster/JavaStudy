@@ -12,12 +12,12 @@ public class ContactDaoImpl implements ContactDao {
     
     private ContactDaoImpl() {
         // 데이터 폴더 초기화: 폴더가 없으면 생성, 있으면 그대로 사용.
-        System.out.println("데이터 폴더를 생성합니다.");
+        
         FileUtil.initDataDir();
         
         // 데이터 초기화: 데이터 파일이 있으면 파일에서 읽어오기, 없으면 빈 리스트 만들기.
         contacts = FileUtil.initData();
-        System.out.println("데이터 폴더가 이미 있습니다.");
+       
     }
     
     public static ContactDaoImpl getInstance() {

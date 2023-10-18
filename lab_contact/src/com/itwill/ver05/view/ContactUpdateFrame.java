@@ -5,10 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.itwill.ver04.controller.ContactDaoImpl;
-import com.itwill.ver04.model.Contact;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 
@@ -17,34 +13,32 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class ContactCreateFrame extends JFrame {
+public class ContactUpdateFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JPanel buttonPanel;
     private JPanel mainPanel;
     private JButton btnCancel;
-    private JButton btnSave;
+    private JButton btnUpdate;
     private JLabel lblName;
     private JLabel lblPhone;
     private JTextField textName;
     private JTextField textPhone;
     private JTextField textEmail;
+
+    private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
     private JLabel lblEmail;
     
-    private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
-    private ContactDaoImpl dao = ContactDaoImpl.getInstance();
     /**
      * Launch the application.
      */
-    public static void showContactCreateFrame(Component parent) {
+    public static void showContactUpdateFrame(Component parent) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactCreateFrame frame = new ContactCreateFrame(parent);
+                    ContactUpdateFrame frame = new ContactUpdateFrame(parent);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,7 +48,7 @@ public class ContactCreateFrame extends JFrame {
     }
     
     // constructor. 생성자.
-    public ContactCreateFrame(Component parent) {
+    public ContactUpdateFrame(Component parent) {
         this.parent = parent; // 필드 초기화.
         initialize(); // Swing 컴포넌트 생성 & 초기화.
     }
@@ -63,7 +57,7 @@ public class ContactCreateFrame extends JFrame {
      * Create the frame.
      */
     public void initialize() {
-        setTitle("새 연락처");
+        setTitle("연락처 업데이트");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         int x = 100;
@@ -125,36 +119,12 @@ public class ContactCreateFrame extends JFrame {
         buttonPanel = new JPanel();
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
         
-        btnSave = new JButton("저장");
-        btnSave.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createNewContact();
-            }
-            
-        });
-        
-        btnSave.setFont(new Font("D2Coding", Font.PLAIN, 14));
-        buttonPanel.add(btnSave);
+        btnUpdate = new JButton("업데이트");
+        btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 14));
+        buttonPanel.add(btnUpdate);
         
         btnCancel = new JButton("취소");
-        btnCancel.addActionListener((e) -> dispose()); //취소 버튼에 대한 처리.
         btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 14));
         buttonPanel.add(btnCancel);
-    }
-
-    private void createNewContact() {
-        // 1. JTextField에서 이름, 전화번호, 이메일을 읽음.
-        String name = textName.getText();
-        String phone = textPhone.getText();
-        String email = textEmail.getText();
-        // 2. Contact 타입 객체 생성.
-        Contact contact = new Contact(0, name, phone, email);
-        // 3. 연락처 데이터 파일에 저장.
-        dao.create(contact);
-        
-        // 현재 창 닫기
-        dispose();
     }
 }
