@@ -95,7 +95,7 @@ public class ContactMain05 {
                 if(index != -1) {
                     ContactUpdateFrame.showContactUpdateFrame(frame, index, ContactMain05.this);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다. ", "경고", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "선택된 연락처가 없습니다. ", "경고", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
