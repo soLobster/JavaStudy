@@ -108,12 +108,7 @@ public class ContactMain05 {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                if(index != -1) {
                     deleteContact();
-                } else {
-                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다. ", "경고", JOptionPane.WARNING_MESSAGE);
-                }
             }
         });
         
@@ -124,12 +119,7 @@ public class ContactMain05 {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                if(index != -1) {
                     ContactSearchFrame.showContactSearchFrame(frame, ContactMain05.this);
-                } else {
-                    JOptionPane.showMessageDialog(frame, "저장된 연락처가 없습니다.","경고" , JOptionPane.WARNING_MESSAGE);
-                }
             }
         });
         btnSearch.setFont(new Font("D2Coding", Font.PLAIN, 28));

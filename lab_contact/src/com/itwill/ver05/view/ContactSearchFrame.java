@@ -139,6 +139,7 @@ public class ContactSearchFrame extends JFrame {
             
             model.addRow(row);
         }
+        textInput.setText("");
     }//insertInfoToTable
 
     public List<Contact> searchContact(String searchText) {
