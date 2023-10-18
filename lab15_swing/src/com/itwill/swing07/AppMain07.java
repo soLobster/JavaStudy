@@ -133,7 +133,7 @@ public class AppMain07 {
         table = new JTable(); // 테이블(JTable) 객체를 생성
         model = new DefaultTableModel(null, COLUMN_NAMES); // 테이블 모델 객체 생성
         table.setModel(model); // 테이블에 모델을 세팅.
-        table.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        table.setFont(new Font("D2Coding", Font.PLAIN, 30));
         scrollPane.setViewportView(table);
         
         btnReset = new JButton("초기화");
