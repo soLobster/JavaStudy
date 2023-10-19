@@ -34,12 +34,13 @@ public class ContactUpdateFrame extends JFrame {
     private JTextField textName;
     private JTextField textPhone;
     private JTextField textEmail;
-
+    private JLabel lblEmail;
+    
     private Component parent; // 부모 컴포넌트(JFrame)을 저장하기 위한 필드.
     
     private ContactDaoImpl dao = ContactDaoImpl.getInstance();
     private ContactMain05 app;
-    private JLabel lblEmail;
+    
     private int index;
     
     /**

@@ -188,7 +188,6 @@ public class ContactMain05 {
     }
 
     public void notifyContactUpdated() {
-        // TODO Auto-generated method stub
         resetTableModel();
         JOptionPane.showMessageDialog(frame, "연락처 수정 성공...!");
     }
