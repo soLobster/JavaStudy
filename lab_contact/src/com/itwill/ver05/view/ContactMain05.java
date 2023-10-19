@@ -33,6 +33,8 @@ public class ContactMain05 {
     private DefaultTableModel model;
     
     
+    //커밋 테스
+    
     //controller
     private ContactDaoImpl dao = ContactDaoImpl.getInstance(); // 초기화.
 
