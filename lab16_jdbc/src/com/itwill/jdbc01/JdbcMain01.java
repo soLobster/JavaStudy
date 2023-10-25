@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
+import com.itwill.jdbc.model.Blog;
 
 import oracle.jdbc.OracleDriver; // <- 이놈을 임포트해야한다. 
 // ojdbc11.jar에 포함된 클래스.
@@ -69,7 +71,13 @@ public class JdbcMain01 {
             while(rs.next()) { // rs.next() 테이블에 자료가 있는지 확인 있다면 true를 리턴하고 다음 행으로 
                 int id = rs.getInt("ID"); // id 컬럼의 숫자를 읽어온다.
                 String title = rs.getString("TITLE"); // title의 
-                System.out.println(id + ": " + title);
+                String content = rs.getString("CONTENT");
+                String author = rs.getString("AUTHOR");
+                LocalDateTime createdTime = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
+                LocalDateTime modifiedTime = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
+                
+                Blog post = new Blog(id, title, content, author, createdTime, modifiedTime);
+                System.out.println(post);
             }
             
         } catch (Exception e) {
