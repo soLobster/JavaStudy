@@ -11,6 +11,8 @@ import com.itwill.jdbc.controller.BlogDao;
 import com.itwill.jdbc.model.Blog;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -41,15 +43,16 @@ public class BlogDetailsFrame extends JFrame {
     private BlogDao dao;
     private Component parent;
     private Integer id;
-
+    private BlogMain app;
+    
     /**
      * Launch the application.
      */
-    public static void showBlogDetailsFrame(Component parent, Integer id) {
+    public static void showBlogDetailsFrame(Component parent, Integer id, BlogMain app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BlogDetailsFrame frame = new BlogDetailsFrame(parent, id);
+                    BlogDetailsFrame frame = new BlogDetailsFrame(parent, id, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -59,11 +62,12 @@ public class BlogDetailsFrame extends JFrame {
     }
 
     //생성자 분리.
-    public BlogDetailsFrame(Component parent, Integer id) {
+    public BlogDetailsFrame(Component parent, Integer id, BlogMain app) {
         //TODO:
         this.dao = BlogDao.getInstance();
         this.parent = parent;
         this.id = id;
+        this.app = app;
         //UI 컴포넌트들 초기화.
         initialize();
         
@@ -174,6 +178,13 @@ public class BlogDetailsFrame extends JFrame {
         contentPane.add(textModified);
         
         JButton btnUpdate = new JButton("업데이트");
+        btnUpdate.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateBlogPost();
+            }
+        });
         btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 20));
         btnUpdate.setBounds(126, 656, 137, 59);
         contentPane.add(btnUpdate);
@@ -185,6 +196,23 @@ public class BlogDetailsFrame extends JFrame {
         contentPane.add(btnClose);
     }//end initialize()
     
+    private void updateBlogPost() {
+        Integer id = Integer.parseInt(textId.getText());
+        String title = textTitle.getText();
+        String content = textContent.getText();
+        if(title.equals("") || content.equals("")) {
+            //메서드가 있는 클래스는 BlogDetailFrame 이기 때문에 자기 자신 this.
+            JOptionPane.showMessageDialog(this,"제목과 내용은 반드시 입력하세요.");
+            return;
+        }
+        Blog blog = new Blog(id, title, content, null, null, null);
+        int result = dao.update(blog);
+        if(result == 1) {
+            dispose();
+            app.notifyBlogUpdated();
+        }
+    }//updateBlogPost
+
     private void initBlogDetails() {
        // DAO (컨트롤러) 메서드를 이용해서 DB에서 검색하고 , 그 결과를 보여준다.
         Blog blog = dao.read(id);
@@ -196,6 +224,6 @@ public class BlogDetailsFrame extends JFrame {
             textCreated.setText(blog.getCreatedTime().toString());
             textModified.setText(blog.getModifiedTime().toString());
         }
-    }
+    }//initBlogDetails
 
-}
+}//end class
