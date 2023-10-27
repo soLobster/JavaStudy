@@ -3,6 +3,7 @@ package com.itwill.gym.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
@@ -124,6 +125,14 @@ public class GymTrainUpdateOrShow extends JFrame {
         contentPane.add(btnShowDetailTrain);
         
         btnDeleteTrain = new JButton("트레이너 삭제");
+        btnDeleteTrain.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 선택된 행의 회원을 삭제한다.
+                deleteGymTrainer();
+            }
+        });
         btnDeleteTrain.setFont(new Font("D2Coding", Font.BOLD, 16));
         btnDeleteTrain.setBounds(603, 411, 178, 82);
         contentPane.add(btnDeleteTrain);
@@ -139,6 +148,28 @@ public class GymTrainUpdateOrShow extends JFrame {
         btnAddTrainer.setBounds(212, 411, 178, 82);
         contentPane.add(btnAddTrainer);
     }
+
+    private void deleteGymTrainer() {
+        // 회원 삭제 메서드를 정의한다.
+        int row = table.getSelectedRow();
+        if(row == -1 ) {
+            JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "삭제하려는 회원을 테이블에서 선택하세요.");
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(GymTrainUpdateOrShow.this, 
+                "정말 삭제 할까요?",
+                "삭제 확인",
+                JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION) {
+            Integer id = (Integer) tableModel.getValueAt(row, 0);
+            int result = dao.delete(id);
+            if(result == 1) {
+                initTable();
+                JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "직원 삭제 성공....!");
+            }
+        }
+    }//end deleteGymTrainer().
 
     private void resetTableModel(List<GymTrainer> list) {
         // 테이블 모델 리셋.

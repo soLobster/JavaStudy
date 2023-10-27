@@ -145,4 +145,29 @@ public class GymTrainerDao {
         return result;
     }// end create().
 
+    
+    //SQL_DELETE_BY_ID.
+    public static final String SQL_DELETE_BY_ID = 
+            "delete from GYM_TRAINER where t_id = ?";
+    
+    public int delete(Integer t_id) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null; 
+        
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SQL_DELETE_BY_ID);
+            stmt.setInt(1, t_id);
+            
+            result = stmt.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }//end delete method().
+    
 }//end class
