@@ -81,7 +81,7 @@ public class GymTrainerDao {
 
     //SQL_SELECT_ORDER_BY_ID
     public static final String SQL_SELECT_ORDER_BY_ID = 
-            "select * from GYM_TRAINER order by ID desc";
+            "select * from GYM_TRAINER order by T_ID desc";
 
     public List<GymTrainer> read() {
         List<GymTrainer> result = new ArrayList<GymTrainer>();

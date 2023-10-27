@@ -105,6 +105,12 @@ public class GymManagerView extends JFrame {
         contentPane.add(btnCancel);   
         
         btnTrainerList = new JButton("트레이너 관리");
+        btnTrainerList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // 트레이너 관리 frame 으로 넘어간다.
+                GymTrainUpdateOrShow.showGymTrainUpdateOrShow();
+            }
+        });
         btnTrainerList.setFont(new Font("D2Coding", Font.BOLD, 24));
         btnTrainerList.setBounds(102, 310, 299, 96);
         contentPane.add(btnTrainerList);
