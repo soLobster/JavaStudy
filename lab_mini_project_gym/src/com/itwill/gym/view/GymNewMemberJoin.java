@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.Date;
 import java.awt.event.ActionEvent;
 
@@ -115,15 +117,50 @@ public class GymNewMemberJoin extends JFrame {
         textMemName.setColumns(10);
         
         textPhoneNum = new JTextField();
+        textPhoneNum.setText("'-'는 빼고 입력해주세요.");
         textPhoneNum.setFont(new Font("D2Coding", Font.PLAIN, 18));
         textPhoneNum.setColumns(10);
         textPhoneNum.setBounds(125, 131, 283, 40);
+        textPhoneNum.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // 포커스를 얻었을 때, 힌트 텍스트 지우기
+                if (textPhoneNum.getText().equals("'-'는 빼고 입력해주세요.")) {
+                    textPhoneNum.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // 포커스를 잃었을 때, 힌트 텍스트 다시 설정
+                if (textPhoneNum.getText().isEmpty()) {
+                    textPhoneNum.setText("'-'는 빼고 입력해주세요.");
+                }
+            }
+        });
         contentPane.add(textPhoneNum);
         
         textGender = new JTextField();
-        textGender.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textGender.setText("'남' 또는 '여' 로 입력해주세요.");
+        textGender.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textGender.setColumns(10);
         textGender.setBounds(125, 194, 283, 40);
+        textGender.addFocusListener(new FocusListener() {
+            
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textGender.getText().equals("'남' 또는 '여' 로 입력해주세요.")) {
+                    textGender.setText("");
+                }
+            }
+            
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textGender.getText().isEmpty()) {
+                    textGender.setText("'남' 또는 '여' 로 입력해주세요.");
+                }
+            }
+        });
         contentPane.add(textGender);
         
         //java.util.Date....

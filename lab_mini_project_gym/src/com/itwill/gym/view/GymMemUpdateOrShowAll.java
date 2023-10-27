@@ -3,6 +3,7 @@ package com.itwill.gym.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
@@ -35,7 +36,6 @@ public class GymMemUpdateOrShowAll extends JFrame {
     private JButton btnSearch;
     private JTable table;
     private JButton btnShowAllMem;
-    private JButton btnUpdateMember;
     private JButton btnViewMemInfo;
     private JButton btnDeleteMember;
     private DefaultTableModel tableModel;
@@ -68,8 +68,8 @@ public class GymMemUpdateOrShowAll extends JFrame {
      */
     public void initialize() {
         setTitle("ITWILL_FITNESS");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 724, 620);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 773, 620);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -84,17 +84,17 @@ public class GymMemUpdateOrShowAll extends JFrame {
         
         textField = new JTextField();
         textField.setFont(new Font("D2Coding", Font.PLAIN, 17));
-        textField.setBounds(202, 10, 308, 39);
+        textField.setBounds(202, 10, 325, 39);
         contentPane.add(textField);
         textField.setColumns(10);
         
         btnSearch = new JButton("검색");
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 26));
-        btnSearch.setBounds(522, 10, 120, 39);
+        btnSearch.setBounds(539, 8, 120, 39);
         contentPane.add(btnSearch);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(12, 63, 684, 402);
+        scrollPane.setBounds(12, 63, 733, 402);
         contentPane.add(scrollPane);
         
         table = new JTable() { // 익명 클래스
@@ -119,26 +119,73 @@ public class GymMemUpdateOrShowAll extends JFrame {
             }
         });
         btnShowAllMem.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnShowAllMem.setBounds(12, 491, 162, 58);
+        btnShowAllMem.setBounds(109, 491, 162, 58);
         contentPane.add(btnShowAllMem);
         
-        btnUpdateMember = new JButton("회원정보 수정");
-        btnUpdateMember.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnUpdateMember.setBounds(186, 491, 162, 58);
-        contentPane.add(btnUpdateMember);
-        
         btnViewMemInfo = new JButton("회원정보 상세정보");
+        btnViewMemInfo.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 회원 정보 상세 보기.
+                showGymMemberDetails();
+            }
+        });
         btnViewMemInfo.setFont(new Font("D2Coding", Font.BOLD, 15));
-        btnViewMemInfo.setBounds(360, 491, 162, 58);
+        btnViewMemInfo.setBounds(283, 492, 162, 58);
         contentPane.add(btnViewMemInfo);
         
         btnDeleteMember = new JButton("회원 삭제");
+        btnDeleteMember.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 선택된 행의 회원을 삭제한다.
+                deleteGymMember(); 
+            }
+        });
         btnDeleteMember.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnDeleteMember.setBounds(534, 491, 162, 58);
+        btnDeleteMember.setBounds(457, 491, 162, 58);
         contentPane.add(btnDeleteMember);
         
     }//end initialize()
     
+    private void showGymMemberDetails() {
+        //테이블에서 선택된 회원 인덱스.
+        int row = table.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(GymMemUpdateOrShowAll.this, "테이블에서 회원을 선택해주세요.");
+            return;
+        }
+        
+        Integer id = (Integer) tableModel.getValueAt(row, 0);
+        
+        GymShowDetailMember.showDetailMember(GymMemUpdateOrShowAll.this, id, GymMemUpdateOrShowAll.this);
+    }
+
+    private void deleteGymMember() {
+        // 회원 삭제 메서드를 정의한다.
+        int row = table.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(GymMemUpdateOrShowAll.this, "삭제하려는 회원을 테이블에서 선택하세요.");
+            return; //메서드 종료.
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(GymMemUpdateOrShowAll.this,
+                "정말 삭제 할까요??",
+                "삭제 확인",
+                 JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION) {
+            Integer id =(Integer) tableModel.getValueAt(row, 0);
+            int result = dao.delete(id);
+            if(result == 1) {
+                initTable();
+                JOptionPane.showMessageDialog(GymMemUpdateOrShowAll.this, "회원 삭제 성공...!");
+            }
+        }
+        
+    }//end deleteGymMember()
+
     private void resetTableModel(List<GymMember> list) {
         tableModel = new DefaultTableModel(null, COLUMN_NAMES); // 테이블모델 리셋(초기화)
         for (GymMember gymMember : list) { // DB에서 검색한 내용으로 테이블의 행들을 만듦.
@@ -149,7 +196,6 @@ public class GymMemUpdateOrShowAll extends JFrame {
                     gymMember.getGender(),
                     gymMember.getBirthday(),
                     gymMember.getAddress()
-                    
             };
             tableModel.addRow(row);
         }

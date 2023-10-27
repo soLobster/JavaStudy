@@ -115,7 +115,13 @@ public class GymMemberDao {
 
     public static final String SQL_INSERT = 
             "insert into GYM_MEMBER (NAME, PHONE, GENDER, BIRTHDAY, ADDRESS) values(?,?,?,?,?)";
-    
+
+    /**
+     * 데이터 베이스의 GYM_MEMBER 테이블에 행을 삽입(Insert). SQL_INSERT를 실행.
+     * 
+     * @param gymMember GymMemeber 테이블에 insert할 값(name, phone, gender, birthday, address)을 저장한 객체.
+     * @return 테이블에 Insert 된 행의 개수.
+     */
     public int create(GymMember gymMember) {
         int result = 0;
         
@@ -140,6 +146,37 @@ public class GymMemberDao {
         }
         return result;
     }//end of create
+    
+    public static final String SQL_DELTE_BY_ID = 
+            "delete from GYM_MEMBER where id = ?";
+
+    /**
+     * 데이터 베이스 GYM_MEMBER 테이블에서 글 번호(id)에 해당하는 레코드를 삭제.
+     * SQL_DELETE_BY_ID 문장을 실행. 삭제된 행의 개수를 리턴한다.
+     * @param id 삭제하려는 회원 번호(id). 테이블의 PK(Primary Key)
+     * @return 삭제성공이면 1, 실패시 0.
+     */
+    public int delete(Integer id) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SQL_DELTE_BY_ID);
+            stmt.setInt(1, id);
+            
+            result = stmt.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }//end delete() method
     
 
 }//end of class
