@@ -20,16 +20,13 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class GymManagerView extends JFrame {
-
-    public static final String[] COLUMN_NAMES = {"이름", "연락처", "성별" , "생년월일", "주소"};
     
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JLabel lblManagerInfo;
-    private JButton btnMemberUpdate;
+    private JButton btnMemUpOrShow;
     private JButton btnNewMemberJoin;
     private JButton btnCancel;
-    private JButton btnMemberList;
     private GymMemberDao dao = GymMemberDao.getInstance();
     
     
@@ -61,7 +58,7 @@ public class GymManagerView extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 512, 542);
+        setBounds(100, 100, 513, 434);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -87,36 +84,23 @@ public class GymManagerView extends JFrame {
         btnNewMemberJoin.setBounds(102, 98, 299, 96);
         contentPane.add(btnNewMemberJoin);
         
-        btnMemberUpdate = new JButton("회원정보수정");
-        btnMemberUpdate.addActionListener(new ActionListener() {
+        btnMemUpOrShow = new JButton("회원 정보 조회 및 수정");
+        btnMemUpOrShow.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 회원 정보 수정 frame으로 넘어간다.
-                
+                // 회원 정보 조회 및 수정 frame으로 넘어간다.
+                GymMemUpdateOrShowAll.memUpdateOrShowAll();
             }
         });
-        btnMemberUpdate.setFont(new Font("D2Coding", Font.BOLD, 25));
-        btnMemberUpdate.setBounds(102, 204, 299, 96);
-        contentPane.add(btnMemberUpdate);
-        
-        btnMemberList = new JButton("모든 회원 조회");
-        btnMemberList.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 모든 회원 조회 frame으로 넘어간다.
-                
-            }
-        });
-        btnMemberList.setFont(new Font("D2Coding", Font.BOLD, 25));
-        btnMemberList.setBounds(102, 310, 299, 96);
-        contentPane.add(btnMemberList);
+        btnMemUpOrShow.setFont(new Font("D2Coding", Font.BOLD, 24));
+        btnMemUpOrShow.setBounds(102, 204, 299, 96);
+        contentPane.add(btnMemUpOrShow);
         
         btnCancel = new JButton("취소");
         btnCancel.addActionListener((e)->dispose());
         btnCancel.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnCancel.setBounds(184, 435, 123, 39);
+        btnCancel.setBounds(186, 330, 123, 39);
         contentPane.add(btnCancel);   
     }//end initialize() 
 

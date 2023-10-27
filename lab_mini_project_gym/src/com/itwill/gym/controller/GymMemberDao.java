@@ -68,7 +68,7 @@ public class GymMemberDao {
         Date birthday = rs.getDate("BIRTHDAY");
         String address = rs.getString("ADDRESS");
         LocalDateTime join = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
-        LocalDateTime modified = rs.getTimestamp("MODIFIED_TIEM").toLocalDateTime();
+        LocalDateTime modified = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
         
         GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join, modified);
         
