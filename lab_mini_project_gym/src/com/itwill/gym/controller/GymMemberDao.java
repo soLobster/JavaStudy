@@ -21,7 +21,7 @@ import static com.itwill.gym.GymJdbc.*;
 //DB CRUD (Create, Read, Update, Delete).
 
 public class GymMemberDao {
-    //singlton
+    //singelton
     private static GymMemberDao instance = null;
 
     private GymMemberDao() {

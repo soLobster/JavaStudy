@@ -28,6 +28,7 @@ public class GymManagerView extends JFrame {
     private JButton btnNewMemberJoin;
     private JButton btnCancel;
     private GymMemberDao dao = GymMemberDao.getInstance();
+    private JButton btnTrainerList;
     
     
     /**
@@ -58,7 +59,7 @@ public class GymManagerView extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 513, 434);
+        setBounds(100, 100, 513, 553);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -100,8 +101,13 @@ public class GymManagerView extends JFrame {
         btnCancel = new JButton("취소");
         btnCancel.addActionListener((e)->dispose());
         btnCancel.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnCancel.setBounds(186, 330, 123, 39);
+        btnCancel.setBounds(183, 444, 123, 39);
         contentPane.add(btnCancel);   
+        
+        btnTrainerList = new JButton("트레이너 관리");
+        btnTrainerList.setFont(new Font("D2Coding", Font.BOLD, 24));
+        btnTrainerList.setBounds(102, 310, 299, 96);
+        contentPane.add(btnTrainerList);
     }//end initialize() 
 
 //    private void resetTableModel(List<GymMember> list) {

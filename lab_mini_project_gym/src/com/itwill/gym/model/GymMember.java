@@ -20,7 +20,7 @@ public class GymMember {
 
     public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address,
             LocalDateTime joinTime, LocalDateTime modefiedTime) {
-        super();
+        
         this.id = id;
         this.name = name;
         this.phone = phone;
