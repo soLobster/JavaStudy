@@ -170,4 +170,34 @@ public class GymTrainerDao {
         return result;
     }//end delete method().
     
+    public static final String SQL_SELECT_BY_ID = "select * from GYM_TRAINER where t_id = ?";
+    
+    public GymTrainer read(Integer t_id) {
+        GymTrainer trainer = null;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL,USER,PASSWORD);
+            
+            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+            stmt.setInt(1, t_id);
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()) {
+                trainer = makeGymTrainerResultSet(rs);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return trainer;
+    }//end GymTrianer read(Integer t_id)
+    
 }//end class

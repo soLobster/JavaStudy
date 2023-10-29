@@ -8,9 +8,14 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import com.itwill.gym.controller.GymMemberDao;
+import com.itwill.gym.model.GymMember;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class GymLogin {
@@ -33,7 +38,8 @@ public class GymLogin {
     private JButton btnManager;
     private JButton btnGymEnter;
     private JLabel lblMemNumInfo;
-
+    
+    
     /**
      * Launch the application.
      */
@@ -82,6 +88,8 @@ public class GymLogin {
         memberNumField.setColumns(10);
 
         confirmedMember = new JTextField();
+        confirmedMember.setText("회원 확인을 먼저 해주세요...!");
+        confirmedMember.setHorizontalAlignment(SwingConstants.CENTER);
         confirmedMember.setFont(new Font("D2Coding", Font.PLAIN, 20));
         confirmedMember.setEditable(false);
         confirmedMember.setBounds(166, 266, 420, 46);
@@ -233,6 +241,7 @@ public class GymLogin {
             public void actionPerformed(ActionEvent e) {
                 // 확인을 누르면 리스트에 담겨 있는 고객 정보와 비교후 true or false 를 리턴.
                 // confirmedMember = new JTextField();에 정보를 넘긴다.
+                comfirmedMember();
             }
         });
         btnConfirm.setFont(new Font("D2Coding", Font.BOLD, 30));
@@ -245,6 +254,7 @@ public class GymLogin {
             @Override
             public void actionPerformed(ActionEvent e) {
                memberNumField.setText("");
+               confirmedMember.setText("회원 확인을 먼저 해주세요...!");
             }
         });
         btnCancel.setFont(new Font("D2Coding", Font.BOLD, 30));
@@ -257,7 +267,6 @@ public class GymLogin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 회원번호 '0000'을 입력하면 관리자 메뉴로 넘어간다.
-                // 새로운 프레임을 만들어야함.
                 if(memberNumField.getText().equals("0000")) {
                     GymManagerView.showGymManagerView();
                 } else {
@@ -275,8 +284,17 @@ public class GymLogin {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 회원 정보 창으로 넘어간다.
+                /* 
+                 * comfirmedMember() method 를 통해 회원 확인이 되었을 때 입장 버튼을 누르면 회원 정보 메뉴로 넘어간다
+                 */
+                boolean isConfirmed = comfirmedMember();
+                if(isConfirmed) {
+                    GymMemberMenu.showMemberMenu();    
+                }
                 
+                if(!isConfirmed) {
+                    JOptionPane.showMessageDialog(frame, "회원 확인이 완료되지 않았습니다.");
+                }
             }
         });
         btnGymEnter.setFont(new Font("D2Coding", Font.BOLD, 40));
@@ -288,6 +306,37 @@ public class GymLogin {
         lblMemNumInfo.setFont(new Font("D2Coding", Font.BOLD, 22));
         lblMemNumInfo.setBounds(166, 117, 420, 44);
         frame.getContentPane().add(lblMemNumInfo);
-    }
+    }//initialize
 
-}
+    private boolean comfirmedMember() {
+        // Gym_Member DB에 저장되어 있는 회원의 전화번호와 memberNumField에 입력된 회원 전화번호를 비교해서
+        // 일치하면 true를 리턴하고 confirmedMember JTextArea에 '회원 확인 되었습니다' 라고 표시.
+        // 불일치하면 false를 리턴하고 confirmedMember JTextTArea에 '일치하지 않는 회원전화번호입니다' 라고 표시.
+        
+        // String 타입의 객체를 생성 이것은 memberNumField에 입력된 정보를 불러옴 
+        String inputMemberPhoneNum = memberNumField.getText();
+        // GymMemberDao 객체 싱글톤. 저장된 List에서 read()를 통해 데이터베이스를 불러옴.
+        GymMemberDao memberDao = GymMemberDao.getInstance();
+        List<GymMember> gymMembers = memberDao.read();
+        // 불린 타입 변수를 선언.
+        boolean isMemberConfirmed = false;
+        
+        
+        for(GymMember member : gymMembers) {
+            if(inputMemberPhoneNum.equals(member.getPhone())) {
+                isMemberConfirmed = true;
+                confirmedMember.setText("회원 확인 되었습니다....!");
+                break;
+            }
+        }
+        
+        if (!isMemberConfirmed) {
+            confirmedMember.setText("일치하지 않는 회원 전화번호입니다");
+        }
+        
+        //회원인지 아닌지 boolean값을 반환한다.
+        return isMemberConfirmed;
+        
+    }//end confirmedMember().
+
+}//end class

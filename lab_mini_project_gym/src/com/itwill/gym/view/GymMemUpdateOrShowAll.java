@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -39,9 +41,12 @@ public class GymMemUpdateOrShowAll extends JFrame {
     private JButton btnViewMemInfo;
     private JButton btnDeleteMember;
     private DefaultTableModel tableModel;
-    
+    private JFrame frame;
     
     private GymMemberDao dao = GymMemberDao.getInstance();
+    private JButton btnBackPage;
+
+    
     
     /**
      * Launch the application.
@@ -79,18 +84,26 @@ public class GymMemUpdateOrShowAll extends JFrame {
         comboBox = new JComboBox();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"회원번호", "이름", "연락처", "성별", "생년월일", "주소"}));
         comboBox.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        comboBox.setBounds(62, 10, 128, 39);
+        comboBox.setBounds(118, 3, 170, 52);
         contentPane.add(comboBox);
         
         textField = new JTextField();
         textField.setFont(new Font("D2Coding", Font.PLAIN, 17));
-        textField.setBounds(202, 10, 325, 39);
+        textField.setBounds(288, 9, 325, 39);
         contentPane.add(textField);
         textField.setColumns(10);
         
         btnSearch = new JButton("검색");
+        btnSearch.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 회원 정보 검색 기능
+                
+            }
+        });
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 26));
-        btnSearch.setBounds(539, 8, 120, 39);
+        btnSearch.setBounds(625, 8, 120, 39);
         contentPane.add(btnSearch);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -148,6 +161,12 @@ public class GymMemUpdateOrShowAll extends JFrame {
         btnDeleteMember.setBounds(457, 491, 162, 58);
         contentPane.add(btnDeleteMember);
         
+        btnBackPage = new JButton("뒤로가기");
+        btnBackPage.addActionListener((e) -> dispose());
+        btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 13));
+        btnBackPage.setBounds(12, 9, 96, 40);
+        contentPane.add(btnBackPage);
+        
     }//end initialize()
     
     private void showGymMemberDetails() {
@@ -160,7 +179,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
         
         Integer id = (Integer) tableModel.getValueAt(row, 0);
         
-        GymShowDetailMember.showDetailMember(GymMemUpdateOrShowAll.this, id, GymMemUpdateOrShowAll.this);
+        GymShowDetailMember.showDetailMember(frame, id, GymMemUpdateOrShowAll.this);
     }
 
     private void deleteGymMember() {

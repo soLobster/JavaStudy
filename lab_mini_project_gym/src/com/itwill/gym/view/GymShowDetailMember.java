@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.itwill.gym.controller.GymMemberDao;
+import com.itwill.gym.model.GymMember;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -76,12 +77,15 @@ public class GymShowDetailMember extends JFrame {
         this.id = id;
         this.app = app;
         initialize();
+        
+        initMemberDetails();
     }
     
     /**
      * Create the frame.
      */
     public void initialize() {
+        setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 737, 647);
         contentPane = new JPanel();
@@ -189,13 +193,13 @@ public class GymShowDetailMember extends JFrame {
         
         textJoindate = new JTextField();
         textJoindate.setEditable(false);
-        textJoindate.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textJoindate.setFont(new Font("D2Coding", Font.PLAIN, 13));
         textJoindate.setColumns(10);
         textJoindate.setBounds(450, 148, 237, 59);
         contentPane.add(textJoindate);
         
         textExpireDate = new JTextField();
-        textExpireDate.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textExpireDate.setFont(new Font("D2Coding", Font.PLAIN, 13));
         textExpireDate.setEditable(false);
         textExpireDate.setColumns(10);
         textExpireDate.setBounds(450, 216, 237, 59);
@@ -231,8 +235,26 @@ public class GymShowDetailMember extends JFrame {
         contentPane.add(btnUpdate);
         
         btnCancel = new JButton("취소");
+        btnCancel.addActionListener((e) -> dispose());
         btnCancel.setFont(new Font("D2Coding", Font.BOLD, 18));
         btnCancel.setBounds(419, 528, 157, 59);
         contentPane.add(btnCancel);
-    }
-}
+    }//initialize()
+    
+    private void initMemberDetails() {
+        //DAO (컨트롤러) 메서드를 이용해서 DB에서 검색하고 , 그 결과를 보여준다.
+        GymMember gymMembers = dao.read(id);
+        if(gymMembers != null) {
+            textMemNum.setText(gymMembers.getId().toString());
+            textMemName.setText(gymMembers.getName());
+            textMemPhone.setText(gymMembers.getPhone());
+            textMemGender.setText(gymMembers.getGender());
+            textMemAddress.setText(gymMembers.getAddress());
+            dateMemBirthday.setDate(gymMembers.getBirthday());
+            textJoindate.setText(gymMembers.getJoinTime().toString());
+            textExpireDate.setText(gymMembers.getModefiedTime().toString());
+        }   
+    }//initMemberDetails
+
+    
+}//class

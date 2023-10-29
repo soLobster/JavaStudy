@@ -39,6 +39,9 @@ public class GymTrainUpdateOrShow extends JFrame {
     
     private GymTrainerDao dao = GymTrainerDao.getInstance();
     private JButton btnAddTrainer;
+    private JButton btnBackPage;
+    private JButton btnShowDetailTrain;
+    private JFrame frame;
     /**
      * Launch the application.
      */
@@ -76,18 +79,18 @@ public class GymTrainUpdateOrShow extends JFrame {
         comboBox = new JComboBox();
         comboBox.setFont(new Font("D2Coding", Font.BOLD, 18));
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"트레이너 번호", "이름", "연락처", "성별", "주소", "이메일"}));
-        comboBox.setBounds(106, 10, 167, 46);
+        comboBox.setBounds(163, 10, 167, 46);
         contentPane.add(comboBox);
         
         textField = new JTextField();
         textField.setFont(new Font("D2Coding", Font.PLAIN, 16));
-        textField.setBounds(285, 10, 198, 46);
+        textField.setBounds(335, 10, 242, 46);
         contentPane.add(textField);
         textField.setColumns(10);
         
         btnSearch = new JButton("검색");
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 24));
-        btnSearch.setBounds(495, 10, 122, 46);
+        btnSearch.setBounds(587, 8, 122, 46);
         contentPane.add(btnSearch);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -119,7 +122,15 @@ public class GymTrainUpdateOrShow extends JFrame {
         btnShowAllTrain.setBounds(12, 411, 178, 82);
         contentPane.add(btnShowAllTrain);
         
-        JButton btnShowDetailTrain = new JButton("트레이너 상세정보");
+        btnShowDetailTrain = new JButton("트레이너 상세정보");
+        btnShowDetailTrain.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 트레이너 정보 상세보
+                showTrainerDetails();
+            }
+        });
         btnShowDetailTrain.setFont(new Font("D2Coding", Font.BOLD, 16));
         btnShowDetailTrain.setBounds(402, 411, 178, 82);
         contentPane.add(btnShowDetailTrain);
@@ -147,6 +158,26 @@ public class GymTrainUpdateOrShow extends JFrame {
         btnAddTrainer.setFont(new Font("D2Coding", Font.BOLD, 16));
         btnAddTrainer.setBounds(212, 411, 178, 82);
         contentPane.add(btnAddTrainer);
+        
+        btnBackPage = new JButton("뒤로가기");
+        btnBackPage.addActionListener((e) -> dispose());
+        btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 13));
+        btnBackPage.setBounds(20, 19, 117, 29);
+        contentPane.add(btnBackPage);
+    }
+
+    private void showTrainerDetails() {
+        // 테이블에서 선택된 트레이너 인덱스 
+        int row = table.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "테이블에서 트레이너를 선택해주세요.");
+            return;
+        }
+        
+        Integer t_id = (Integer) tableModel.getValueAt(row , 0);
+        
+        GymShowDetailsTrainer.showDetailTrainer(frame, t_id, GymTrainUpdateOrShow.this);
+        
     }
 
     private void deleteGymTrainer() {
