@@ -101,6 +101,7 @@ public class GymMemberMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 회원권 구매 및 연장 페이지
+                BuyMembershipPage.showBuyMembershipPage();
                 
             }
         });

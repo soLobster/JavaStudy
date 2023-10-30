@@ -147,6 +147,11 @@ public class GymMemberDao {
         return result;
     }//end of create
 
+    public static String SQL_INSERT_MEMBERSHIPCODE = 
+            "insert into GYM_MEMBER (NAME, PHONE, GENDER, BIRTHDAY, ADDRESS, MEMBERSHIP_CODE) values(?,?,?,?,?,?)";
+    
+    
+    
     public static final String SQL_DELETE_BY_ID = 
             "delete from GYM_MEMBER where id = ?";
 

@@ -4,36 +4,36 @@ package com.itwill.gym.model;
 
 public class PT {
 
-    private Integer pt_code; //PK (none sequence)
-    private Integer t_id; //FK (GYM_TRAINER)
+    private Integer pt_Code; //PK (none sequence)
+    private Integer t_Id; //FK (GYM_TRAINER)
     private Integer pt_price;
     private Integer pt_time;
     private String pt_category;
     
     public PT() {}
 
-    public PT(Integer pt_code, Integer t_id, Integer pt_price, Integer pt_time, String pt_category) {
-        this.pt_code = pt_code;
-        this.t_id = t_id;
+    public PT(Integer pt_Code, Integer t_Id, Integer pt_price, Integer pt_time, String pt_category) {
+        this.pt_Code = pt_Code;
+        this.t_Id = t_Id;
         this.pt_price = pt_price;
         this.pt_time = pt_time;
         this.pt_category = pt_category;
     }
 
     public Integer getPt_code() {
-        return pt_code;
+        return pt_Code;
     }
 
-    public void setPt_code(Integer pt_code) {
-        this.pt_code = pt_code;
+    public void setPt_code(Integer pt_Code) {
+        this.pt_Code = pt_Code;
     }
 
-    public Integer getT_id() {
-        return t_id;
+    public Integer getT_Id() {
+        return t_Id;
     }
 
-    public void setT_id(Integer t_id) {
-        this.t_id = t_id;
+    public void setT_Id(Integer t_Id) {
+        this.t_Id = t_Id;
     }
 
     public Integer getPt_price() {
@@ -62,7 +62,7 @@ public class PT {
 
     @Override
     public String toString() {
-        return "PT [pt_code=" + pt_code + ", t_id=" + t_id + ", pt_price=" + pt_price + ", pt_time=" + pt_time
+        return "PT [pt_Code=" + pt_Code + ", t_Id=" + t_Id + ", pt_price=" + pt_price + ", pt_time=" + pt_time
                 + ", pt_category=" + pt_category + "]";
     }
     

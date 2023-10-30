@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class GymTrainer {
 
-    private Integer t_id; // 트레이너 번호 pk Sequence.
+    private Integer t_Id; // 트레이너 번호 pk Sequence.
     private String t_name;
     private String t_phone;
     private String t_gender;
@@ -18,10 +18,10 @@ public class GymTrainer {
     
     public GymTrainer() {}
 
-    public GymTrainer(Integer t_id, String t_name, String t_phone, String t_gender, String t_email, Integer salary,
+    public GymTrainer(Integer t_Id, String t_name, String t_phone, String t_gender, String t_email, Integer salary,
             Date birthday, Date hiredate, String t_address) {
         
-        this.t_id = t_id;
+        this.t_Id = t_Id;
         this.t_name = t_name;
         this.t_phone = t_phone;
         this.t_gender = t_gender;
@@ -32,12 +32,12 @@ public class GymTrainer {
         this.t_address = t_address;
     }
 
-    public Integer getT_id() {
-        return t_id;
+    public Integer getT_Id() {
+        return t_Id;
     }
 
-    public void setT_id(Integer t_id) {
-        this.t_id = t_id;
+    public void setT_Id(Integer t_Id) {
+        this.t_Id = t_Id;
     }
 
     public String getT_name() {
@@ -106,7 +106,7 @@ public class GymTrainer {
 
     @Override
     public String toString() {
-        return "GymTrainer [t_id=" + t_id + ", t_name=" + t_name + ", t_phone=" + t_phone + ", t_gender=" + t_gender
+        return "GymTrainer [t_Id=" + t_Id + ", t_name=" + t_name + ", t_phone=" + t_phone + ", t_gender=" + t_gender
                 + ", t_email=" + t_email + ", salary=" + salary + ", birthday=" + birthday + ", hiredate=" + hiredate
                 + ", t_address=" + t_address + "]";
     } 

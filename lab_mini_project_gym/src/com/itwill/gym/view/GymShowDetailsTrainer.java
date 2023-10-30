@@ -21,7 +21,7 @@ public class GymShowDetailsTrainer extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private Component parent;
-    private Integer t_id;
+    private Integer t_Id;
     private GymTrainUpdateOrShow app;
     private GymTrainerDao dao;
     private JLabel lblTName;
@@ -47,11 +47,11 @@ public class GymShowDetailsTrainer extends JFrame {
     /**
      * Launch the application.
      */
-    public static void showDetailTrainer(Component parent, Integer t_id, GymTrainUpdateOrShow app) {
+    public static void showDetailTrainer(Component parent, Integer t_Id, GymTrainUpdateOrShow app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    GymShowDetailsTrainer frame = new GymShowDetailsTrainer(parent, t_id, app);
+                    GymShowDetailsTrainer frame = new GymShowDetailsTrainer(parent, t_Id, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -60,10 +60,10 @@ public class GymShowDetailsTrainer extends JFrame {
         });
     }
 
-    public GymShowDetailsTrainer(Component parent, Integer t_id, GymTrainUpdateOrShow gymTrainUpdateOrShow) {
+    public GymShowDetailsTrainer(Component parent, Integer t_Id, GymTrainUpdateOrShow gymTrainUpdateOrShow) {
         this.dao = GymTrainerDao.getInstance();
         this.parent = parent;
-        this.t_id = t_id;
+        this.t_Id = t_Id;
         this.app = app;
 
         initialize();
@@ -191,9 +191,9 @@ public class GymShowDetailsTrainer extends JFrame {
 
     private void initTrainerDetails() {
         //DAO (컨트롤러) 메서드를 이용해서 DB에서 검색하고 , 그 결과를 보여준다.
-        GymTrainer gymTrainers = dao.read(t_id);
+        GymTrainer gymTrainers = dao.read(t_Id);
         if(gymTrainers != null) {
-            textTNum.setText(gymTrainers.getT_id().toString());
+            textTNum.setText(gymTrainers.getT_Id().toString());
             textTName.setText(gymTrainers.getT_name());
             textTPhoneNum.setText(gymTrainers.getT_phone());
             textGender.setText(gymTrainers.getT_gender());

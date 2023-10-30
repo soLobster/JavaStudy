@@ -174,9 +174,9 @@ public class GymTrainUpdateOrShow extends JFrame {
             return;
         }
         
-        Integer t_id = (Integer) tableModel.getValueAt(row , 0);
+        Integer t_Id = (Integer) tableModel.getValueAt(row , 0);
         
-        GymShowDetailsTrainer.showDetailTrainer(frame, t_id, GymTrainUpdateOrShow.this);
+        GymShowDetailsTrainer.showDetailTrainer(frame, t_Id, GymTrainUpdateOrShow.this);
         
     }
 
@@ -193,8 +193,8 @@ public class GymTrainUpdateOrShow extends JFrame {
                 "삭제 확인",
                 JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION) {
-            Integer id = (Integer) tableModel.getValueAt(row, 0);
-            int result = dao.delete(id);
+            Integer Id = (Integer) tableModel.getValueAt(row, 0);
+            int result = dao.delete(Id);
             if(result == 1) {
                 initTable();
                 JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "직원 삭제 성공....!");
@@ -207,7 +207,7 @@ public class GymTrainUpdateOrShow extends JFrame {
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
         for(GymTrainer gymTrainer : list) {
             Object[] row = {
-                    gymTrainer.getT_id(),
+                    gymTrainer.getT_Id(),
                     gymTrainer.getT_name(),
                     gymTrainer.getT_phone(),
                     gymTrainer.getT_gender(),

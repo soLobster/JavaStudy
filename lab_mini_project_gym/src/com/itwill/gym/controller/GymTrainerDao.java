@@ -63,7 +63,7 @@ public class GymTrainerDao {
     }
 
     private GymTrainer makeGymTrainerResultSet(ResultSet rs) throws SQLException {
-        int t_id = rs.getInt("T_ID");
+        int t_Id = rs.getInt("T_ID");
         String t_name = rs.getString("T_NAME");
         String t_phone = rs.getString("T_PHONE");
         String t_gender = rs.getString("T_GENDER");
@@ -74,7 +74,7 @@ public class GymTrainerDao {
         String t_address = rs.getString("T_ADDRESS");
 
         GymTrainer gymTrainer = new GymTrainer
-                (t_id, t_name, t_phone, t_gender, t_email, salary, t_birthday, t_hiredate, t_address);
+                (t_Id, t_name, t_phone, t_gender, t_email, salary, t_birthday, t_hiredate, t_address);
 
         return gymTrainer;
     }
@@ -148,9 +148,9 @@ public class GymTrainerDao {
     
     //SQL_DELETE_BY_ID.
     public static final String SQL_DELETE_BY_ID = 
-            "delete from GYM_TRAINER where t_id = ?";
+            "delete from GYM_TRAINER where t_Id = ?";
     
-    public int delete(Integer t_id) {
+    public int delete(Integer t_Id) {
         int result = 0;
         
         Connection conn = null;
@@ -159,7 +159,7 @@ public class GymTrainerDao {
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt = conn.prepareStatement(SQL_DELETE_BY_ID);
-            stmt.setInt(1, t_id);
+            stmt.setInt(1, t_Id);
             
             result = stmt.executeUpdate();
             
@@ -170,9 +170,9 @@ public class GymTrainerDao {
         return result;
     }//end delete method().
     
-    public static final String SQL_SELECT_BY_ID = "select * from GYM_TRAINER where t_id = ?";
+    public static final String SQL_SELECT_BY_ID = "select * from GYM_TRAINER where t_Id = ?";
     
-    public GymTrainer read(Integer t_id) {
+    public GymTrainer read(Integer t_Id) {
         GymTrainer trainer = null;
         
         Connection conn = null;
@@ -183,7 +183,7 @@ public class GymTrainerDao {
             conn = DriverManager.getConnection(URL,USER,PASSWORD);
             
             stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
-            stmt.setInt(1, t_id);
+            stmt.setInt(1, t_Id);
             
             rs = stmt.executeQuery();
             

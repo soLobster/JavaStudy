@@ -4,27 +4,27 @@ package com.itwill.gym.model;
 
 public class Membership {
     
-    private Integer membershipcode; //pk
+    private Integer membershipCode; //pk
     private Integer membershiplength;
     private Integer membershipprice;
     private String membershipcategory;
     
     public Membership() {}
 
-    public Membership(Integer membershipcode, Integer membershiplength, Integer membershipprice,
+    public Membership(Integer membershipCode, Integer membershiplength, Integer membershipprice,
             String membershipcategory) {
-        this.membershipcode = membershipcode;
+        this.membershipCode = membershipCode;
         this.membershiplength = membershiplength;
         this.membershipprice = membershipprice;
         this.membershipcategory = membershipcategory;
     }
 
     public Integer getMembershipcode() {
-        return membershipcode;
+        return membershipCode;
     }
 
     public void setMembershipcode(Integer membershipcode) {
-        this.membershipcode = membershipcode;
+        this.membershipCode = membershipcode;
     }
 
     public Integer getMembershiplength() {
@@ -53,7 +53,7 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership [membershipcode=" + membershipcode + ", membershiplength=" + membershiplength
+        return "Membership [membershipCode=" + membershipCode + ", membershiplength=" + membershiplength
                 + ", membershipprice=" + membershipprice + ", membershipcategory=" + membershipcategory + "]";
     }
     
