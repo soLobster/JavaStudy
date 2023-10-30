@@ -1,6 +1,5 @@
 package com.itwill.gym.view;
 
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,7 +13,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,21 +29,18 @@ public class GymMemberMenu extends JFrame {
     private JButton btnExitGym;
     private JButton btnCheckInGym;
     private JTextField textHelloMember;
-    private Component parent;
-    private GymLogin app;
-    private String inputMemberPhoneNum;
-    private String string;
+    private String memberPhone;
     private String memberName;
-    
+    private GymMemberDao dao = GymMemberDao.getInstance();
     /**
      * Launch the application.
      * @param string 
      */
-    public static void showMemberMenu(String string) {
+    public static void showMemberMenu(String memberPhone) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    GymMemberMenu frame = new GymMemberMenu(string);
+                    GymMemberMenu frame = new GymMemberMenu(memberPhone);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,8 +49,8 @@ public class GymMemberMenu extends JFrame {
         });
     }
 
-    public GymMemberMenu(String string) {
-        this.string = string;
+    public GymMemberMenu(String memberPhone) {
+        this.memberPhone = memberPhone;
         initialize();
         helloMember();
     }
@@ -81,7 +76,7 @@ public class GymMemberMenu extends JFrame {
         textHelloMember = new JTextField();
         textHelloMember.setHorizontalAlignment(SwingConstants.CENTER);
         textHelloMember.setEditable(false);
-        textHelloMember.setFont(new Font("D2Coding", Font.BOLD, 18));
+        textHelloMember.setFont(new Font("D2Coding", Font.BOLD, 25));
         textHelloMember.setBounds(77, 64, 375, 67);
         contentPane.add(textHelloMember);
         textHelloMember.setColumns(10);
@@ -91,7 +86,7 @@ public class GymMemberMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //나의 정보 페이지.
-                MemberInfo.showMemberInfo();
+                MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
                 //TODO
                 //GymLogin에서 넘겨받은 회원의 전화번호를 토대로 일치하는 회원의 정보를 띄워야한다.
             }
@@ -144,7 +139,7 @@ public class GymMemberMenu extends JFrame {
     }//initialize
     
     
-    public void helloMember() { 
+    private void helloMember() { 
 //        GymMemberDao dao = GymMemberDao.getInstance();
 //        GymMember member = dao.read(string);
 //        
@@ -152,7 +147,7 @@ public class GymMemberMenu extends JFrame {
 //        
 //        memberName = member.getName();
         
-        getMemberNameByPhone(string);
+        getMemberNameByPhone(memberPhone);
         
         textHelloMember.setText(memberName + " 님 환영합니다.");
         //TODO 
@@ -161,9 +156,9 @@ public class GymMemberMenu extends JFrame {
         
     }//end helloMember
 
-    private void getMemberNameByPhone(String string) {
-        GymMemberDao dao = GymMemberDao.getInstance();
-        GymMember member = dao.read(string);
+    private void getMemberNameByPhone(String memberPhone) {
+        //GymMemberDao dao = GymMemberDao.getInstance();
+        GymMember member = dao.read(memberPhone);
         
        //System.out.println(member.getName());
         

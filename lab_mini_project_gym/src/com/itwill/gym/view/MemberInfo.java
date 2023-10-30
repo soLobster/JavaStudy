@@ -1,10 +1,15 @@
 package com.itwill.gym.view;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.itwill.gym.controller.GymMemberDao;
+import com.itwill.gym.model.GymMember;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -33,15 +38,20 @@ public class MemberInfo extends JFrame {
     private JTextField textPtMembership;
     private JButton btnDetailMembershipInfo;
     private JButton btnBackPage;
-
+    private GymMember gymMember;
+    private GymMemberDao dao = GymMemberDao.getInstance();
+    private GymMemberMenu app;
+    private String phone;
+    private Component parent;
+    private String memberPhone;
     /**
      * Launch the application.
      */
-    public static void showMemberInfo() {
+    public static void showMemberInfo(Component parent,String memberPhone, GymMemberMenu app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MemberInfo frame = new MemberInfo();
+                    MemberInfo frame = new MemberInfo(parent, memberPhone, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,8 +60,12 @@ public class MemberInfo extends JFrame {
         });
     }
 
-    public MemberInfo() {
+    public MemberInfo(Component parent, String memberPhone, GymMemberMenu app) {
+        this.parent = parent;
+        this.memberPhone = memberPhone;
+        this.app = app;
         initialize();
+        initPersonDetails();
     }
     
     /**
@@ -181,5 +195,19 @@ public class MemberInfo extends JFrame {
         btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 18));
         btnBackPage.setBounds(429, 539, 129, 39);
         contentPane.add(btnBackPage);
-    }
-}
+    }//end initialize
+    
+    private void initPersonDetails() {
+        GymMember gymMember = dao.read(memberPhone);
+        if(gymMember !=null) {
+            textMemNum.setText(gymMember.getId().toString());
+            textMemName.setText(gymMember.getName());
+            textMemPhone.setText(gymMember.getPhone());
+            textMemBirth.setText(gymMember.getBirthday().toString());
+            textAddress.setText(gymMember.getAddress());
+            textGender.setText(gymMember.getGender());
+            
+        }
+    }//initPersonDetails
+    
+}//end class
