@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 public class BuyMembershipPage extends JFrame {
 
     
-    public static final String[] COLUMN_NAMES = {"카테고리","금액"};
+    public static final String[] COLUMN_NAMES = {"상품 코드","카테고리","금액"};
     
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -101,7 +101,7 @@ public class BuyMembershipPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO 구매 확인 창.
-                confirmedBuyMembership();
+                //confirmedBuyMembership();
             }
             
         });
@@ -116,26 +116,30 @@ public class BuyMembershipPage extends JFrame {
         contentPane.add(btnBackPage);
     }//initialize().
     
-    private void confirmedBuyMembership() {
-        //회원권 구매 메서드를 정의한다.
-        int row = tableMembership.getSelectedRow();
-        if(row == -1) {
-            JOptionPane.showMessageDialog(BuyMembershipPage.this, "구매하려는 회원권을 선택하세요...!");
-            return;
-        }
-        
-        int confirm = JOptionPane.showConfirmDialog(BuyMembershipPage.this, 
-                "정말 구매 할까요?",
-                "구매 확인",
-                JOptionPane.YES_NO_OPTION);
-        if(confirm == JOptionPane.YES_OPTION) {
-            Integer memCode = (Integer) tableModel.getValueAt(row, 0);
-            // TODO 1. MembershipDao.selectMembershipCode 
-            // TODO 2. 구매한 회원권을 GymMember 테이블에는 MembershipCode를 insert
-           // int result = dao.
-        }
-        
-    }//confirmedBuyMembership()
+    
+   // ************* -> 여기가 문제다     
+//    private void confirmedBuyMembership() {
+//        //회원권 구매 메서드를 정의한다.
+//        int row = tableMembership.getSelectedRow();
+//        if(row == -1) {
+//            JOptionPane.showMessageDialog(BuyMembershipPage.this, "구매하려는 회원권을 선택하세요...!");
+//            return;
+//        }
+//        
+//        int confirm = JOptionPane.showConfirmDialog(BuyMembershipPage.this, 
+//                "정말 구매 할까요?",
+//                "구매 확인",
+//                JOptionPane.YES_NO_OPTION);
+//        if(confirm == JOptionPane.YES_OPTION) {
+//            Integer memCode = (Integer) tableModel.getValueAt(row, 0);
+//            Membership result = dao.read(memCode);
+//            System.out.println(result);
+//            // TODO 1. MembershipDao.selectMembershipCode 
+//            // TODO 2. 구매한 회원권을 GymMember 테이블에는 MembershipCode를 insert
+//            // int result = dao.
+//        }
+//        
+//    }//confirmedBuyMembership()
 
     private void initTable() {
         List<Membership> membershipList = dao.read();
@@ -147,6 +151,7 @@ public class BuyMembershipPage extends JFrame {
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
         for(Membership m : membershipList) {
             Object[] row = {
+                    m.getMembershipcode(),
                     m.getMembershipcategory(),
                     m.getMembershipprice()
             };

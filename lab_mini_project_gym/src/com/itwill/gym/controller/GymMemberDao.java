@@ -118,7 +118,7 @@ public class GymMemberDao {
 
     /**
      * 데이터 베이스의 GYM_MEMBER 테이블에 행을 삽입(Insert). SQL_INSERT를 실행.
-     * 
+     * GymNewMemberJoin -> createNewMemberJoin
      * @param gymMember GymMemeber 테이블에 insert할 값(name, phone, gender, birthday, address)을 저장한 객체.
      * @return 테이블에 Insert 된 행의 개수.
      */
@@ -150,7 +150,7 @@ public class GymMemberDao {
     public static String SQL_INSERT_MEMBERSHIPCODE = 
             "insert into GYM_MEMBER (NAME, PHONE, GENDER, BIRTHDAY, ADDRESS, MEMBERSHIP_CODE) values(?,?,?,?,?,?)";
     
-    
+   // public int create()
     
     public static final String SQL_DELETE_BY_ID = 
             "delete from GYM_MEMBER where id = ?";

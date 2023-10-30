@@ -206,7 +206,6 @@ public class MemberInfo extends JFrame {
             textMemBirth.setText(gymMember.getBirthday().toString());
             textAddress.setText(gymMember.getAddress());
             textGender.setText(gymMember.getGender());
-            
         }
     }//initPersonDetails
     
