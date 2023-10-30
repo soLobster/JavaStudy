@@ -252,7 +252,7 @@ public class GymShowDetailMember extends JFrame {
             textMemAddress.setText(gymMembers.getAddress());
             dateMemBirthday.setDate(gymMembers.getBirthday());
             textJoindate.setText(gymMembers.getJoinTime().toString());
-            textExpireDate.setText(gymMembers.getModefiedTime().toString());
+            textExpireDate.setText(gymMembers.getModifiedTime().toString());
         }   
     }//initMemberDetails
 

@@ -87,7 +87,6 @@ public class GymMemberMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //나의 정보 페이지.
                 MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
-                //TODO
                 //GymLogin에서 넘겨받은 회원의 전화번호를 토대로 일치하는 회원의 정보를 띄워야한다.
             }
         });
@@ -101,7 +100,12 @@ public class GymMemberMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 회원권 구매 및 연장 페이지
-                BuyMembershipPage.showBuyMembershipPage();
+                
+                //TODO 위의 MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
+                // 같이 밑의 BuyMembershipPage.showBuyMembershipPage); <- 이곳에 회원의 전화번호가 넘어가
+                // BuyMembershipPage에 회원의 GYM_MEMBER 테이블로 회원권 구매 정보가 넘어가야한
+                BuyMembershipPage.showBuyMembershipPage(memberPhone);
+                
                 
             }
         });
@@ -141,30 +145,15 @@ public class GymMemberMenu extends JFrame {
     
     
     private void helloMember() { 
-//        GymMemberDao dao = GymMemberDao.getInstance();
-//        GymMember member = dao.read(string);
-//        
-//        System.out.println(member.getName());
-//        
-//        memberName = member.getName();
-        
         getMemberNameByPhone(memberPhone);
-        
         textHelloMember.setText(memberName + " 님 환영합니다.");
-        //TODO 
         //GymLogin을 통해 넘겨받은 폰번호를 통해 GymMemerdao의 read()를 불러오고 특정 회원을 찾는다
-        //찾은 회원의 이름을 표시 해서 textHelloMember에 "회원의 이름" + " 님 환영합니다"를 setText를 해야한다.
-        
+        //찾은 회원의 이름을 표시 해서 textHelloMember에 "회원의 이름" + " 님 환영합니다"를 setText를 해야한다. 
     }//end helloMember
 
     private void getMemberNameByPhone(String memberPhone) {
-        //GymMemberDao dao = GymMemberDao.getInstance();
         GymMember member = dao.read(memberPhone);
-        
-       //System.out.println(member.getName());
-        
-        memberName = member.getName();
-        
+        memberName = member.getName();      
     }//end getMemberNameByPhone.
     
     

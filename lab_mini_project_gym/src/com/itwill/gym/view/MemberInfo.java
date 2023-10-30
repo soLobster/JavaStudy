@@ -206,6 +206,11 @@ public class MemberInfo extends JFrame {
             textMemBirth.setText(gymMember.getBirthday().toString());
             textAddress.setText(gymMember.getAddress());
             textGender.setText(gymMember.getGender());
+            
+            
+            //TODO 회원권 코드가 뜨는것은 확인했다 이제 할일은 GYM_MEMBER 테이블과 MEMBERSHIP을 조인하여 MEMBERSHIP_CATEGORY를 textMembership에 보이게 하는
+            String membershipCategory = dao.getMembershipCategory(gymMember.getMembership_code());
+            textMembership.setText(membershipCategory);
         }
     }//initPersonDetails
     

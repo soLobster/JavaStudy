@@ -3,60 +3,57 @@ package com.itwill.gym.model;
 // DB MEMBERSHIP 테이블의 컬럼을 정의하는 모델 클래스.
 
 public class Membership {
-    
-    private Integer membershipCode; //pk
-    private Integer membershiplength;
-    private Integer membershipprice;
-    private String membershipcategory;
-    
+
+    private Integer membership_code; //pk
+    private Integer membership_numofdays;
+    private Integer membership_price;
+    private String membership_category;
+
     public Membership() {}
 
-    public Membership(Integer membershipCode, Integer membershiplength, Integer membershipprice,
-            String membershipcategory) {
-        this.membershipCode = membershipCode;
-        this.membershiplength = membershiplength;
-        this.membershipprice = membershipprice;
-        this.membershipcategory = membershipcategory;
+    public Membership(Integer membership_code, Integer membership_numofdays, Integer membership_price, String membership_category) {
+
+        this.membership_code = membership_code;
+        this.membership_numofdays = membership_numofdays;
+        this.membership_price = membership_price;
+        this.membership_category = membership_category;
     }
 
-    public Integer getMembershipcode() {
-        return membershipCode;
+    public Integer getMembership_code() {
+        return membership_code;
     }
 
-    public void setMembershipcode(Integer membershipcode) {
-        this.membershipCode = membershipcode;
+    public void setMembership_code(Integer membership_code) {
+        this.membership_code = membership_code;
     }
 
-    public Integer getMembershiplength() {
-        return membershiplength;
+    public Integer getMembership_numofdays() {
+        return membership_numofdays;
     }
 
-    public void setMembershiplength(Integer membershiplength) {
-        this.membershiplength = membershiplength;
+    public void setMembership_numofdays(Integer membership_numofdays) {
+        this.membership_numofdays = membership_numofdays;
     }
 
-    public Integer getMembershipprice() {
-        return membershipprice;
+    public Integer getMembership_price() {
+        return membership_price;
     }
 
-    public void setMembershipprice(Integer membershipprice) {
-        this.membershipprice = membershipprice;
+    public void setMembership_price(Integer membership_price) {
+        this.membership_price = membership_price;
     }
 
-    public String getMembershipcategory() {
-        return membershipcategory;
+    public String getMembership_category() {
+        return membership_category;
     }
 
-    public void setMembershipcategory(String membershipcategory) {
-        this.membershipcategory = membershipcategory;
+    public void setMembership_category(String membership_category) {
+        this.membership_category = membership_category;
     }
 
     @Override
     public String toString() {
-        return "Membership [membershipCode=" + membershipCode + ", membershiplength=" + membershiplength
-                + ", membershipprice=" + membershipprice + ", membershipcategory=" + membershipcategory + "]";
+        return "Membership [membership_code=" + membership_code + ", membership_numofdays=" + membership_numofdays
+                + ", membership_price=" + membership_price + ", membership_category=" + membership_category + "]";
     }
-    
-    
-
 }

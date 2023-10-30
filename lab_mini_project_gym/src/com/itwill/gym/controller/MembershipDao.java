@@ -58,19 +58,20 @@ public class MembershipDao {
 
 
     private Membership makeMembershipResultSet(ResultSet rs) throws SQLException {
-        int membershipCode = rs.getInt("MEMBERSHIPCODE");
-        int membershiplength = rs.getInt("MEMBERSHIPLENGTH");
-        int membershipprice = rs.getInt("MEMBERSHIPPRICE");
-        String membershipcategory = rs.getString("MEMBERSHIPCATEGORY");
+        Integer membership_code = rs.getInt("MEMBERSHIP_CODE");
+        Integer membership_numofdays = rs.getInt("MEMBERSHIP_NUMOFDAYS");
+        Integer membership_price = rs.getInt("MEMBERSHIP_PRICE");
+        String membership_category = rs.getString("MEMBERSHIP_CATEGORY");
 
-        Membership membership = new Membership(membershipCode, membershiplength, membershipprice, membershipcategory);
+        Membership membership = new Membership(membership_code, membership_numofdays, membership_price, membership_category);
 
         return membership;
-    }//makeMembershipResult()
+    }
+//makeMembershipResult()
 
     //SQL_SELECT_ORDER_BY_MEMBERSHIPCODE
-    public static final String SQL_SELECT_ORDER_BY_MEMBERSHIPCODE = 
-            "select * from MEMBERSHIP order by MEMBERSHIPCODE desc";
+    public static final String SQL_SELECT_ORDER_BY_MEMBERSHIP_CODE = 
+            "select * from MEMBERSHIP order by MEMBERSHIP_CODE desc";
 
     public List<Membership> read(){
         List<Membership> result = new ArrayList<Membership>();
@@ -80,7 +81,7 @@ public class MembershipDao {
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            stmt = conn.prepareStatement(SQL_SELECT_ORDER_BY_MEMBERSHIPCODE);
+            stmt = conn.prepareStatement(SQL_SELECT_ORDER_BY_MEMBERSHIP_CODE);
             rs = stmt.executeQuery();
 
             while(rs.next()) {
@@ -96,10 +97,10 @@ public class MembershipDao {
         return result;
     }//end of List<Membership> read().
 
-    public static final String SQL_SELECT_MEMBERSHIPCODE  = 
-            "select MEMBERSHIPCODE from MEMBERSHIP where MEMBERSHIPCODE = ?";
+    public static final String SQL_SELECT_MEMBERSHIP_CODE  = 
+            "select MEMBERSHIP_CODE from MEMBERSHIP where MEMBERSHIP_CODE = ?";
 
-    public Membership read(Integer memCode){
+    public Membership read(Integer membership_code){
         Membership membership = null;
 
         Connection conn = null;
@@ -109,13 +110,15 @@ public class MembershipDao {
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             
-            stmt = conn.prepareStatement(SQL_SELECT_MEMBERSHIPCODE);
-            stmt.setInt(1, memCode);
+            stmt = conn.prepareStatement(SQL_SELECT_MEMBERSHIP_CODE);
+            stmt.setInt(1, membership_code);
          
             rs = stmt.executeQuery();
             
             if(rs.next()){
                 membership = makeMembershipResultSet(rs);
+            } else {
+                System.err.println("데이터베이스 연결에 문제가 있습니다.");
             }
             
         } catch (Exception e) {

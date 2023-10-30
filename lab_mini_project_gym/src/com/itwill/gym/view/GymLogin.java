@@ -73,7 +73,7 @@ public class GymLogin {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblWelcome = new JLabel("ITWILL FITNESS에 \r\n오신걸 환영합니다");
+        JLabel lblWelcome = new JLabel("ITWILL FITNESS에 오신걸 환영합니다");
         lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
         lblWelcome.setFont(new Font("D2Coding", Font.BOLD, 30));
         lblWelcome.setBounds(12, 10, 622, 85);
