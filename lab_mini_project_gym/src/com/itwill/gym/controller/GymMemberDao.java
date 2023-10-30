@@ -70,7 +70,7 @@ public class GymMemberDao {
         LocalDateTime join = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
         LocalDateTime modified = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
 
-        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join, modified);
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join, modified, null, null, null);
 
         return gymMember;
     }
@@ -209,5 +209,41 @@ public class GymMemberDao {
 
         return gymMembers;
     }//end GymMember read(integer t_id)
-
+    
+    
+    public static final String SQL_SELECT_BY_PHONE = "select * from GYM_MEMBER where phone = ?";
+    
+    /**
+     * GYM_MEMBER DB 테이블의 회원의 폰 번호를 검색 결과를 리턴.
+     * SQL_SELECT_BY_PHONE 문을 실행
+     * @param phone
+     * @return
+     */
+    public GymMember read(String phone) {
+        GymMember members = null;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+          conn = DriverManager.getConnection(URL, USER, PASSWORD);
+          
+          stmt = conn.prepareStatement(SQL_SELECT_BY_PHONE);
+          stmt.setString(1, phone);
+          
+          rs = stmt.executeQuery();
+          
+          if(rs.next()) {
+              members = makeGymMemberResultSet(rs);
+          }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        return members;
+        
+    }//end read(String phone)
+    
 }//end of class

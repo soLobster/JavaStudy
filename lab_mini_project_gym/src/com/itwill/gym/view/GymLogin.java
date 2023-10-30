@@ -287,9 +287,22 @@ public class GymLogin {
                 /* 
                  * comfirmedMember() method 를 통해 회원 확인이 되었을 때 입장 버튼을 누르면 회원 정보 메뉴로 넘어간다
                  */
+                
                 boolean isConfirmed = comfirmedMember();
+                
                 if(isConfirmed) {
-                    GymMemberMenu.showMemberMenu();    
+                    String inputMemberPhoneName = memberNumField.getText();
+                    GymMemberDao dao = GymMemberDao.getInstance();
+                    GymMember gymMembers = dao.read(inputMemberPhoneName);
+                    
+                    //System.out.println(gymMembers.getPhone());
+                    
+                    String memberPhone = gymMembers.getPhone();
+                    
+                    GymMemberMenu.showMemberMenu(memberPhone);
+                    //TODO 
+                    //회원의 전화번호를 GymMemberMenu.showMemberMenu로 넘겨야한다.
+                    //그래야 showMemberMenu에서 회원의 전화번호를 통해 회원의 정보를 db 테이블에서 넘겨받을 수 있다.
                 }
                 
                 if(!isConfirmed) {
@@ -318,10 +331,11 @@ public class GymLogin {
         // GymMemberDao 객체 싱글톤. 저장된 List에서 read()를 통해 데이터베이스를 불러옴.
         GymMemberDao memberDao = GymMemberDao.getInstance();
         List<GymMember> gymMembers = memberDao.read();
+        
+        
         // 불린 타입 변수를 선언.
         boolean isMemberConfirmed = false;
-        
-        
+         
         for(GymMember member : gymMembers) {
             if(inputMemberPhoneNum.equals(member.getPhone())) {
                 isMemberConfirmed = true;
@@ -333,7 +347,7 @@ public class GymLogin {
         if (!isMemberConfirmed) {
             confirmedMember.setText("일치하지 않는 회원 전화번호입니다");
         }
-        
+    
         //회원인지 아닌지 boolean값을 반환한다.
         return isMemberConfirmed;
         

@@ -15,11 +15,15 @@ public class GymMember {
     private String address;
     private LocalDateTime joinTime;
     private LocalDateTime modifiedTime;
+    private Integer membershipCode;
+    private Integer pt_Code;
+    private Integer t_Id;
+
 
     public GymMember() {}
 
     public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address,
-            LocalDateTime joinTime, LocalDateTime modefiedTime) {
+            LocalDateTime joinTime, LocalDateTime modefiedTime, Integer membershipCode, Integer pt_Code, Integer t_Id) {
         
         this.id = id;
         this.name = name;
@@ -29,6 +33,9 @@ public class GymMember {
         this.address = address;
         this.joinTime = joinTime;
         this.modifiedTime = modefiedTime;
+        this.membershipCode = membershipCode;
+        this.pt_Code = pt_Code;
+        this.t_Id = t_Id;
     }
 
     public Integer getId() {
@@ -95,11 +102,38 @@ public class GymMember {
         this.modifiedTime = modefiedTime;
     }
 
+    public Integer getMembershipCode() {
+        return membershipCode;
+    }
+
+    public void setMembershipCode(Integer membershipCode) {
+        this.membershipCode = membershipCode;
+    }
+
+    public Integer getPt_Code() {
+        return pt_Code;
+    }
+
+    public void setPt_Code(Integer pt_Code) {
+        this.pt_Code = pt_Code;
+    }
+
+    public Integer getT_Id() {
+        return t_Id;
+    }
+
+    public void setT_Id(Integer t_Id) {
+        this.t_Id = t_Id;
+    }
+
     @Override
     public String toString() {
         return "GymMember [id=" + id + ", name=" + name + ", phone=" + phone + ", gender=" + gender + ", birthday="
-                + birthday + ", address=" + address + ", joinTime=" + joinTime + ", modifiedTime=" + modifiedTime + "]";
+                + birthday + ", address=" + address + ", joinTime=" + joinTime + ", modifiedTime=" + modifiedTime
+                + ", membershipCode=" + membershipCode + ", pt_Code=" + pt_Code + ", t_Id=" + t_Id + "]";
     }
+
+    
 
 
 

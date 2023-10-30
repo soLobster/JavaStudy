@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
 
 public class GymShowDetailsTrainer extends JFrame {
 
@@ -39,6 +40,8 @@ public class GymShowDetailsTrainer extends JFrame {
     private JTextField textAddress;
     private JDateChooser dateBirth;
     private JDateChooser dateHire;
+    private JButton btnUpdate;
+    private JButton btnCancel;
 
 
     /**
@@ -173,6 +176,17 @@ public class GymShowDetailsTrainer extends JFrame {
         textAddress.setColumns(10);
         textAddress.setBounds(130, 302, 537, 50);
         contentPane.add(textAddress);
+        
+        btnUpdate = new JButton("업데이트");
+        btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        btnUpdate.setBounds(130, 484, 129, 50);
+        contentPane.add(btnUpdate);
+        
+        btnCancel = new JButton("취소");
+        btnCancel.addActionListener((e) -> dispose());
+        btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        btnCancel.setBounds(446, 484, 129, 50);
+        contentPane.add(btnCancel);
     }//end initialize()
 
     private void initTrainerDetails() {
@@ -190,5 +204,4 @@ public class GymShowDetailsTrainer extends JFrame {
         }
 
     }//initTrainerDetails
-
 }//end class
