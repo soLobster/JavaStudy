@@ -215,7 +215,7 @@ public class GymNewMemberJoin extends JFrame {
             JOptionPane.showMessageDialog(GymNewMemberJoin.this, "이름, 연락처, 성별, 생년월일, 주소는 반드시 입력되어야 합니다.");
             return;
         }
-        GymMember gymMember = new GymMember(null, name, phone, gender, birthday, address, null, null, null, null, null);
+        GymMember gymMember = new GymMember(name, phone, gender, birthday, address);
         int result = dao.create(gymMember);
         
         if(result == 1) {

@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,10 +70,10 @@ public class GymMemberDao {
         Date birthday = rs.getDate("BIRTHDAY");
         String address = rs.getString("ADDRESS");
         int membership_code = rs.getInt("MEMBERSHIP_CODE");
-        LocalDateTime join = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
-        LocalDateTime modified = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
+        LocalDateTime join_time = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
+        LocalDateTime expire_date = rs.getTimestamp("EXPIRE_DATE").toLocalDateTime();
 
-        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join, modified, membership_code, null, null);
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, null, null);
         return gymMember;
     }
 
@@ -254,7 +256,12 @@ public class GymMemberDao {
 
     public static final String SQL_UPDATE_SET = 
             "UPDATE GYM_MEMBER SET NAME=?, PHONE=?, GENDER=?, BIRTHDAY=?, ADDRESS=?, MEMBERSHIP_CODE=? WHERE ID=?";
-
+    /**
+     * BuyMembershipPage의 confirmedBuyMembership()를 실행하기 위한 메서드
+     * 
+     * @param member
+     * @return
+     */
     public int update(GymMember member) {
         int result = 0;
 
@@ -275,7 +282,7 @@ public class GymMemberDao {
 
             result = stmt.executeUpdate();
 
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -287,50 +294,58 @@ public class GymMemberDao {
 
     public static final String SQL_JOIN_GYM_MEMBER_ON_MEMBERSHIP = 
             "SELECT GYM_MEMBER.*, MEMBERSHIP.MEMBERSHIP_CATEGORY FROM GYM_MEMBER " 
-             +"LEFT JOIN MEMBERSHIP ON GYM_MEMBER.MEMBERSHIP_CODE = MEMBERSHIP.MEMBERSHIP_CODE " 
-             +"ORDER BY ID DESC";
+                    +"LEFT JOIN MEMBERSHIP ON GYM_MEMBER.MEMBERSHIP_CODE = MEMBERSHIP.MEMBERSHIP_CODE " 
+                    +"ORDER BY ID DESC";
 
-    public List<GymMember> readWithMembershipInfo() {
-        List<GymMember> result = new ArrayList<GymMember>();
+    //    public List<GymMember> readWithMembershipInfo() {
+    //        List<GymMember> result = new ArrayList<GymMember>();
+    //
+    //        Connection conn = null;
+    //        PreparedStatement stmt = null;
+    //        ResultSet rs = null;
+    //        
+    //        try {
+    //            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+    //            stmt = conn.prepareStatement(SQL_JOIN_GYM_MEMBER_ON_MEMBERSHIP);
+    //            rs = stmt.executeQuery();
+    //            
+    //            while(rs.next()) {
+    //                GymMember gymMember = makeGymMemberResultSet(rs);
+    //                result.add(gymMember);
+    //            }
+    //            
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        } finally {
+    //            closeResources(conn, stmt, rs);
+    //        }
+    //        
+    //        return result;
+    //    }//end of readWithMembershipInfo
+
+    public static final String SELECT_MEMBERSHIP_CATEGORY_FROM_MEMBERSHIP = 
+            "SELECT MEMBERSHIP_CATEGORY FROM MEMBERSHIP WHERE MEMBERSHIP_CODE = ?";
+    /**
+     * MemberInfo에서 initPersonDetails()의 membership_code를 불러와 조인한 다음 membership_category로 변환하기 위한 메서드.
+     * 
+     * @param membership_code
+     * @return
+     */
+    public String getMembership_category(int membership_code) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
-        try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            stmt = conn.prepareStatement(SQL_JOIN_GYM_MEMBER_ON_MEMBERSHIP);
-            rs = stmt.executeQuery();
-            
-            while(rs.next()) {
-                GymMember gymMember = makeGymMemberResultSet(rs);
-                result.add(gymMember);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, stmt, rs);
-        }
-        
-        return result;
-    }//end of readWithMembershipInfo
-    
-    public String getMembershipCategory(int membershipCode) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String membershipCategory = null;
+        String membership_category = null;
 
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            String sql = "SELECT MEMBERSHIP_CATEGORY FROM MEMBERSHIP WHERE MEMBERSHIP_CODE = ?";
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, membershipCode);
+            stmt = conn.prepareStatement(SELECT_MEMBERSHIP_CATEGORY_FROM_MEMBERSHIP);
+            stmt.setInt(1, membership_code);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                membershipCategory = rs.getString("MEMBERSHIP_CATEGORY");
+                membership_category = rs.getString("MEMBERSHIP_CATEGORY");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -338,7 +353,37 @@ public class GymMemberDao {
             closeResources(conn, stmt, rs);
         }
 
-        return membershipCategory;
-    }
+        return membership_category;
+    }//end getMembership_category
+
+    public static final String SELECT_MEMBERSHIP_NUMOFDAYS_FROM_MEMBERSHIP = 
+            "select membership_numofdays from membership where membership_code = ?";
     
+    public int getMembershipNumOfDays(int membership_code) {
+        int days = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SELECT_MEMBERSHIP_NUMOFDAYS_FROM_MEMBERSHIP);
+            stmt.setInt(1, membership_code);
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()) {
+                days = rs.getInt("MEMBERSHIP_NUMOFDAYS");
+            }
+            
+        } catch (Exception e) {
+           e.printStackTrace();
+        } finally {
+          closeResources(conn, stmt, rs);   
+        }
+
+        return days;
+    }//end of getMembershipnumofdays
+
 }//end of class

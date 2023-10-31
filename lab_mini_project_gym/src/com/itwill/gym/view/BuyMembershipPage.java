@@ -40,6 +40,7 @@ public class BuyMembershipPage extends JFrame {
     private DefaultTableModel tableModel;
     private MembershipDao dao = MembershipDao.getInstance();
 
+
     private String memberPhone;
     /**
      * Launch the application.
@@ -123,7 +124,7 @@ public class BuyMembershipPage extends JFrame {
     }//initialize().
     
     
-   // ************* -> 여기가 문제다     
+   
     private void confirmedBuyMembership() {
         // 회원권 구매 메서드를 정의한다.
         int row = tableMembership.getSelectedRow();
@@ -144,16 +145,16 @@ public class BuyMembershipPage extends JFrame {
                 GymMember member = memberDao.read(memberPhone);
                 
                 if (member != null) {
-                    System.out.println("회원 정보: " + member.toString());
+                    //테스트 코드.
+                    //System.out.println("회원 정보: " + member.toString());
 
-                    
+                    //GymMember에 Membership_code를 set한다.
+                    //membership_code insert...
                     member.setMembership_code(membership_code);
                     
-                    // TODO: GymMemberDao를 사용하여 회원 정보 업데이트
+                    // GymMemberDao.update 메서드를 사용하여 회원 정보 업데이트
                     memberDao.update(member);
-                    
-                    //TODO: memberDao.update를 재정의 해야할듯 
-                    
+
                 } else {
                     // member 객체가 null인 경우 처리
                     System.err.println("해당 회원 정보를 찾을 수 없습니다.");
@@ -163,8 +164,8 @@ public class BuyMembershipPage extends JFrame {
                 System.err.println("membership_code가 null입니다.");
             }
         }
-        //TODO 객체를 가져오는것 까지 확인 했으니 이제 GymMember 테이블에 membership_code를 insert 해야한다.
         initTable();
+        JOptionPane.showMessageDialog(BuyMembershipPage.this, "회원권 구매 성공...!");
     }
 
 

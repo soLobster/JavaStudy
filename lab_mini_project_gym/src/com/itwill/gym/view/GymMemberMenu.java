@@ -94,14 +94,14 @@ public class GymMemberMenu extends JFrame {
         btnMemInfo.setBounds(77, 162, 375, 67);
         contentPane.add(btnMemInfo);
         
-        btnMembershipBuy = new JButton("피트니스 회원권 구매 및 연장");
+        btnMembershipBuy = new JButton("피트니스 회원권 구매");
         btnMembershipBuy.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 회원권 구매 및 연장 페이지
+                // 회원권 구매 페이지
                 
-                //TODO 위의 MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
+                //위의 MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
                 // 같이 밑의 BuyMembershipPage.showBuyMembershipPage); <- 이곳에 회원의 전화번호가 넘어가
                 // BuyMembershipPage에 회원의 GYM_MEMBER 테이블로 회원권 구매 정보가 넘어가야한
                 BuyMembershipPage.showBuyMembershipPage(memberPhone);
