@@ -6,11 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.itwill.gym.controller.GymMemberDao;
 import com.itwill.gym.controller.PtDao;
+import com.itwill.gym.model.GymMember;
 import com.itwill.gym.model.PT;
 import com.itwill.gym.model.PtWithTrainer;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.util.List;
 
@@ -63,7 +67,7 @@ public class BuyPtPage extends JFrame {
         this.memberPhone = memberPhone;
         initialize();
         popUpPtComboBox();
-//        fillTextField();
+        //        fillTextField();
     }
 
 
@@ -88,16 +92,16 @@ public class BuyPtPage extends JFrame {
 
         ptComboBox = new JComboBox();
         ptComboBox.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedPtCategory = (String) ptComboBox.getSelectedItem();
-                
+
                 for(PtWithTrainer pt : pwt) {
                     if(pt.getPt_category().equals(selectedPtCategory)) {
                         textPtPrice.setText(String.valueOf(pt.getPt_price() + " 원"));
                         textPtCount.setText(String.valueOf(pt.getPt_time() + " 회"));
-                        //TODO 조인한 테이블을 토대로 트레이너의 이름을 불러오고자 한다.
+                        //조인한 테이블을 토대로 트레이너의 이름을 불러오고자 한다.
                         textPtTrainer.setText(pt.getTrainerName());
                         break;
                     }
@@ -107,63 +111,111 @@ public class BuyPtPage extends JFrame {
         ptComboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
         ptComboBox.setBounds(12, 119, 313, 88);
         contentPane.add(ptComboBox);
-        
+
         lblPtPrice = new JLabel("PT권 금액");
         lblPtPrice.setHorizontalAlignment(SwingConstants.LEFT);
         lblPtPrice.setFont(new Font("D2Coding", Font.PLAIN, 20));
         lblPtPrice.setBounds(12, 255, 133, 47);
         contentPane.add(lblPtPrice);
-        
+
         textPtPrice = new JTextField();
         textPtPrice.setEditable(false);
         textPtPrice.setFont(new Font("D2Coding", Font.PLAIN, 20));
         textPtPrice.setBounds(192, 255, 133, 47);
         contentPane.add(textPtPrice);
         textPtPrice.setColumns(10);
-        
+
         lblPtTrainer = new JLabel("담당 트레이너");
         lblPtTrainer.setHorizontalAlignment(SwingConstants.LEFT);
         lblPtTrainer.setFont(new Font("D2Coding", Font.PLAIN, 20));
         lblPtTrainer.setBounds(12, 312, 133, 47);
         contentPane.add(lblPtTrainer);
-        
+
         textPtTrainer = new JTextField();
         textPtTrainer.setEditable(false);
         textPtTrainer.setFont(new Font("D2Coding", Font.PLAIN, 20));
         textPtTrainer.setColumns(10);
         textPtTrainer.setBounds(192, 312, 133, 47);
         contentPane.add(textPtTrainer);
-        
+
         lblPtCount = new JLabel("PT 횟수");
         lblPtCount.setHorizontalAlignment(SwingConstants.LEFT);
         lblPtCount.setFont(new Font("D2Coding", Font.PLAIN, 20));
         lblPtCount.setBounds(12, 369, 133, 47);
         contentPane.add(lblPtCount);
-        
+
         textPtCount = new JTextField();
         textPtCount.setFont(new Font("D2Coding", Font.PLAIN, 20));
         textPtCount.setEditable(false);
         textPtCount.setColumns(10);
         textPtCount.setBounds(192, 369, 133, 47);
         contentPane.add(textPtCount);
-        
+
         btnBuyPt = new JButton("구매하기");
         btnBuyPt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                confirmedBuyPt();
             }
         });
         btnBuyPt.setFont(new Font("D2Coding", Font.PLAIN, 20));
         btnBuyPt.setBounds(12, 478, 133, 47);
         contentPane.add(btnBuyPt);
-        
+
         btnBackPage = new JButton("뒤로가기");
         btnBackPage.addActionListener((e) -> dispose());
         btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 20));
         btnBackPage.setBounds(192, 478, 133, 47);
         contentPane.add(btnBackPage);
     }//end initialize
+
+    private void confirmedBuyPt() {
+        //TODO ComboBox를 통해 선택한 PT 이용권을 구매한다.
+        String selectedPtCategory = (String) ptComboBox.getSelectedItem();
+        if(selectedPtCategory == null) {
+            JOptionPane.showMessageDialog(BuyPtPage.this, "PT이용권을 선택해주세요.");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(BuyPtPage.this, 
+                "PT 이용권을 정말 구매하시겠습니까?",
+                "구매 확인",
+                JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION) {
+            GymMemberDao memberDao = GymMemberDao.getInstance();
+            GymMember member = memberDao.read(memberPhone);
+
+            if(member != null) {
+                PtDao ptDao = PtDao.getInstance();
+                PtWithTrainer pt = null;
+
+                for(PtWithTrainer ptInfo : pwt) {
+                    if(ptInfo.getPt_category().equals(selectedPtCategory)) {
+                        pt = ptInfo;
+                        break;
+                    }
+                }
+
+                if (pt != null) {
+                    // PT 이용권을 사용자에게 할당 (사용자 정보를 업데이트)
+                    member.setPt_Code(pt.getPt_code()); // 이용권 코드 설정
+
+                    // 사용자 정보를 데이터베이스에 업데이트 (실제 데이터베이스와 연결해야 함)
+                    memberDao.update(member);
+
+                    // 사용자에게 성공 메시지 표시
+                    JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 성공!");
+                } else {
+                    // 선택한 PT 이용권 정보를 찾을 수 없는 경우
+                    JOptionPane.showMessageDialog(BuyPtPage.this, "선택한 PT 이용권을 찾을 수 없습니다.");
+                }
+            } else {
+                // 사용자 정보를 찾을 수 없는 경우
+                JOptionPane.showMessageDialog(BuyPtPage.this, "해당 회원 정보를 찾을 수 없습니다.");
+            }
+        }
+    }//confirmedBuyPt
+
 
     private void popUpPtComboBox() {
         ptList = dao.read();
@@ -173,18 +225,7 @@ public class BuyPtPage extends JFrame {
             ptComboBox.addItem(pt.getPt_category());
         }
     }//end popUpPtComboBox().
-    
-//    private void fillTextField() {
-//        List<PT> list = dao.read();
-//        
-//        ptComboBox.removeAllItems();
-//        
-//        for(PT p : list) {
-//            textPtPrice.setText(String.valueOf(p.getPt_price()));
-//            textPtCount.setText(String.valueOf(p.getPt_time()));
-//        }
-//        
-//    }//end fillTextField
-    
-    
+
+
+
 }

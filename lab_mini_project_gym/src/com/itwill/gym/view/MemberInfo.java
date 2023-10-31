@@ -259,6 +259,10 @@ public class MemberInfo extends JFrame {
                 textMembership.setText("X");
             }
             
+            if(gymMember.getPt_Code() != 0){
+             
+            };
+            
             //회원권 코드가 뜨는것은 확인했다 이제 할일은 GYM_MEMBER 테이블과 MEMBERSHIP을 조인하여 
             //MEMBERSHIP_CATEGORY를 textMembership에 보이게 하는
             

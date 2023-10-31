@@ -72,8 +72,9 @@ public class GymMemberDao {
         int membership_code = rs.getInt("MEMBERSHIP_CODE");
         LocalDateTime join_time = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
         LocalDateTime expire_date = rs.getTimestamp("EXPIRE_DATE").toLocalDateTime();
+        int pt_code = rs.getInt("PT_CODE");
 
-        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, null, null);
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code, null);
         return gymMember;
     }
 
@@ -255,7 +256,7 @@ public class GymMemberDao {
     }//end read(String phone)
 
     public static final String SQL_UPDATE_SET = 
-            "UPDATE GYM_MEMBER SET NAME=?, PHONE=?, GENDER=?, BIRTHDAY=?, ADDRESS=?, MEMBERSHIP_CODE=? WHERE ID=?";
+            "UPDATE GYM_MEMBER SET NAME=?, PHONE=?, GENDER=?, BIRTHDAY=?, ADDRESS=?, MEMBERSHIP_CODE=?, PT_CODE=? WHERE ID=?";
     /**
      * BuyMembershipPage의 confirmedBuyMembership()를 실행하기 위한 메서드
      * 
@@ -278,8 +279,8 @@ public class GymMemberDao {
             stmt.setDate(4, member.getBirthday());
             stmt.setString(5, member.getAddress());
             stmt.setInt(6, member.getMembership_code()); // Update membership_code
-            stmt.setInt(7, member.getId()); // Assuming ID is the primary key
-
+            stmt.setInt(7, member.getPt_Code());
+            stmt.setInt(8, member.getId()); // Assuming ID is the primary key
             result = stmt.executeUpdate();
 
 

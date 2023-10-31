@@ -4,15 +4,17 @@ public class PtWithTrainer {
     private int t_id;
     private String TrainerName;
     private int pt_price;
+    private int pt_code;
     private int pt_time;
     private String pt_category;
     
     public PtWithTrainer() {}
 
-    public PtWithTrainer(int t_id, String trainerName, int pt_price, int pt_time, String pt_category) {
+    public PtWithTrainer(int t_id, String trainerName, int pt_price, int pt_code, int pt_time, String pt_category) {
         this.t_id = t_id;
-        this.TrainerName = trainerName;
+        TrainerName = trainerName;
         this.pt_price = pt_price;
+        this.pt_code = pt_code;
         this.pt_time = pt_time;
         this.pt_category = pt_category;
     }
@@ -41,6 +43,14 @@ public class PtWithTrainer {
         this.pt_price = pt_price;
     }
 
+    public int getPt_code() {
+        return pt_code;
+    }
+
+    public void setPt_code(int pt_code) {
+        this.pt_code = pt_code;
+    }
+
     public int getPt_time() {
         return pt_time;
     }
@@ -56,5 +66,6 @@ public class PtWithTrainer {
     public void setPt_category(String pt_category) {
         this.pt_category = pt_category;
     }
-    
+
+   
 }
