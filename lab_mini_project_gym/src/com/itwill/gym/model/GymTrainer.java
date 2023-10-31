@@ -6,38 +6,37 @@ import java.sql.Date;
 
 public class GymTrainer {
 
-    private Integer t_Id; // 트레이너 번호 pk Sequence.
+    private Integer t_id; // 트레이너 번호 pk Sequence.
     private String t_name;
     private String t_phone;
     private String t_gender;
     private String t_email;
-    private Integer salary;
+    private Integer t_salary;
     private Date birthday;
     private Date hiredate;
     private String t_address;
     
     public GymTrainer() {}
 
-    public GymTrainer(Integer t_Id, String t_name, String t_phone, String t_gender, String t_email, Integer salary,
+    public GymTrainer(Integer t_id, String t_name, String t_phone, String t_gender, String t_email, Integer t_salary,
             Date birthday, Date hiredate, String t_address) {
-        
-        this.t_Id = t_Id;
+        this.t_id = t_id;
         this.t_name = t_name;
         this.t_phone = t_phone;
         this.t_gender = t_gender;
         this.t_email = t_email;
-        this.salary = salary;
+        this.t_salary = t_salary;
         this.birthday = birthday;
         this.hiredate = hiredate;
         this.t_address = t_address;
     }
 
-    public Integer getT_Id() {
-        return t_Id;
+    public Integer getT_id() {
+        return t_id;
     }
 
-    public void setT_Id(Integer t_Id) {
-        this.t_Id = t_Id;
+    public void setT_id(Integer t_id) {
+        this.t_id = t_id;
     }
 
     public String getT_name() {
@@ -72,12 +71,12 @@ public class GymTrainer {
         this.t_email = t_email;
     }
 
-    public Integer getSalary() {
-        return salary;
+    public Integer getT_salary() {
+        return t_salary;
     }
 
-    public void setSalary(Integer salary) {
-        this.salary = salary;
+    public void setT_salary(Integer t_salary) {
+        this.t_salary = t_salary;
     }
 
     public Date getBirthday() {
@@ -106,12 +105,11 @@ public class GymTrainer {
 
     @Override
     public String toString() {
-        return "GymTrainer [t_Id=" + t_Id + ", t_name=" + t_name + ", t_phone=" + t_phone + ", t_gender=" + t_gender
-                + ", t_email=" + t_email + ", salary=" + salary + ", birthday=" + birthday + ", hiredate=" + hiredate
-                + ", t_address=" + t_address + "]";
-    } 
-    
-    
+        return "GymTrainer [t_id=" + t_id + ", t_name=" + t_name + ", t_phone=" + t_phone + ", t_gender=" + t_gender
+                + ", t_email=" + t_email + ", t_salary=" + t_salary + ", birthday=" + birthday + ", hiredate="
+                + hiredate + ", t_address=" + t_address + "]";
+    }
+
     
     
 }

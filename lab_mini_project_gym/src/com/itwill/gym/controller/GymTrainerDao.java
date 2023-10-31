@@ -68,13 +68,13 @@ public class GymTrainerDao {
         String t_phone = rs.getString("T_PHONE");
         String t_gender = rs.getString("T_GENDER");
         String t_email = rs.getString("T_EMAIL");
-        int salary = rs.getInt("SALARY");
+        int t_salary = rs.getInt("T_SALARY");
         Date t_birthday = rs.getDate("T_BIRTHDAY");
         Date t_hiredate = rs.getDate("T_HIREDATE");
         String t_address = rs.getString("T_ADDRESS");
 
         GymTrainer gymTrainer = new GymTrainer
-                (t_Id, t_name, t_phone, t_gender, t_email, salary, t_birthday, t_hiredate, t_address);
+                (t_Id, t_name, t_phone, t_gender, t_email, t_salary, t_birthday, t_hiredate, t_address);
 
         return gymTrainer;
     }
@@ -112,8 +112,7 @@ public class GymTrainerDao {
 
     //SQL_INSERT
     public static final String SQL_INSERT = 
-            "insert into GYM_TRAINER (T_NAME, T_PHONE, T_GENDER, T_EMAIL, SALARY, T_BIRTHDAY, T_HIREDATE, T_ADDRESS) "
-            + "values(?,?,?,?,?,?,?,?)";
+            "insert into GYM_TRAINER values(?,?,?,?,?,?,?,?,?)";
 
     public int create(GymTrainer gymTrainer) {
         int result = 0;
@@ -125,14 +124,15 @@ public class GymTrainerDao {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt = conn.prepareStatement(SQL_INSERT);
             
-            stmt.setString(1, gymTrainer.getT_name());
-            stmt.setString(2, gymTrainer.getT_phone());
-            stmt.setString(3, gymTrainer.getT_gender());
-            stmt.setString(4, gymTrainer.getT_email());
-            stmt.setInt(5, gymTrainer.getSalary());
-            stmt.setDate(6, gymTrainer.getBirthday());
-            stmt.setDate(7, gymTrainer.getHiredate());
-            stmt.setString(8, gymTrainer.getT_address());
+            stmt.setInt(1, gymTrainer.getT_id());
+            stmt.setString(2, gymTrainer.getT_name());
+            stmt.setString(3, gymTrainer.getT_phone());
+            stmt.setString(4, gymTrainer.getT_gender());
+            stmt.setString(5, gymTrainer.getT_email());
+            stmt.setInt(6, gymTrainer.getT_salary());
+            stmt.setDate(7, gymTrainer.getBirthday());
+            stmt.setDate(8, gymTrainer.getHiredate());
+            stmt.setString(9, gymTrainer.getT_address());
             
             result = stmt.executeUpdate();
             
@@ -148,9 +148,9 @@ public class GymTrainerDao {
     
     //SQL_DELETE_BY_ID.
     public static final String SQL_DELETE_BY_ID = 
-            "delete from GYM_TRAINER where t_Id = ?";
+            "delete from GYM_TRAINER where t_id = ?";
     
-    public int delete(Integer t_Id) {
+    public int delete(Integer t_id) {
         int result = 0;
         
         Connection conn = null;
@@ -159,7 +159,7 @@ public class GymTrainerDao {
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt = conn.prepareStatement(SQL_DELETE_BY_ID);
-            stmt.setInt(1, t_Id);
+            stmt.setInt(1, t_id);
             
             result = stmt.executeUpdate();
             
@@ -170,9 +170,9 @@ public class GymTrainerDao {
         return result;
     }//end delete method().
     
-    public static final String SQL_SELECT_BY_ID = "select * from GYM_TRAINER where t_Id = ?";
+    public static final String SQL_SELECT_BY_ID = "select * from GYM_TRAINER where t_id = ?";
     
-    public GymTrainer read(Integer t_Id) {
+    public GymTrainer read(Integer t_id) {
         GymTrainer trainer = null;
         
         Connection conn = null;
@@ -183,7 +183,7 @@ public class GymTrainerDao {
             conn = DriverManager.getConnection(URL,USER,PASSWORD);
             
             stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
-            stmt.setInt(1, t_Id);
+            stmt.setInt(1, t_id);
             
             rs = stmt.executeQuery();
             

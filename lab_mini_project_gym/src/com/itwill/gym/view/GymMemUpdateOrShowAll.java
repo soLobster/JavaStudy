@@ -29,7 +29,7 @@ import javax.swing.DefaultComboBoxModel;
 
 public class GymMemUpdateOrShowAll extends JFrame {
     
-    public static final String[] COLUMN_NAMES = {"회원번호", "이름", "연락처", "성별", "생년월일", "주소"};
+    public static final String[] COLUMN_NAMES = {"회원번호", "이름", "연락처", "성별", "생년월일"};
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -66,6 +66,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
 
     public GymMemUpdateOrShowAll() {
         initialize();
+        initTable();
     }
     
     /**
@@ -82,9 +83,9 @@ public class GymMemUpdateOrShowAll extends JFrame {
         contentPane.setLayout(null);
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"회원번호", "이름", "연락처", "성별", "생년월일", "주소"}));
-        comboBox.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        comboBox.setBounds(118, 3, 170, 52);
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"회원번호", "이름", "연락처", "성별", "생년월일"}));
+        comboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        comboBox.setBounds(120, 9, 156, 38);
         contentPane.add(comboBox);
         
         textField = new JTextField();
@@ -102,8 +103,8 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 
             }
         });
-        btnSearch.setFont(new Font("D2Coding", Font.BOLD, 26));
-        btnSearch.setBounds(625, 8, 120, 39);
+        btnSearch.setFont(new Font("D2Coding", Font.BOLD, 23));
+        btnSearch.setBounds(625, 9, 120, 39);
         contentPane.add(btnSearch);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -132,7 +133,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
             }
         });
         btnShowAllMem.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnShowAllMem.setBounds(109, 491, 162, 58);
+        btnShowAllMem.setBounds(87, 491, 162, 58);
         contentPane.add(btnShowAllMem);
         
         btnViewMemInfo = new JButton("회원정보 상세정보");
@@ -144,8 +145,8 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 showGymMemberDetails();
             }
         });
-        btnViewMemInfo.setFont(new Font("D2Coding", Font.BOLD, 15));
-        btnViewMemInfo.setBounds(283, 492, 162, 58);
+        btnViewMemInfo.setFont(new Font("D2Coding", Font.BOLD, 20));
+        btnViewMemInfo.setBounds(261, 492, 209, 58);
         contentPane.add(btnViewMemInfo);
         
         btnDeleteMember = new JButton("회원 삭제");
@@ -158,7 +159,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
             }
         });
         btnDeleteMember.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnDeleteMember.setBounds(457, 491, 162, 58);
+        btnDeleteMember.setBounds(482, 491, 162, 58);
         contentPane.add(btnDeleteMember);
         
         btnBackPage = new JButton("뒤로가기");
@@ -214,7 +215,6 @@ public class GymMemUpdateOrShowAll extends JFrame {
                     gymMember.getPhone(),
                     gymMember.getGender(),
                     gymMember.getBirthday(),
-                    gymMember.getAddress()
             };
             tableModel.addRow(row);
         }

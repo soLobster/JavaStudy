@@ -104,9 +104,7 @@ public class GymMemberMenu extends JFrame {
                 //위의 MemberInfo.showMemberInfo(GymMemberMenu.this, memberPhone,GymMemberMenu.this);
                 // 같이 밑의 BuyMembershipPage.showBuyMembershipPage); <- 이곳에 회원의 전화번호가 넘어가
                 // BuyMembershipPage에 회원의 GYM_MEMBER 테이블로 회원권 구매 정보가 넘어가야한
-                BuyMembershipPage.showBuyMembershipPage(memberPhone);
-                
-                
+                BuyMembershipPage.showBuyMembershipPage(memberPhone);     
             }
         });
         btnMembershipBuy.setFont(new Font("D2Coding", Font.BOLD, 22));
@@ -119,7 +117,7 @@ public class GymMemberMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Pt 이용권 구매 페이지
-                
+                BuyPtPage.showBuyPtPage();
             }
         });
         btnMemPtBuy.setFont(new Font("D2Coding", Font.BOLD, 22));

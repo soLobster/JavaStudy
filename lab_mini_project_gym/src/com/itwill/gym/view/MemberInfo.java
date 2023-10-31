@@ -13,8 +13,13 @@ import com.itwill.gym.model.GymMember;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MemberInfo extends JFrame {
 
@@ -36,7 +41,6 @@ public class MemberInfo extends JFrame {
     private JTextField textAddress;
     private JTextField textMembership;
     private JTextField textPtMembership;
-    private JButton btnDetailMembershipInfo;
     private JButton btnBackPage;
     private GymMember gymMember;
     private GymMemberDao dao = GymMemberDao.getInstance();
@@ -46,6 +50,8 @@ public class MemberInfo extends JFrame {
     private String memberPhone;
     private JLabel lblRegisterDate;
     private JTextField textRegisterDate;
+    private JLabel lblExpireMembership;
+    private JTextField textExpireMembership;
     /**
      * Launch the application.
      */
@@ -76,7 +82,7 @@ public class MemberInfo extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 692, 517);
+        setBounds(100, 100, 693, 658);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -84,86 +90,86 @@ public class MemberInfo extends JFrame {
         contentPane.setLayout(null);
         
         lblMemNum = new JLabel("회원번호");
-        lblMemNum.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        lblMemNum.setFont(new Font("D2Coding", Font.PLAIN, 17));
         lblMemNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblMemNum.setBounds(12, 10, 129, 54);
         contentPane.add(lblMemNum);
         
         lblMemName = new JLabel("이 름");
         lblMemName.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemName.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        lblMemName.setFont(new Font("D2Coding", Font.PLAIN, 17));
         lblMemName.setBounds(12, 74, 129, 54);
         contentPane.add(lblMemName);
         
         lblMemGender = new JLabel("성 별");
         lblMemGender.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemGender.setFont(new Font("D2Coding", Font.PLAIN, 15));
-        lblMemGender.setBounds(325, 74, 129, 54);
+        lblMemGender.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        lblMemGender.setBounds(12, 138, 129, 54);
         contentPane.add(lblMemGender);
         
         lblMemPhone = new JLabel("연 락 처");
         lblMemPhone.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemPhone.setFont(new Font("D2Coding", Font.PLAIN, 15));
-        lblMemPhone.setBounds(12, 138, 129, 54);
+        lblMemPhone.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        lblMemPhone.setBounds(325, 74, 129, 54);
         contentPane.add(lblMemPhone);
         
         lblMemBirh = new JLabel("생년월일");
         lblMemBirh.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemBirh.setFont(new Font("D2Coding", Font.PLAIN, 15));
-        lblMemBirh.setBounds(335, 138, 129, 54);
+        lblMemBirh.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        lblMemBirh.setBounds(325, 138, 129, 54);
         contentPane.add(lblMemBirh);
         
         lblMemAddress = new JLabel("주 소");
         lblMemAddress.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemAddress.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        lblMemAddress.setFont(new Font("D2Coding", Font.PLAIN, 17));
         lblMemAddress.setBounds(12, 202, 129, 54);
         contentPane.add(lblMemAddress);
         
         lblMembership = new JLabel("회원권");
         lblMembership.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMembership.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        lblMembership.setFont(new Font("D2Coding", Font.PLAIN, 17));
         lblMembership.setBounds(12, 266, 129, 54);
         contentPane.add(lblMembership);
         
         lblPtMembership = new JLabel("PT 여부");
         lblPtMembership.setHorizontalAlignment(SwingConstants.CENTER);
-        lblPtMembership.setFont(new Font("D2Coding", Font.PLAIN, 15));
-        lblPtMembership.setBounds(12, 330, 129, 54);
+        lblPtMembership.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        lblPtMembership.setBounds(12, 392, 129, 54);
         contentPane.add(lblPtMembership);
         
         textMemNum = new JTextField();
-        textMemNum.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textMemNum.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textMemNum.setEditable(false);
-        textMemNum.setBounds(153, 10, 160, 54);
+        textMemNum.setBounds(153, 11, 160, 54);
         contentPane.add(textMemNum);
         textMemNum.setColumns(10);
         
         textMemName = new JTextField();
-        textMemName.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textMemName.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textMemName.setEditable(false);
         textMemName.setColumns(10);
-        textMemName.setBounds(153, 74, 160, 54);
+        textMemName.setBounds(153, 75, 160, 54);
         contentPane.add(textMemName);
         
         textGender = new JTextField();
-        textGender.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textGender.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textGender.setEditable(false);
         textGender.setColumns(10);
-        textGender.setBounds(466, 73, 160, 54);
+        textGender.setBounds(153, 139, 160, 54);
         contentPane.add(textGender);
         
         textMemPhone = new JTextField();
-        textMemPhone.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textMemPhone.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textMemPhone.setEditable(false);
         textMemPhone.setColumns(10);
-        textMemPhone.setBounds(153, 137, 160, 54);
+        textMemPhone.setBounds(466, 75, 198, 54);
         contentPane.add(textMemPhone);
         
         textMemBirth = new JTextField();
-        textMemBirth.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textMemBirth.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textMemBirth.setEditable(false);
         textMemBirth.setColumns(10);
-        textMemBirth.setBounds(466, 137, 160, 54);
+        textMemBirth.setBounds(466, 139, 198, 54);
         contentPane.add(textMemBirth);
         
         textAddress = new JTextField();
@@ -177,40 +183,47 @@ public class MemberInfo extends JFrame {
         textMembership.setFont(new Font("D2Coding", Font.PLAIN, 18));
         textMembership.setEditable(false);
         textMembership.setColumns(10);
-        textMembership.setBounds(153, 265, 511, 54);
+        textMembership.setBounds(153, 266, 511, 54);
         contentPane.add(textMembership);
         
         textPtMembership = new JTextField();
         textPtMembership.setFont(new Font("D2Coding", Font.PLAIN, 18));
         textPtMembership.setEditable(false);
         textPtMembership.setColumns(10);
-        textPtMembership.setBounds(153, 329, 511, 54);
+        textPtMembership.setBounds(153, 392, 511, 54);
         contentPane.add(textPtMembership);
         
         lblRegisterDate = new JLabel("회원 가입 일자");
         lblRegisterDate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblRegisterDate.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        lblRegisterDate.setFont(new Font("D2Coding", Font.PLAIN, 17));
         lblRegisterDate.setBounds(325, 10, 129, 54);
         contentPane.add(lblRegisterDate);
         
         textRegisterDate = new JTextField();
-        textRegisterDate.setFont(new Font("D2Coding", Font.PLAIN, 12));
+        textRegisterDate.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textRegisterDate.setEditable(false);
         textRegisterDate.setColumns(10);
-        textRegisterDate.setBounds(466, 10, 160, 54);
+        textRegisterDate.setBounds(466, 11, 198, 54);
         contentPane.add(textRegisterDate);
-        
-        
-        btnDetailMembershipInfo = new JButton("회원권 및 PT 상세보기");
-        btnDetailMembershipInfo.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnDetailMembershipInfo.setBounds(81, 405, 232, 39);
-        contentPane.add(btnDetailMembershipInfo);
         
         btnBackPage = new JButton("뒤로가기");
         btnBackPage.addActionListener((e) -> dispose());
         btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnBackPage.setBounds(422, 405, 129, 39);
+        btnBackPage.setBounds(285, 570, 129, 39);
         contentPane.add(btnBackPage);
+        
+        lblExpireMembership = new JLabel("회원권 만료일");
+        lblExpireMembership.setHorizontalAlignment(SwingConstants.CENTER);
+        lblExpireMembership.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        lblExpireMembership.setBounds(12, 330, 129, 54);
+        contentPane.add(lblExpireMembership);
+        
+        textExpireMembership = new JTextField();
+        textExpireMembership.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        textExpireMembership.setEditable(false);
+        textExpireMembership.setColumns(10);
+        textExpireMembership.setBounds(153, 328, 198, 54);
+        contentPane.add(textExpireMembership);
         
         
     }//end initialize
@@ -224,11 +237,32 @@ public class MemberInfo extends JFrame {
             textMemBirth.setText(gymMember.getBirthday().toString());
             textAddress.setText(gymMember.getAddress());
             textGender.setText(gymMember.getGender());
-            textRegisterDate.setText(gymMember.getJoinTime().toString());
+            //LocalDateTime을 -> "yyyy-mm-dd"로 포멧 변환.
+            LocalDateTime JoinDate = gymMember.getJoinTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = JoinDate.format(formatter);
+            textRegisterDate.setText(formattedDate);
+            
+            if(gymMember.getMembership_code() != 0) {
+                int membership_code = gymMember.getMembership_code();
+                int membership_numofdays = dao.getMembershipNumOfDays(membership_code);
+                LocalDateTime expireDate = JoinDate.plusDays(membership_numofdays);
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedExpireDate = expireDate.format(formatter2);
+                textExpireMembership.setText(formattedExpireDate);
+                
+                String membership_category = dao.getMembership_category(gymMember.getMembership_code());
+                textMembership.setText(membership_category);
+                
+            } else if (gymMember.getMembership_code() == 0) {
+                textExpireMembership.setText("X");
+                textMembership.setText("X");
+            }
+            
             //회원권 코드가 뜨는것은 확인했다 이제 할일은 GYM_MEMBER 테이블과 MEMBERSHIP을 조인하여 
             //MEMBERSHIP_CATEGORY를 textMembership에 보이게 하는
-            String membership_category = dao.getMembership_category(gymMember.getMembership_code());
-            textMembership.setText(membership_category);
+            
         }
     }//initPersonDetails
+    
 }//end class

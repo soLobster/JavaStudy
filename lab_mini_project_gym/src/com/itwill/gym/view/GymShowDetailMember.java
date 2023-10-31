@@ -170,34 +170,34 @@ public class GymShowDetailMember extends JFrame {
         lblMemEnroll.setBounds(12, 356, 108, 59);
         contentPane.add(lblMemEnroll);
 
-        lblMemExpireDate = new JLabel("만료 기한");
+        lblMemExpireDate = new JLabel("회원권 만료일");
         lblMemExpireDate.setHorizontalAlignment(SwingConstants.CENTER);
         lblMemExpireDate.setFont(new Font("D2Coding", Font.BOLD, 15));
         lblMemExpireDate.setBounds(330, 217, 108, 59);
         contentPane.add(lblMemExpireDate);
 
-        lblMemJoinDate = new JLabel("최초 등록일");
+        lblMemJoinDate = new JLabel("회원 가입일");
         lblMemJoinDate.setHorizontalAlignment(SwingConstants.CENTER);
         lblMemJoinDate.setFont(new Font("D2Coding", Font.BOLD, 15));
         lblMemJoinDate.setBounds(330, 148, 108, 59);
         contentPane.add(lblMemJoinDate);
 
         textExpireDate = new JTextField(); // textExpireDate 필드 초기화
-        textExpireDate.setFont(new Font("D2Coding", Font.PLAIN, 13));
+        textExpireDate.setFont(new Font("D2Coding", Font.PLAIN, 15));
         textExpireDate.setEditable(false);
         textExpireDate.setColumns(10);
         textExpireDate.setBounds(450, 216, 237, 59);
         contentPane.add(textExpireDate);
-        
+
         textJoindate = new JTextField();
         textJoindate.setEditable(false);
-        textJoindate.setFont(new Font("D2Coding", Font.PLAIN, 13));
+        textJoindate.setFont(new Font("D2Coding", Font.PLAIN, 15));
         textExpireDate.setEditable(false);
         textJoindate.setColumns(10);
         textJoindate.setBounds(450, 148, 237, 59);
         contentPane.add(textJoindate);
 
-        
+
         lblPt = new JLabel("PT 여부");
         lblPt.setHorizontalAlignment(SwingConstants.CENTER);
         lblPt.setFont(new Font("D2Coding", Font.BOLD, 15));
@@ -234,6 +234,7 @@ public class GymShowDetailMember extends JFrame {
         contentPane.add(btnCancel);
 
         textMembership = new JTextField();
+        textMembership.setEditable(false);
         textMembership.setFont(new Font("D2Coding", Font.PLAIN, 18));
         textMembership.setColumns(10);
         textMembership.setBounds(132, 355, 555, 59);
@@ -251,24 +252,37 @@ public class GymShowDetailMember extends JFrame {
             textMemAddress.setText(gymMembers.getAddress());
             dateMemBirthday.setDate(gymMembers.getBirthday());
             textJoindate.setText(gymMembers.getJoinTime().toString());
-            
+
             System.out.println(gymMembers.getJoinTime());
             /*
-             * TODO: Expire_date를 어렵게 데이터베이스를 통해 갱신하지 말고 여기 GYMSHOWDETAILMEMBER에서만 표기하면 되니까 
+             * Expire_date를 어렵게 데이터베이스를 통해 갱신하지 말고 여기 GYMSHOWDETAILMEMBER에서만 표기하면 되니까 
              * JoinDate를 불러온 후 밑의 getMebership_code를 통해 membership_numofdays를 불러오자 
              * 그러고 Joindate에 Membership_numofdays를 더해서 
              * 단순하게 Expire_date를 표기해보자.
              */
-            
+
             LocalDateTime joinDate = gymMembers.getJoinTime();
-            int membership_code = gymMembers.getMembership_code();
-            int membership_numofdays = dao.getMembershipNumOfDays(membership_code);
-            LocalDateTime expireDate = joinDate.plusDays(membership_numofdays);
-            textExpireDate.setText(expireDate.toString());
-            
-            String membership_category = dao.getMembership_category(gymMembers.getMembership_code());
-            System.out.println(gymMembers.getMembership_code());
-            textMembership.setText(membership_category);
+
+            if(gymMembers.getMembership_code() != 0) {
+                int membership_code = gymMembers.getMembership_code();
+                int membership_numofdays = dao.getMembershipNumOfDays(membership_code);
+                LocalDateTime expireDate = joinDate.plusDays(membership_numofdays);
+                textExpireDate.setText(expireDate.toString());
+
+                
+                //updateGymMemberSetExpireDate가 여기에 있는게 맞는건가...???
+                dao.updateGymMemberSetExpireDate(id, expireDate);
+                
+                String membership_category = dao.getMembership_category(gymMembers.getMembership_code());
+                System.out.println(gymMembers.getMembership_code());
+                textMembership.setText(membership_category);
+                
+            } else if (gymMembers.getMembership_code() == 0){
+                textExpireDate.setText("X");
+                textMembership.setText("X");
+            }
+
         }   
-    }
-}
+    }//initMemberDetails
+
+}//end claass

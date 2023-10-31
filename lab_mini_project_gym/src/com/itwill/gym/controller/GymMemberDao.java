@@ -386,4 +386,28 @@ public class GymMemberDao {
         return days;
     }//end of getMembershipnumofdays
 
+    public static final String UPDATE_GYM_MEMBER_SET_EXPIRE_DATE = 
+            "update gym_member set expire_date = ? where id = ?";
+
+    public int updateGymMemberSetExpireDate(int id, LocalDateTime expireDate) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL,USER, PASSWORD);
+            stmt = conn.prepareStatement(UPDATE_GYM_MEMBER_SET_EXPIRE_DATE);
+            stmt.setTimestamp(1, Timestamp.valueOf(expireDate));
+            stmt.setInt(2, id);
+            
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+    }//end updateGymMemberSetExpireDate
+    
+    
 }//end of class

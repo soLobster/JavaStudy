@@ -193,11 +193,11 @@ public class GymShowDetailsTrainer extends JFrame {
         //DAO (컨트롤러) 메서드를 이용해서 DB에서 검색하고 , 그 결과를 보여준다.
         GymTrainer gymTrainers = dao.read(t_Id);
         if(gymTrainers != null) {
-            textTNum.setText(gymTrainers.getT_Id().toString());
+            textTNum.setText(gymTrainers.getT_id().toString());
             textTName.setText(gymTrainers.getT_name());
             textTPhoneNum.setText(gymTrainers.getT_phone());
             textGender.setText(gymTrainers.getT_gender());
-            textTSalary.setText(gymTrainers.getSalary().toString());
+            textTSalary.setText(gymTrainers.getT_salary().toString());
             dateBirth.setDate(gymTrainers.getBirthday());
             dateHire.setDate(gymTrainers.getHiredate());
             textAddress.setText(gymTrainers.getT_address());

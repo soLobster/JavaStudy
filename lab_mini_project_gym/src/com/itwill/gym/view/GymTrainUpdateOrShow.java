@@ -61,6 +61,7 @@ public class GymTrainUpdateOrShow extends JFrame {
     public GymTrainUpdateOrShow() {
         
         initialize();
+        initTable();
     }
     
     /**
@@ -207,11 +208,11 @@ public class GymTrainUpdateOrShow extends JFrame {
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
         for(GymTrainer gymTrainer : list) {
             Object[] row = {
-                    gymTrainer.getT_Id(),
+                    gymTrainer.getT_id(),
                     gymTrainer.getT_name(),
                     gymTrainer.getT_phone(),
                     gymTrainer.getT_gender(),
-                    gymTrainer.getSalary(),
+                    gymTrainer.getT_salary(),
                     gymTrainer.getBirthday()
             };
             tableModel.addRow(row);
