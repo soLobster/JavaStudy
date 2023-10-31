@@ -117,7 +117,7 @@ public class GymMemberMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Pt 이용권 구매 페이지
-                BuyPtPage.showBuyPtPage();
+                BuyPtPage.showBuyPtPage(memberPhone);
             }
         });
         btnMemPtBuy.setFont(new Font("D2Coding", Font.BOLD, 22));
