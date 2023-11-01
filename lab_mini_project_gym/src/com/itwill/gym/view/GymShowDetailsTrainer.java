@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import com.itwill.gym.controller.GymTrainerDao;
@@ -88,6 +90,8 @@ public class GymShowDetailsTrainer extends JFrame {
         initTrainerDetails();
         
         initTable();
+        
+        resizeColumnWidth(tablePtSession);
     }
 
     /**
@@ -299,5 +303,18 @@ public class GymShowDetailsTrainer extends JFrame {
         List<GTGMPT> gymtrainer = dao.readPt(t_Id);
         resetTableModel(gymtrainer);
     }
+    
+    public void resizeColumnWidth(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 50; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width +1 , width);
+            }
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
+    }//테이블 컬럼 사이즈 조절 함수
     
 }//end class
