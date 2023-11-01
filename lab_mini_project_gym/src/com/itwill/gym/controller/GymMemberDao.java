@@ -61,7 +61,7 @@ public class GymMemberDao {
         }
     }
 
-    //결과처리.
+    // 회원의 전체 컬럼을 가져오는 역할(결과 처리) -> 편의성을 위해 메서드를 만들었다.
     private GymMember makeGymMemberResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("ID");
         String name = rs.getString("NAME");
@@ -73,8 +73,8 @@ public class GymMemberDao {
         LocalDateTime join_time = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
         LocalDateTime expire_date = rs.getTimestamp("EXPIRE_DATE").toLocalDateTime();
         int pt_code = rs.getInt("PT_CODE");
-
-        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code, null);
+        
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code);
         return gymMember;
     }
 
@@ -86,7 +86,7 @@ public class GymMemberDao {
      * 데이터베이스 GYM_MEMBER 테이블에서 모든 레코드(행)을 검색해서 리스트를 리턴.
      * 검색 결과는 회원 ID(Sequence)의 내림차순으로 정렬.
      * 테이블에 레코드가 1개도 없는 경우 빈 리스트를 리턴한다.
-     * 
+     * 관리자 계정에서 전체 회원을 불러올때 사용하는 메서드.
      * @return 전체 회원들의 리스트.
      */
     public List<GymMember> read() {
@@ -150,8 +150,8 @@ public class GymMemberDao {
         return result;
     }//end of create
 
-    public static String SQL_INSERT_MEMBERSHIPCODE = 
-            "insert into GYM_MEMBER (NAME, PHONE, GENDER, BIRTHDAY, ADDRESS, MEMBERSHIP_CODE) values(?,?,?,?,?,?)";
+    //    public static String SQL_INSERT_MEMBERSHIPCODE = 
+    //            "insert into GYM_MEMBER (NAME, PHONE, GENDER, BIRTHDAY, ADDRESS, MEMBERSHIP_CODE) values(?,?,?,?,?,?)";
 
     // public int create()
 
@@ -220,8 +220,8 @@ public class GymMemberDao {
     }//end GymMember read(integer t_id)
 
 
-    public static final String SQL_SELECT_BY_PHONE = "select * from GYM_MEMBER where phone = ?";
-
+    public static final String SQL_SELECT_BY_PHONE = 
+            "select * from GYM_MEMBER where phone = ?";
     /**
      * GYM_MEMBER DB 테이블의 회원의 폰 번호를 검색 결과를 리턴.
      * SQL_SELECT_BY_PHONE 문을 실행
@@ -229,7 +229,7 @@ public class GymMemberDao {
      * @return
      */
     public GymMember read(String phone) {
-        GymMember members = null;
+        GymMember member = null;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -244,26 +244,26 @@ public class GymMemberDao {
             rs = stmt.executeQuery();
 
             if(rs.next()) {
-                members = makeGymMemberResultSet(rs);
+                member = makeGymMemberResultSet(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             closeResources(conn, stmt, rs);
         }
-        return members;
+        return member;
 
     }//end read(String phone)
 
-    public static final String SQL_UPDATE_SET = 
-            "UPDATE GYM_MEMBER SET NAME=?, PHONE=?, GENDER=?, BIRTHDAY=?, ADDRESS=?, MEMBERSHIP_CODE=?, PT_CODE=? WHERE ID=?";
+    public static final String SQL_UPDATE_SET_MEMBERSHIP_CODE = 
+            "UPDATE GYM_MEMBER SET MEMBERSHIP_CODE=? WHERE ID=?";
     /**
      * BuyMembershipPage의 confirmedBuyMembership()를 실행하기 위한 메서드
      * 
      * @param member
      * @return
      */
-    public int update(GymMember member) {
+    public int updateMembership_Code(GymMember member) {
         int result = 0;
 
         Connection conn = null;
@@ -271,16 +271,12 @@ public class GymMemberDao {
 
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            stmt = conn.prepareStatement(SQL_UPDATE_SET);
+            stmt = conn.prepareStatement(SQL_UPDATE_SET_MEMBERSHIP_CODE);
 
-            stmt.setString(1, member.getName());
-            stmt.setString(2, member.getPhone());
-            stmt.setString(3, member.getGender());
-            stmt.setDate(4, member.getBirthday());
-            stmt.setString(5, member.getAddress());
-            stmt.setInt(6, member.getMembership_code()); // Update membership_code
-            stmt.setInt(7, member.getPt_Code());
-            stmt.setInt(8, member.getId()); // Assuming ID is the primary key
+
+            stmt.setInt(1, member.getMembership_code()); // Update membership_code
+            stmt.setInt(2, member.getId()); // Assuming ID is the primary key
+
             result = stmt.executeUpdate();
 
 
@@ -291,7 +287,34 @@ public class GymMemberDao {
         }
 
         return result;
-    }//update(GymMember member)
+    }//updateMembership_Code(GymMember member)
+
+    public static final String SQL_UPDATE_SET_PT_CODE = 
+            "UPDATE GYM_MEMBER SET PT_CODE = ? WHERE ID = ?";
+    public int updatePt_Code(GymMember member) {
+        int result = 0;
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL,USER,PASSWORD);
+            stmt = conn.prepareStatement(SQL_UPDATE_SET_PT_CODE);
+
+            stmt.setInt(1, member.getPt_Code());
+            stmt.setInt(2, member.getId());
+
+            result = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+
+        return result;
+    } //updatePt_Code(GymMember member)
+
+
 
     public static final String SQL_JOIN_GYM_MEMBER_ON_MEMBERSHIP = 
             "SELECT GYM_MEMBER.*, MEMBERSHIP.MEMBERSHIP_CATEGORY FROM GYM_MEMBER " 
@@ -359,29 +382,29 @@ public class GymMemberDao {
 
     public static final String SELECT_MEMBERSHIP_NUMOFDAYS_FROM_MEMBERSHIP = 
             "select membership_numofdays from membership where membership_code = ?";
-    
+
     public int getMembershipNumOfDays(int membership_code) {
         int days = 0;
-        
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt = conn.prepareStatement(SELECT_MEMBERSHIP_NUMOFDAYS_FROM_MEMBERSHIP);
             stmt.setInt(1, membership_code);
-            
+
             rs = stmt.executeQuery();
-            
+
             if(rs.next()) {
                 days = rs.getInt("MEMBERSHIP_NUMOFDAYS");
             }
-            
+
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         } finally {
-          closeResources(conn, stmt, rs);   
+            closeResources(conn, stmt, rs);   
         }
 
         return days;
@@ -393,13 +416,13 @@ public class GymMemberDao {
     public int updateGymMemberSetExpireDate(int id, LocalDateTime expireDate) {
         Connection conn = null;
         PreparedStatement stmt = null;
-        
+
         try {
             conn = DriverManager.getConnection(URL,USER, PASSWORD);
             stmt = conn.prepareStatement(UPDATE_GYM_MEMBER_SET_EXPIRE_DATE);
             stmt.setTimestamp(1, Timestamp.valueOf(expireDate));
             stmt.setInt(2, id);
-            
+
             return stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -407,8 +430,8 @@ public class GymMemberDao {
         } finally {
             closeResources(conn, stmt);
         }
-        
+
     }//end updateGymMemberSetExpireDate
-    
-    
+
+
 }//end of class

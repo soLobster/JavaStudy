@@ -153,7 +153,7 @@ public class BuyMembershipPage extends JFrame {
                     member.setMembership_code(membership_code);
                     
                     // GymMemberDao.update 메서드를 사용하여 회원 정보 업데이트
-                    memberDao.update(member);
+                    memberDao.updateMembership_Code(member);
 
                 } else {
                     // member 객체가 null인 경우 처리
@@ -166,7 +166,7 @@ public class BuyMembershipPage extends JFrame {
         }
         initTable();
         JOptionPane.showMessageDialog(BuyMembershipPage.this, "회원권 구매 성공...!");
-    }
+    }//end ConfirmedBuyMembership().
 
 
     private void initTable() {

@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.itwill.gym.controller.GymMemberDao;
+import com.itwill.gym.controller.PtDao;
 import com.itwill.gym.model.GymMember;
+import com.itwill.gym.model.PtWithTrainer;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -18,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -49,14 +52,16 @@ public class GymShowDetailMember extends JFrame {
     private JTextField textJoindate;
     private JTextField textExpireDate;
     private JLabel lblPt;
-    private JComboBox comboBoxPt;
     private JLabel lblTrainer;
-    private JComboBox comboBoxTrainer;
     private JButton btnUpdate;
-    private JButton btnCancel;
+    private JButton btnBackPage;
     private JTextField textMembership;
     private JLabel lblMemExpireDate;
-
+    private JTextField textPt;
+    private JTextField textPtTrainerName;
+    private PtDao ptDao = PtDao.getInstance();
+    private List<PtWithTrainer> pwt = ptDao.readJoin();
+    
     public static void showDetailMember(Component parent, Integer id, GymMemUpdateOrShowAll app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -83,7 +88,7 @@ public class GymShowDetailMember extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 737, 647);
+        setBounds(100, 100, 737, 713);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -204,34 +209,22 @@ public class GymShowDetailMember extends JFrame {
         lblPt.setBounds(12, 425, 108, 59);
         contentPane.add(lblPt);
 
-        comboBoxPt = new JComboBox();
-        comboBoxPt.setModel(new DefaultComboBoxModel(new String[] {"예", "아니오"}));
-        comboBoxPt.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        comboBoxPt.setBounds(132, 424, 151, 60);
-        contentPane.add(comboBoxPt);
-
         lblTrainer = new JLabel("담당 트레이너");
         lblTrainer.setHorizontalAlignment(SwingConstants.CENTER);
         lblTrainer.setFont(new Font("D2Coding", Font.BOLD, 15));
-        lblTrainer.setBounds(295, 424, 143, 59);
+        lblTrainer.setBounds(12, 494, 117, 59);
         contentPane.add(lblTrainer);
-
-        comboBoxTrainer = new JComboBox();
-        comboBoxTrainer.setModel(new DefaultComboBoxModel(new String[] {"김근육", "이근육", "권근육", "강근육", "오근육", "최근육"}));
-        comboBoxTrainer.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        comboBoxTrainer.setBounds(450, 424, 237, 60);
-        contentPane.add(comboBoxTrainer);
 
         btnUpdate = new JButton("업데이트");
         btnUpdate.setFont(new Font("D2Coding", Font.BOLD, 18));
-        btnUpdate.setBounds(132, 528, 157, 59);
+        btnUpdate.setBounds(132, 587, 157, 59);
         contentPane.add(btnUpdate);
 
-        btnCancel = new JButton("취소");
-        btnCancel.addActionListener((e) -> dispose());
-        btnCancel.setFont(new Font("D2Coding", Font.BOLD, 18));
-        btnCancel.setBounds(419, 528, 157, 59);
-        contentPane.add(btnCancel);
+        btnBackPage = new JButton("뒤로가기");
+        btnBackPage.addActionListener((e) -> dispose());
+        btnBackPage.setFont(new Font("D2Coding", Font.BOLD, 18));
+        btnBackPage.setBounds(429, 587, 157, 59);
+        contentPane.add(btnBackPage);
 
         textMembership = new JTextField();
         textMembership.setEditable(false);
@@ -239,6 +232,20 @@ public class GymShowDetailMember extends JFrame {
         textMembership.setColumns(10);
         textMembership.setBounds(132, 355, 555, 59);
         contentPane.add(textMembership);
+        
+        textPt = new JTextField();
+        textPt.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textPt.setEditable(false);
+        textPt.setBounds(132, 425, 555, 59);
+        contentPane.add(textPt);
+        textPt.setColumns(10);
+        
+        textPtTrainerName = new JTextField();
+        textPtTrainerName.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textPtTrainerName.setEditable(false);
+        textPtTrainerName.setColumns(10);
+        textPtTrainerName.setBounds(132, 493, 181, 59);
+        contentPane.add(textPtTrainerName);
     }
 
     private void initMemberDetails() {
@@ -252,7 +259,7 @@ public class GymShowDetailMember extends JFrame {
             textMemAddress.setText(gymMembers.getAddress());
             dateMemBirthday.setDate(gymMembers.getBirthday());
             textJoindate.setText(gymMembers.getJoinTime().toString());
-
+            
             System.out.println(gymMembers.getJoinTime());
             /*
              * Expire_date를 어렵게 데이터베이스를 통해 갱신하지 말고 여기 GYMSHOWDETAILMEMBER에서만 표기하면 되니까 
@@ -269,7 +276,6 @@ public class GymShowDetailMember extends JFrame {
                 LocalDateTime expireDate = joinDate.plusDays(membership_numofdays);
                 textExpireDate.setText(expireDate.toString());
 
-                
                 //updateGymMemberSetExpireDate가 여기에 있는게 맞는건가...???
                 dao.updateGymMemberSetExpireDate(id, expireDate);
                 
@@ -277,12 +283,23 @@ public class GymShowDetailMember extends JFrame {
                 System.out.println(gymMembers.getMembership_code());
                 textMembership.setText(membership_category);
                 
+                
             } else if (gymMembers.getMembership_code() == 0){
                 textExpireDate.setText("X");
                 textMembership.setText("X");
             }
 
-        }   
+            if(gymMembers.getPt_Code() != 0) {
+                for(PtWithTrainer p : pwt) {
+                    if(p.getPt_code() == gymMembers.getPt_Code()) {
+                        textPt.setText(p.getPt_category());
+                        textPtTrainerName.setText(p.getTrainerName());
+                    }
+                }
+            } else if (gymMembers.getPt_Code() == 0) {
+                textPt.setText("X");
+                textPtTrainerName.setText("X");
+            } 
+        }//if(gymMembers != null)   
     }//initMemberDetails
-
 }//end claass

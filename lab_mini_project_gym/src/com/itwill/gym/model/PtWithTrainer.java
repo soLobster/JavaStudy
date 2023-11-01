@@ -12,7 +12,7 @@ public class PtWithTrainer {
 
     public PtWithTrainer(int t_id, String trainerName, int pt_price, int pt_code, int pt_time, String pt_category) {
         this.t_id = t_id;
-        TrainerName = trainerName;
+        this.TrainerName = trainerName;
         this.pt_price = pt_price;
         this.pt_code = pt_code;
         this.pt_time = pt_time;

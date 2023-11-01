@@ -17,7 +17,6 @@ public class GymMember {
     private LocalDateTime expireDate;
     private Integer membership_code;
     private Integer pt_Code;
-    private Integer t_Id;
 
     public GymMember() {}
 
@@ -30,7 +29,7 @@ public class GymMember {
     }
 
     public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address,
-            LocalDateTime joinTime, LocalDateTime expireDate, Integer membership_code, Integer pt_Code, Integer t_Id) {
+            LocalDateTime joinTime, LocalDateTime expireDate, Integer membership_code, Integer pt_Code) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -41,7 +40,6 @@ public class GymMember {
         this.expireDate = expireDate;
         this.membership_code = membership_code;
         this.pt_Code = pt_Code;
-        this.t_Id = t_Id;
     }
 
     public Integer getId() {
@@ -124,22 +122,13 @@ public class GymMember {
         this.pt_Code = pt_Code;
     }
 
-    public Integer getT_Id() {
-        return t_Id;
-    }
-
-    public void setT_Id(Integer t_Id) {
-        this.t_Id = t_Id;
-    }
-
     @Override
     public String toString() {
         return "GymMember [id=" + id + ", name=" + name + ", phone=" + phone + ", gender=" + gender + ", birthday="
                 + birthday + ", address=" + address + ", joinTime=" + joinTime + ", expireDate=" + expireDate
-                + ", membership_code=" + membership_code + ", pt_Code=" + pt_Code + ", t_Id=" + t_Id + "]";
+                + ", membership_code=" + membership_code + ", pt_Code=" + pt_Code + "]";
     }
+
     
-    
-   
 
 }

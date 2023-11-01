@@ -104,7 +104,11 @@ public class PtDao {
 
     //SQL GYM_TRAINER 테이블과 PT 테이블 JOIN.
     public static final String SQL_GYM_TRAINER_JOIN_PT = 
-            "select g.t_id, g.t_name, p.pt_price, p.pt_code ,p.pt_time, p.pt_category from gym_trainer g join pt p on g.t_id = p.t_id";
+            "select g.t_id, g.t_name, p.pt_code, p.pt_price, p.pt_time, p.pt_category "
+            + "from gym_trainer g "
+            + "join pt p "
+            + "on g.t_id = p.t_id";
+
     public List<PtWithTrainer> readJoin() {
         List<PtWithTrainer> JoinList = new ArrayList<>();
 
@@ -121,6 +125,7 @@ public class PtDao {
                 PtWithTrainer pwt = new PtWithTrainer();
                 pwt.setT_id(rs.getInt("T_ID"));
                 pwt.setTrainerName(rs.getString("T_NAME"));
+                pwt.setPt_code(rs.getInt("PT_CODE"));
                 pwt.setPt_price(rs.getInt("PT_PRICE"));
                 pwt.setPt_time(rs.getInt("PT_TIME"));
                 pwt.setPt_category(rs.getString("PT_CATEGORY"));

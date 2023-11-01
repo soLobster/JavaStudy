@@ -8,13 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.itwill.gym.controller.GymMemberDao;
+import com.itwill.gym.controller.PtDao;
 import com.itwill.gym.model.GymMember;
+import com.itwill.gym.model.PtWithTrainer;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -52,6 +55,8 @@ public class MemberInfo extends JFrame {
     private JTextField textRegisterDate;
     private JLabel lblExpireMembership;
     private JTextField textExpireMembership;
+    private PtDao ptDao = PtDao.getInstance();
+    private List<PtWithTrainer> pwt = ptDao.readJoin();
     /**
      * Launch the application.
      */
@@ -260,12 +265,14 @@ public class MemberInfo extends JFrame {
             }
             
             if(gymMember.getPt_Code() != 0){
-             
-            };
-            
-            //회원권 코드가 뜨는것은 확인했다 이제 할일은 GYM_MEMBER 테이블과 MEMBERSHIP을 조인하여 
-            //MEMBERSHIP_CATEGORY를 textMembership에 보이게 하는
-            
+                for(PtWithTrainer p : pwt) {
+                    if(p.getPt_code() == gymMember.getPt_Code()) {
+                        textPtMembership.setText(p.getPt_category());
+                    }
+                }
+            } else if(gymMember.getPt_Code() == 0) {
+                textPtMembership.setText("X");
+            }
         }
     }//initPersonDetails
     

@@ -97,12 +97,12 @@ public class BuyPtPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String selectedPtCategory = (String) ptComboBox.getSelectedItem();
 
-                for(PtWithTrainer pt : pwt) {
-                    if(pt.getPt_category().equals(selectedPtCategory)) {
-                        textPtPrice.setText(String.valueOf(pt.getPt_price() + " 원"));
-                        textPtCount.setText(String.valueOf(pt.getPt_time() + " 회"));
+                for(PtWithTrainer p : pwt) {
+                    if(p.getPt_category().equals(selectedPtCategory)) {
+                        textPtPrice.setText(String.valueOf(p.getPt_price() + " 원"));
+                        textPtCount.setText(String.valueOf(p.getPt_time() + " 회"));
                         //조인한 테이블을 토대로 트레이너의 이름을 불러오고자 한다.
-                        textPtTrainer.setText(pt.getTrainerName());
+                        textPtTrainer.setText(p.getTrainerName());
                         break;
                     }
                 }
@@ -170,8 +170,9 @@ public class BuyPtPage extends JFrame {
     }//end initialize
 
     private void confirmedBuyPt() {
-        //TODO ComboBox를 통해 선택한 PT 이용권을 구매한다.
+        //ComboBox를 통해 선택한 PT 이용권을 선택한다.
         String selectedPtCategory = (String) ptComboBox.getSelectedItem();
+        
         if(selectedPtCategory == null) {
             JOptionPane.showMessageDialog(BuyPtPage.this, "PT이용권을 선택해주세요.");
             return;
@@ -181,41 +182,33 @@ public class BuyPtPage extends JFrame {
                 "PT 이용권을 정말 구매하시겠습니까?",
                 "구매 확인",
                 JOptionPane.YES_NO_OPTION);
+
         if(confirm == JOptionPane.YES_OPTION) {
-            GymMemberDao memberDao = GymMemberDao.getInstance();
-            GymMember member = memberDao.read(memberPhone);
-
-            if(member != null) {
-                PtDao ptDao = PtDao.getInstance();
-                PtWithTrainer pt = null;
-
-                for(PtWithTrainer ptInfo : pwt) {
-                    if(ptInfo.getPt_category().equals(selectedPtCategory)) {
-                        pt = ptInfo;
-                        break;
-                    }
+            if(selectedPtCategory != null) {
+                //GymMemberDao의 read()를 사용해서 해당 멤버를 확인.
+                GymMemberDao memberDao = GymMemberDao.getInstance();
+                //read -> memberPhone를 토대로 회원의 정보를 member라는 변수에 저장
+                GymMember member = memberDao.read(memberPhone);
+                //read(memberPhone) = "select * from GYM_MEMBER where phone = ?";
+                //findPtCode 메서드를 통해 selectedPtCategory 아규먼트로 pt_code를 리턴해온다.
+                int pt_Code = findPtCode(selectedPtCategory);
+                if(member != null) {
+                    //memberDao를 통해 가저온 'memberPhone' 주인의 회원 객체 member가 null이 아니라면.
+                    
+                    //member에 PT_CODE를 셋 해야한다.
+                    //그전에 위의 콤보박스에서 selectedPtCategory는 PT와 GYM_TRAINER를 조인한 PtWithTrainer에서
+                    //가져온 것이기 때문에 PtWithTrainer에서 Pt_Category와 equals한지 확인하고 
+                    //PT_CODE를 가져와서 member에 setPt_Code를 해야한다.
+                    //TODO member.setPt_Code() 해결하기.
+                    member.setPt_Code(pt_Code);
+   
+                    //그다음 업데이트를 해야한다.
+                    memberDao.updatePt_Code(member);
                 }
-
-                if (pt != null) {
-                    // PT 이용권을 사용자에게 할당 (사용자 정보를 업데이트)
-                    member.setPt_Code(pt.getPt_code()); // 이용권 코드 설정
-
-                    // 사용자 정보를 데이터베이스에 업데이트 (실제 데이터베이스와 연결해야 함)
-                    memberDao.update(member);
-
-                    // 사용자에게 성공 메시지 표시
-                    JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 성공!");
-                } else {
-                    // 선택한 PT 이용권 정보를 찾을 수 없는 경우
-                    JOptionPane.showMessageDialog(BuyPtPage.this, "선택한 PT 이용권을 찾을 수 없습니다.");
-                }
-            } else {
-                // 사용자 정보를 찾을 수 없는 경우
-                JOptionPane.showMessageDialog(BuyPtPage.this, "해당 회원 정보를 찾을 수 없습니다.");
             }
         }
+        JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 완료....!");
     }//confirmedBuyPt
-
 
     private void popUpPtComboBox() {
         ptList = dao.read();
@@ -225,7 +218,13 @@ public class BuyPtPage extends JFrame {
             ptComboBox.addItem(pt.getPt_category());
         }
     }//end popUpPtComboBox().
-
-
-
+    
+    private int findPtCode(String selectedPtCategory) {
+        for (PtWithTrainer p : pwt) {
+            if (p.getPt_category().equals(selectedPtCategory)) {
+                return p.getPt_code(); // PT 코드를 반환
+            }
+        }
+        return 0; // 일치하는 PT 코드를 찾지 못한 경우
+    }
 }
