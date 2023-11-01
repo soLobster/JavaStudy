@@ -88,18 +88,12 @@ public class BuyMembershipPage extends JFrame {
         scrollPane.setBounds(12, 103, 464, 306);
         contentPane.add(scrollPane);
         
-        tableMembership = new JTable() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // 테이블 셀 편집 불가
-            }
-        };
+        tableMembership = new JTable() {};
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
-        tableMembership.setModel(tableModel);
-        tableMembership.getColumnModel().getColumn(0).setPreferredWidth(250);
-        tableMembership.getColumnModel().getColumn(1).setPreferredWidth(30);
+        tableMembership.getTableHeader().setResizingAllowed(false);
         tableMembership.setFont(new Font("D2Coding", Font.PLAIN, 15));
         tableMembership.setRowHeight(30);
+        tableMembership.setModel(tableModel);
         scrollPane.setViewportView(tableMembership);
         
         btnBuy = new JButton("구매하기");

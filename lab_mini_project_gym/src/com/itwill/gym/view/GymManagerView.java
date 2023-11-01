@@ -114,19 +114,5 @@ public class GymManagerView extends JFrame {
         btnTrainerList.setFont(new Font("D2Coding", Font.BOLD, 24));
         btnTrainerList.setBounds(102, 310, 299, 96);
         contentPane.add(btnTrainerList);
-    }//end initialize() 
-
-//    private void resetTableModel(List<GymMember> list) {
-//        tableModel = new DefaultTableModel(null, COLUMN_NAMES);
-//    }
-//    
-//    private void initTable() {
-//        List<GymMember> gymMember = dao.read();
-//        resetTabl
-//    }
-//    
-//    public void notifyGymMemberCreated() {
-//        initTa
-//    }
-    
+    }//end initialize()
 }//end class

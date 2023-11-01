@@ -20,6 +20,15 @@ public class GymMember {
 
     public GymMember() {}
 
+    public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.address = address;
+    }
+    
     public GymMember(String name, String phone, String gender, Date birthday, String address) {
         this.name = name;
         this.phone = phone;

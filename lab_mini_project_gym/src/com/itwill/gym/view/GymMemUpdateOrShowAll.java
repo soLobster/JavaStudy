@@ -33,7 +33,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textField;
+    private JTextField textSearchKeyword;
     private JComboBox comboBox;
     private JButton btnSearch;
     private JTable table;
@@ -83,16 +83,16 @@ public class GymMemUpdateOrShowAll extends JFrame {
         contentPane.setLayout(null);
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"회원번호", "이름", "연락처", "성별", "생년월일"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"이름", "연락처", "성별", "생년월일"}));
         comboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
         comboBox.setBounds(120, 9, 156, 38);
         contentPane.add(comboBox);
         
-        textField = new JTextField();
-        textField.setFont(new Font("D2Coding", Font.PLAIN, 17));
-        textField.setBounds(288, 9, 325, 39);
-        contentPane.add(textField);
-        textField.setColumns(10);
+        textSearchKeyword = new JTextField();
+        textSearchKeyword.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        textSearchKeyword.setBounds(288, 9, 325, 39);
+        contentPane.add(textSearchKeyword);
+        textSearchKeyword.setColumns(10);
         
         btnSearch = new JButton("검색");
         btnSearch.addActionListener(new ActionListener() {
@@ -100,7 +100,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 회원 정보 검색 기능
-                
+                searchByKeyword();
             }
         });
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 23));
@@ -170,6 +170,19 @@ public class GymMemUpdateOrShowAll extends JFrame {
         
     }//end initialize()
     
+    private void searchByKeyword() {
+        int type = comboBox.getSelectedIndex();
+        String keyword = textSearchKeyword.getText();
+        if(keyword.equals("")) {
+            JOptionPane.showMessageDialog(frame, "검색어를 입력하세요.");
+            textSearchKeyword.requestFocus();
+            
+            return;
+        }
+        List<GymMember> result = dao.search(type, keyword);
+        resetTableModel(result);
+    }
+
     private void showGymMemberDetails() {
         //테이블에서 선택된 회원 인덱스.
         int row = table.getSelectedRow();
@@ -227,5 +240,9 @@ public class GymMemUpdateOrShowAll extends JFrame {
     }//initTable()
     
     
+    public void notifyMemberUpdated() {
+        initTable();
+        JOptionPane.showMessageDialog(frame, "회원 정보 업데이트 성공");
+    }
     
 }//end class

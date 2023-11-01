@@ -13,12 +13,15 @@ import com.itwill.gym.model.GymMember;
 import com.itwill.gym.model.PtWithTrainer;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -216,6 +219,14 @@ public class GymShowDetailMember extends JFrame {
         contentPane.add(lblTrainer);
 
         btnUpdate = new JButton("업데이트");
+        btnUpdate.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                updateMember();
+            }
+        });
         btnUpdate.setFont(new Font("D2Coding", Font.BOLD, 18));
         btnUpdate.setBounds(132, 587, 157, 59);
         contentPane.add(btnUpdate);
@@ -302,4 +313,28 @@ public class GymShowDetailMember extends JFrame {
             } 
         }//if(gymMembers != null)   
     }//initMemberDetails
+    
+    private void updateMember() {
+        Integer id = Integer.parseInt(textMemNum.getText());
+        String name = textMemName.getText();
+        String phone = textMemPhone.getText();
+        String address = textMemAddress.getText();
+        String gender = textMemGender.getText();
+        
+        java.util.Date utilDate = dateMemBirthday.getDate();
+        Date birthday = (utilDate != null) ? new java.sql.Date(utilDate.getTime()) : null;
+        
+        if(name.equals("") || phone.equals("") || gender.equals("") || birthday==null || address.equals("")) {
+            JOptionPane.showMessageDialog(GymShowDetailMember.this, "이름, 연락처, 성별, 생년월일, 주소는 반드시 입력되어야 합니다.");
+            return;
+        }
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address);
+        int result = dao.update(gymMember);
+        
+        if(result == 1) {
+            dispose();
+            app.notifyMemberUpdated();
+        }
+        
+    }//end updateMember()
 }//end claass

@@ -25,11 +25,11 @@ import javax.swing.DefaultComboBoxModel;
 
 public class GymTrainUpdateOrShow extends JFrame {
 
-    public static final String[] COLUMN_NAMES = {"트레이너 번호", "이름", "연락처", "성별", "월급여", "생년월일"};
+    public static final String[] COLUMN_NAMES = {"트레이너 번호", "이름", "연락처", "성별", "월급여", "생년월일","입사 날짜"};
     
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textField;
+    private JTextField textSearchKeyword;
     private JTable table;
     private JButton btnSearch;
     private JComboBox comboBox;
@@ -79,17 +79,24 @@ public class GymTrainUpdateOrShow extends JFrame {
         
         comboBox = new JComboBox();
         comboBox.setFont(new Font("D2Coding", Font.BOLD, 18));
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"트레이너 번호", "이름", "연락처", "성별", "주소", "이메일"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"이름", "연락처", "성별", "주소", "이메일","입사 날짜"}));
         comboBox.setBounds(163, 10, 167, 46);
         contentPane.add(comboBox);
         
-        textField = new JTextField();
-        textField.setFont(new Font("D2Coding", Font.PLAIN, 16));
-        textField.setBounds(335, 10, 242, 46);
-        contentPane.add(textField);
-        textField.setColumns(10);
+        textSearchKeyword = new JTextField();
+        textSearchKeyword.setFont(new Font("D2Coding", Font.PLAIN, 16));
+        textSearchKeyword.setBounds(335, 10, 242, 46);
+        contentPane.add(textSearchKeyword);
+        textSearchKeyword.setColumns(10);
         
         btnSearch = new JButton("검색");
+        btnSearch.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchByKeyword();
+            }
+        });
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 24));
         btnSearch.setBounds(587, 8, 122, 46);
         contentPane.add(btnSearch);
@@ -141,7 +148,7 @@ public class GymTrainUpdateOrShow extends JFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 선택된 행의 회원을 삭제한다.
+                // 선택된 행의 트레이너를 삭제한다.
                 deleteGymTrainer();
             }
         });
@@ -149,7 +156,7 @@ public class GymTrainUpdateOrShow extends JFrame {
         btnDeleteTrain.setBounds(603, 411, 178, 82);
         contentPane.add(btnDeleteTrain);
         
-        btnAddTrainer = new JButton("새 트레이너 추가");
+        btnAddTrainer = new JButton("새 트레이너 고용");
         btnAddTrainer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -165,6 +172,19 @@ public class GymTrainUpdateOrShow extends JFrame {
         btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 13));
         btnBackPage.setBounds(20, 19, 117, 29);
         contentPane.add(btnBackPage);
+    }
+
+    private void searchByKeyword() {
+        int type = comboBox.getSelectedIndex();
+        String keyword = textSearchKeyword.getText();
+        if(keyword.equals("")) {
+            JOptionPane.showMessageDialog(frame, "검색어를 입력하세요.");
+            textSearchKeyword.requestFocus();
+            
+            return;
+        }
+        List<GymTrainer> result = dao.search(type, keyword);
+        resetTableModel(result);
     }
 
     private void showTrainerDetails() {
@@ -185,7 +205,7 @@ public class GymTrainUpdateOrShow extends JFrame {
         // 회원 삭제 메서드를 정의한다.
         int row = table.getSelectedRow();
         if(row == -1 ) {
-            JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "삭제하려는 회원을 테이블에서 선택하세요.");
+            JOptionPane.showMessageDialog(GymTrainUpdateOrShow.this, "삭제하려는 직원을 테이블에서 선택하세요.");
             return;
         }
         
@@ -213,7 +233,8 @@ public class GymTrainUpdateOrShow extends JFrame {
                     gymTrainer.getT_phone(),
                     gymTrainer.getT_gender(),
                     gymTrainer.getT_salary(),
-                    gymTrainer.getBirthday()
+                    gymTrainer.getBirthday(),
+                    gymTrainer.getHiredate()
             };
             tableModel.addRow(row);
         }
@@ -224,8 +245,12 @@ public class GymTrainUpdateOrShow extends JFrame {
     private void initTable() {
         List<GymTrainer> gymTrainers = dao.read();
         resetTableModel(gymTrainers);
-        
     }//initTable().
 
+    public void notifyTrainerUpdated() {
+        initTable();
+        JOptionPane.showMessageDialog(frame, "직원 정보 업데이트 성공");
+    }
+    
     
 }//end class

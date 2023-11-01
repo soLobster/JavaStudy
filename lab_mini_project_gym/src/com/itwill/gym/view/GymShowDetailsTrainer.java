@@ -6,18 +6,31 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import com.itwill.gym.controller.GymTrainerDao;
 import com.itwill.gym.model.GymTrainer;
+import com.itwill.gym.model.GTGMPT;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.List;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class GymShowDetailsTrainer extends JFrame {
 
+    public static final String[] COLUMN_NAMES = {"회원 이름", "성별", "연락처", "PT 카테고리"};
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private Component parent;
@@ -42,6 +55,10 @@ public class GymShowDetailsTrainer extends JFrame {
     private JDateChooser dateHire;
     private JButton btnUpdate;
     private JButton btnCancel;
+    private JLabel lblTSession;
+    private JScrollPane scrollPane;
+    private JTable tablePtSession;
+    private DefaultTableModel tableModel;
 
 
     /**
@@ -60,7 +77,7 @@ public class GymShowDetailsTrainer extends JFrame {
         });
     }
 
-    public GymShowDetailsTrainer(Component parent, Integer t_Id, GymTrainUpdateOrShow gymTrainUpdateOrShow) {
+    public GymShowDetailsTrainer(Component parent, Integer t_Id, GymTrainUpdateOrShow app) {
         this.dao = GymTrainerDao.getInstance();
         this.parent = parent;
         this.t_Id = t_Id;
@@ -69,6 +86,8 @@ public class GymShowDetailsTrainer extends JFrame {
         initialize();
 
         initTrainerDetails();
+        
+        initTable();
     }
 
     /**
@@ -77,7 +96,7 @@ public class GymShowDetailsTrainer extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 724, 601);
+        setBounds(100, 100, 724, 725);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -123,7 +142,7 @@ public class GymShowDetailsTrainer extends JFrame {
         lblTAddress = new JLabel("주소");
         lblTAddress.setHorizontalAlignment(SwingConstants.CENTER);
         lblTAddress.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTAddress.setBounds(6, 302, 129, 64);
+        lblTAddress.setBounds(6, 318, 129, 64);
         contentPane.add(lblTAddress);
 
         lblTSalary = new JLabel("급여(월)");
@@ -174,19 +193,49 @@ public class GymShowDetailsTrainer extends JFrame {
         textAddress = new JTextField();
         textAddress.setFont(new Font("D2Coding", Font.PLAIN, 15));
         textAddress.setColumns(10);
-        textAddress.setBounds(130, 302, 537, 50);
+        textAddress.setBounds(130, 326, 537, 50);
         contentPane.add(textAddress);
-        
+
         btnUpdate = new JButton("업데이트");
+        btnUpdate.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                updateTrainer();
+            }
+        });
         btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnUpdate.setBounds(130, 484, 129, 50);
+        btnUpdate.setBounds(130, 605, 129, 50);
         contentPane.add(btnUpdate);
-        
+
         btnCancel = new JButton("취소");
         btnCancel.addActionListener((e) -> dispose());
         btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnCancel.setBounds(446, 484, 129, 50);
+        btnCancel.setBounds(437, 605, 129, 50);
         contentPane.add(btnCancel);
+
+        lblTSession = new JLabel("PT 현황");
+        lblTSession.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTSession.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        lblTSession.setBounds(6, 392, 120, 64);
+        contentPane.add(lblTSession);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(130, 392, 537, 203);
+        contentPane.add(scrollPane);
+
+        tablePtSession = new JTable() { // 익명 클래스
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // 테이블 셀 편집 불가
+            }
+        };
+        tableModel = new DefaultTableModel(null, COLUMN_NAMES);
+        tablePtSession.setModel(tableModel);
+        tablePtSession.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        tablePtSession.setRowHeight(25);
+        scrollPane.setViewportView(tablePtSession);
     }//end initialize()
 
     private void initTrainerDetails() {
@@ -202,6 +251,53 @@ public class GymShowDetailsTrainer extends JFrame {
             dateHire.setDate(gymTrainers.getHiredate());
             textAddress.setText(gymTrainers.getT_address());
         }
-
     }//initTrainerDetails
+    
+    private void updateTrainer() {
+        Integer t_id = Integer.parseInt(textTNum.getText());
+        String t_name = textTName.getText();
+        String t_phone = textTPhoneNum.getText();
+        String t_gender = textGender.getText();
+        Integer t_salary = Integer.parseInt(textTSalary.getText());
+        
+        java.util.Date utilDate = dateBirth.getDate();
+        Date t_birthday = (utilDate != null) ? new java.sql.Date(utilDate.getTime()) : null;
+        
+        java.util.Date utilDate2 = dateHire.getDate();
+        Date t_hiredate = (utilDate2 != null) ? new java.sql.Date(utilDate2.getTime()) : null;
+        
+        String t_address = textAddress.getText();
+        
+        if(t_name.equals("") || t_phone.equals("") || t_gender.equals("") || t_salary == 0 || t_birthday==null || t_hiredate==null || t_address.equals("")) {
+            JOptionPane.showMessageDialog(GymShowDetailsTrainer.this, "이름, 연락처, 성별, 이메일, 주소, 생년월일, 고용날짜가 누락 되어 있으면 안됩니다.");
+            return;
+        }
+        GymTrainer gymTrainer = new GymTrainer(t_id, t_name, t_phone, t_gender, t_gender, t_salary, t_birthday, t_hiredate, t_address);
+        int result = dao.update(gymTrainer);
+        
+        if(result == 1) {
+            dispose();
+            app.notifyTrainerUpdated();
+        }
+    }//end updateTrainer.
+    private void resetTableModel(List<GTGMPT> list) {
+        tableModel = new DefaultTableModel(null, COLUMN_NAMES);
+        for(GTGMPT gtgmpt : list) {
+            Object[] row = {
+                    gtgmpt.getName(),
+                    gtgmpt.getGender(),
+                    gtgmpt.getPhone(),
+                    gtgmpt.getPt_category()
+            };
+            tableModel.addRow(row);
+        }
+        tablePtSession.setModel(tableModel);
+    }//end resetTablemodel
+    
+    
+    private void initTable() {
+        List<GTGMPT> gymtrainer = dao.readPt(t_Id);
+        resetTableModel(gymtrainer);
+    }
+    
 }//end class

@@ -433,5 +433,96 @@ public class GymMemberDao {
 
     }//end updateGymMemberSetExpireDate
 
+    public static final String SQL_UPDATE_GYM_MEMBER = 
+            "update gym_member set name = ?, phone = ?, address = ?, gender = ?, birthday = ? where id = ?";
+    
+    public int update(GymMember gymMember) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt =conn.prepareStatement(SQL_UPDATE_GYM_MEMBER);
+            stmt.setString(1, gymMember.getName());
+            stmt.setString(2, gymMember.getPhone());
+            stmt.setString(3, gymMember.getAddress());
+            stmt.setString(4, gymMember.getGender());
+            stmt.setDate(5, gymMember.getBirthday());
+            stmt.setInt(6, gymMember.getId());
+            
+            result = stmt.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+
+    //이름에 검색 키워드가 포함된 모든 결과를 검색.(대소 구분 없이)
+    public static final String SQL_SELECT_BY_NAME = 
+            "select * from gym_member where lower(name) like ? order by id desc";
+    // 연락처로 검색 키워드가 포함된 모든 결과를 검색.
+    public static final String SQL_SELECT_BY_MEMBER_PHONENUM = 
+            "select * from gym_member where lower(phone) like ? order by id desc";
+    // 성별 검색 키워드가 포함된 모든 결과를 검색.
+    public static final String SQL_SELECT_BY_GENDER = 
+            "select * from gym_member where lower(gender) like ? order by id desc";
+    // 생일 검색 키워드.
+    public static final String SQL_SELECT_BY_BIRTHDAY = 
+            "select * from gym_member where TO_CHAR(birthday, 'YYYY-MM-DD') like ? order by birthday desc";
+    
+    
+    
+    public List<GymMember> search(int type, String keyword) {
+        final String searchKeyword = "%" + keyword.toLowerCase() + "%";
+        List<GymMember> result = new ArrayList<GymMember>();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL,USER,PASSWORD);
+            switch(type) {
+            case 0:
+                stmt = conn.prepareStatement(SQL_SELECT_BY_NAME);
+                stmt.setString(1, searchKeyword);
+                break;
+            case 1:
+                stmt = conn.prepareStatement(SQL_SELECT_BY_MEMBER_PHONENUM);
+                stmt.setString(1, searchKeyword);
+                break;
+            case 2:
+                stmt = conn.prepareStatement(SQL_SELECT_BY_GENDER);
+                stmt.setString(1, searchKeyword);
+                break;
+            case 3:
+                stmt = conn.prepareStatement(SQL_SELECT_BY_BIRTHDAY);
+                stmt.setString(1, searchKeyword);
+                break;
+            }
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                GymMember g = makeGymMemberResultSet(rs);
+                result.add(g);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        
+        return result;
+    }
+
 
 }//end of class
