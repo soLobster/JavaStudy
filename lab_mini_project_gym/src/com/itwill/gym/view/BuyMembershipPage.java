@@ -104,13 +104,6 @@ public class BuyMembershipPage extends JFrame {
             tableMembership.setRowHeight(30);
             scrollPane.setViewportView(tableMembership);
 
-            TableColumnModel columnModel = tableMembership.getColumnModel();
-            columnModel.getColumn(0).setPreferredWidth(100);
-            columnModel.getColumn(1).setPreferredWidth(200);
-            columnModel.getColumn(2).setPreferredWidth(80);
-
-            tableMembership.repaint();
-
             btnBuy = new JButton("구매하기");
             btnBuy.addActionListener(new ActionListener() {
 

@@ -75,7 +75,7 @@ public class PtDao {
 
     //SQL_SELECT_ORDER_BY_PT_CODE
     public static final String SQL_SELECT_ORDER_BY_PT_CODE = 
-            "select * from PT order by PT_CODE desc";
+            "select * from PT order by PT_CATEGORY desc";
 
     public List<PT> read() {
         List<PT> list = new ArrayList<PT>();
