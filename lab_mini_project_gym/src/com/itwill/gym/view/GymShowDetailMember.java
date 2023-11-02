@@ -69,7 +69,9 @@ public class GymShowDetailMember extends JFrame {
     private LocalDateTime currentDateTime;
     private JTextField textMemBuyDate;
     private JLabel lblMemBuyDate;
-    
+    private JTextField textbuyMemDate;
+    private JLabel lblMemberShipBuyDate;
+
     public static void showDetailMember(Component parent, Integer id, GymMemUpdateOrShowAll app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -89,9 +91,9 @@ public class GymShowDetailMember extends JFrame {
         this.id = id;
         this.app = app;
         currentDateTime = LocalDateTime.now();
-        
+
         initialize();
-        
+
         initMemberDetails();
     }
 
@@ -216,7 +218,7 @@ public class GymShowDetailMember extends JFrame {
 
         btnUpdate = new JButton("업데이트");
         btnUpdate.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
@@ -239,21 +241,31 @@ public class GymShowDetailMember extends JFrame {
         textMembership.setColumns(10);
         textMembership.setBounds(132, 355, 555, 59);
         contentPane.add(textMembership);
-        
+
         textPt = new JTextField();
         textPt.setFont(new Font("나눔고딕", Font.PLAIN, 20));
         textPt.setEditable(false);
         textPt.setBounds(132, 425, 555, 59);
         contentPane.add(textPt);
         textPt.setColumns(10);
-        
+
         textPtTrainerName = new JTextField();
         textPtTrainerName.setFont(new Font("나눔고딕", Font.PLAIN, 20));
         textPtTrainerName.setEditable(false);
         textPtTrainerName.setColumns(10);
         textPtTrainerName.setBounds(132, 493, 181, 59);
         contentPane.add(textPtTrainerName);
-        
+
+        textbuyMemDate = new JTextField();
+        textbuyMemDate.setBounds(132, 217, 174, 59);
+        contentPane.add(textbuyMemDate);
+        textbuyMemDate.setColumns(10);
+
+        lblMemberShipBuyDate = new JLabel("회원권 구매일");
+        lblMemberShipBuyDate.setFont(new Font("나눔고딕", Font.BOLD, 18));
+        lblMemberShipBuyDate.setBounds(12, 217, 108, 59);
+        contentPane.add(lblMemberShipBuyDate);
+
     }
 
     private void initMemberDetails() {
@@ -267,13 +279,12 @@ public class GymShowDetailMember extends JFrame {
             textMemGender.setText(gymMembers.getGender());
             textMemAddress.setText(gymMembers.getAddress());
             dateMemBirthday.setDate(gymMembers.getBirthday());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String FormattedJoin_Date = gymMembers.getJoinTime().format(formatter);
             textJoindate.setText(FormattedJoin_Date);
-            
-            
-            
-           
+
+
+
             /*
              * Expire_date를 어렵게 데이터베이스를 통해 갱신하지 말고 여기 GYMSHOWDETAILMEMBER에서만 표기하면 되니까 
              * JoinDate를 불러온 후 밑의 getMebership_code를 통해 membership_numofdays를 불러오자 
@@ -284,31 +295,35 @@ public class GymShowDetailMember extends JFrame {
             //LocalDateTime joinDate = gymMembers.getJoinTime();
 
             if(gymMembers.getMembership_code() != 0) {
+
+                //                int membership_code = gymMembers.getMembership_code();
+                //                int membership_numofdays = dao.getMembershipNumOfDays(membership_code);
+                //                LocalDateTime expireDate = currentDateTime.plusDays(membership_numofdays);
+                //                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                //                String FormattedExpireDate = gymMembers.getExpireDate().format(formatter);
+                //                System.out.println(FormattedExpireDate);
+                //                String FormattedBuyMembershipDate = gymMembers.get.format(formatter);
+                //                textMemBuyDate.setText(FormattedBuyMembershipDate);
+
+                String FormattedBuy_Membership_date = gymMembers.getBuyMembershipDate().format(formatter);
+                textbuyMemDate.setText(FormattedBuy_Membership_date);
                 
-//                int membership_code = gymMembers.getMembership_code();
-//                int membership_numofdays = dao.getMembershipNumOfDays(membership_code);
-//                LocalDateTime expireDate = currentDateTime.plusDays(membership_numofdays);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                String FormattedExpireDate = gymMembers.getExpireDate().format(formatter);
-//                System.out.println(FormattedExpireDate);
-//                String FormattedBuyMembershipDate = gymMembers.get.format(formatter);
-//                textMemBuyDate.setText(FormattedBuyMembershipDate);
                 String FormattedExpire_Date = gymMembers.getExpireDate().format(formatter);
                 textExpireDate.setText(FormattedExpire_Date);
 
                 //updateGymMemberSetExpireDate가 여기에 있는게 맞는건가...???
-               
+
                 String membership_category = dao.getMembership_category(gymMembers.getMembership_code());
                 System.out.println(gymMembers.getMembership_code());
                 textMembership.setText(membership_category);
-                
-                
+
+
             } else if (gymMembers.getMembership_code() == 0){
-//                textMemBuyDate.setText("X");
+                textbuyMemDate.setText("X");
                 textExpireDate.setText("X");
                 textMembership.setText("X");
             }
-            
+
 
             if(gymMembers.getPt_Code() != 0) {
                 for(PtWithTrainer p : pwt) {
@@ -323,36 +338,28 @@ public class GymShowDetailMember extends JFrame {
             } 
         }//if(gymMembers != null)   
     }//initMemberDetails
-    
+
     private void updateMember() {
         Integer id = Integer.parseInt(textMemNum.getText());
         String name = textMemName.getText();
         String phone = textMemPhone.getText();
         String address = textMemAddress.getText();
         String gender = textMemGender.getText();
-        
+
         java.util.Date utilDate = dateMemBirthday.getDate();
         Date birthday = (utilDate != null) ? new java.sql.Date(utilDate.getTime()) : null;
-        
+
         if(name.equals("") || phone.equals("") || gender.equals("") || birthday==null || address.equals("")) {
             JOptionPane.showMessageDialog(GymShowDetailMember.this, "이름, 연락처, 성별, 생년월일, 주소는 반드시 입력되어야 합니다.");
             return;
         }
         GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address);
         int result = dao.update(gymMember);
-        
+
         if(result == 1) {
             dispose();
             app.notifyMemberUpdated();
         }
-        
+
     }//end updateMember()
-    
-//    private void UpdateMembershipBuyDate(int id, LocalDateTime buyDate) {
-//        dao.updateGymMemberSetMembershipBuyDate(id, buyDate);
-//    }
-//    
-//    private void UpdateMembershipExpireDate(int id, LocalDateTime expireDate) {
-//        dao.updateGymMemberSetExpireDate(id, expireDate);
-//    }
 }//end claass

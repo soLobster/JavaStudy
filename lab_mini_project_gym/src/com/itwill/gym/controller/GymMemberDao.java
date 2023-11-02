@@ -72,9 +72,11 @@ public class GymMemberDao {
         int membership_code = rs.getInt("MEMBERSHIP_CODE");
         LocalDateTime join_time = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
         LocalDateTime expire_date = rs.getTimestamp("EXPIRE_DATE").toLocalDateTime();
+        LocalDateTime buy_membership_date = rs.getTimestamp("BUY_MEMBERSHIP_DATE").toLocalDateTime();
         int pt_code = rs.getInt("PT_CODE");
 
-        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code);
+        //GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code);
+        GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, buy_membership_date, membership_code, pt_code);
         return gymMember;
     }
 
@@ -432,6 +434,29 @@ public class GymMemberDao {
         }
 
     }//end updateGymMemberSetExpireDate
+    
+    public static final String UPDATE_GYM_MEMBER_SET_BUY_MEMBERSHIP_DATE = 
+            "update gym_member set buy_membership_date = ? where id = ?";
+    
+    public int updateBuyMembershipDate(int id, LocalDateTime buyMembershipDate) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareCall(UPDATE_GYM_MEMBER_SET_BUY_MEMBERSHIP_DATE);
+            stmt.setTimestamp(1, Timestamp.valueOf(buyMembershipDate));
+            stmt.setInt(2, id);
+            
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            closeResources(conn, stmt);
+        }
+    }
+    
     
 
     public static final String SQL_UPDATE_GYM_MEMBER = 

@@ -161,10 +161,17 @@ public class BuyMembershipPage extends JFrame {
                     // GymMemberDao.update 메서드를 사용하여 회원 정보 업데이트
                     memberDao.updateMembership_Code(member);
                     
+                    LocalDateTime buyMembershipDate = LocalDateTime.now();
+                    
+                    memberDao.updateBuyMembershipDate(member.getId(), buyMembershipDate);
+                    
+                    
+                    LocalDateTime buyMembership = member.getBuyMembershipDate();
+                    
 //                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
 //                    String FormattedNowDate = buyMemberShip_date.format(formatter);
                     
-                    LocalDateTime expireDate = buyMembership_Date.plusDays(memDao.getMembershipNumOfDays(membership_code));
+                    LocalDateTime expireDate = buyMembership.plusDays(memDao.getMembershipNumOfDays(membership_code));
 //                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("YYYY-MM-DD");
 //                    String formattedExpireDate = expireDate.format(formatter2);
                     
