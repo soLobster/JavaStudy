@@ -15,9 +15,10 @@ public class GymMember {
     private String address;
     private LocalDateTime joinTime;
     private LocalDateTime expireDate;
+    private LocalDateTime buyMembershipDate;
     private Integer membership_code;
     private Integer pt_Code;
-
+    
     public GymMember() {}
 
     public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address) {
@@ -47,6 +48,24 @@ public class GymMember {
         this.address = address;
         this.joinTime = joinTime;
         this.expireDate = expireDate;
+        this.membership_code = membership_code;
+        this.pt_Code = pt_Code;
+    }
+    
+
+    
+    public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address,
+            LocalDateTime joinTime, LocalDateTime expireDate, LocalDateTime buyMembershipDate, Integer membership_code,
+            Integer pt_Code) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.address = address;
+        this.joinTime = joinTime;
+        this.expireDate = expireDate;
+        this.buyMembershipDate = buyMembershipDate;
         this.membership_code = membership_code;
         this.pt_Code = pt_Code;
     }
@@ -115,6 +134,15 @@ public class GymMember {
         this.expireDate = expireDate;
     }
 
+    
+    public LocalDateTime getBuyMembershipDate() {
+        return buyMembershipDate;
+    }
+
+    public void setBuyMembershipDate(LocalDateTime buyMembershipDate) {
+        this.buyMembershipDate = buyMembershipDate;
+    }
+
     public Integer getMembership_code() {
         return membership_code;
     }
@@ -135,9 +163,10 @@ public class GymMember {
     public String toString() {
         return "GymMember [id=" + id + ", name=" + name + ", phone=" + phone + ", gender=" + gender + ", birthday="
                 + birthday + ", address=" + address + ", joinTime=" + joinTime + ", expireDate=" + expireDate
-                + ", membership_code=" + membership_code + ", pt_Code=" + pt_Code + "]";
+                + ", buyMembershipDate=" + buyMembershipDate + ", membership_code=" + membership_code + ", pt_Code="
+                + pt_Code + "]";
     }
 
+   
     
-
 }

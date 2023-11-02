@@ -1,5 +1,6 @@
 package com.itwill.gym.view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,11 +9,19 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.plaf.ColorUIResource;
 
 import com.itwill.gym.controller.GymMemberDao;
 import com.itwill.gym.model.GymMember;
 
+import oracle.core.lmx.CoreException;
+
 import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -38,6 +47,8 @@ public class GymLogin {
     private JButton btnManager;
     private JButton btnGymEnter;
     private JLabel lblMemNumInfo;
+    private JButton btnDelete;
+    private JButton BtnAllClear;
     
     
     /**
@@ -68,35 +79,60 @@ public class GymLogin {
      */
     private void initialize() {
         frame = new JFrame();
+        frame.getContentPane().setBackground(new Color(65, 65, 65));
         frame.setTitle("ITWILL_FITNESS");
-        frame.setBounds(100, 100, 662, 825);
+        frame.setBounds(100, 100, 630, 825);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
+        try {
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+//        UIManager.put("Button.background", Color.BLACK);
+//        UIManager.put("Button.foreground", Color.WHITE);
+        
+        
+        
         JLabel lblWelcome = new JLabel("ITWILL FITNESS에 오신걸 환영합니다");
         lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-        lblWelcome.setFont(new Font("D2Coding", Font.BOLD, 30));
-        lblWelcome.setBounds(12, 10, 622, 85);
+        lblWelcome.setOpaque(true);
+        lblWelcome.setBackground(Color.black);
+        lblWelcome.setFont(new Font("나눔고딕", Font.BOLD, 35));
+        lblWelcome.setForeground(Color.white);
+        lblWelcome.setBounds(0, 0, 614, 107);
         frame.getContentPane().add(lblWelcome);
 
         memberNumField = new JTextField();
+        memberNumField.setOpaque(true);
+        memberNumField.setBackground(Color.GRAY);
         memberNumField.setHorizontalAlignment(SwingConstants.CENTER);
-        memberNumField.setFont(new Font("D2Coding", Font.PLAIN, 40));
+        memberNumField.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        memberNumField.setForeground(Color.white);
         memberNumField.setEditable(false);
         memberNumField.setBounds(166, 171, 420, 85);
+        memberNumField.setBorder(BorderFactory.createEmptyBorder());
         frame.getContentPane().add(memberNumField);
         memberNumField.setColumns(10);
 
         confirmedMember = new JTextField();
+        confirmedMember.setOpaque(true);
+        confirmedMember.setBackground(Color.DARK_GRAY);
         confirmedMember.setText("회원 확인을 먼저 해주세요...!");
         confirmedMember.setHorizontalAlignment(SwingConstants.CENTER);
-        confirmedMember.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        confirmedMember.setFont(new Font("나눔고딕", Font.BOLD, 24));
+        confirmedMember.setForeground(Color.orange);
         confirmedMember.setEditable(false);
-        confirmedMember.setBounds(166, 266, 420, 46);
+        confirmedMember.setBounds(156, 266, 458, 46);
+        confirmedMember.setBorder(BorderFactory.createEmptyBorder());
         frame.getContentPane().add(confirmedMember);
         confirmedMember.setColumns(10);
 
         btnOne = new JButton("1");
+        btnOne.setOpaque(true);
+        btnOne.setBackground(Color.darkGray);
         btnOne.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,11 +141,15 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnOne.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnOne.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnOne.setForeground(Color.white);
         btnOne.setBounds(166, 322, 132, 99);
+        btnOne.setBorder(BorderFactory.createEmptyBorder());
         frame.getContentPane().add(btnOne);
 
         btnTwo = new JButton("2");
+        btnTwo.setOpaque(true);
+        btnTwo.setBackground(Color.DARK_GRAY);
         btnTwo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,11 +158,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnTwo.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnTwo.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnTwo.setForeground(Color.white);
         btnTwo.setBounds(310, 322, 132, 99);
         frame.getContentPane().add(btnTwo);
 
         btnThree = new JButton("3");
+        btnThree.setOpaque(true);
+        btnThree.setBackground(Color.DARK_GRAY);
         btnThree.addActionListener(new ActionListener() {
 
             @Override
@@ -132,11 +175,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnThree.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnThree.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnThree.setForeground(Color.white);
         btnThree.setBounds(454, 322, 132, 99);
         frame.getContentPane().add(btnThree);
 
         btnFour = new JButton("4");
+        btnFour.setOpaque(true);
+        btnFour.setBackground(Color.DARK_GRAY);
         btnFour.addActionListener(new ActionListener() {
 
             @Override
@@ -146,11 +192,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnFour.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnFour.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnFour.setForeground(Color.white);
         btnFour.setBounds(166, 431, 132, 99);
         frame.getContentPane().add(btnFour);
 
         btnFive = new JButton("5");
+        btnFive.setOpaque(true);
+        btnFive.setBackground(Color.DARK_GRAY);
         btnFive.addActionListener(new ActionListener() {
 
             @Override
@@ -160,11 +209,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnFive.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnFive.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnFive.setForeground(Color.white);
         btnFive.setBounds(310, 431, 132, 99);
         frame.getContentPane().add(btnFive);
 
         btnSix = new JButton("6");
+        btnSix.setOpaque(true);
+        btnSix.setBackground(Color.DARK_GRAY);
         btnSix.addActionListener(new ActionListener() {
 
             @Override
@@ -174,11 +226,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnSix.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnSix.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnSix.setForeground(Color.white);
         btnSix.setBounds(454, 431, 132, 99);
         frame.getContentPane().add(btnSix);
 
         btnSeven = new JButton("7");
+        btnSeven.setOpaque(true);
+        btnSeven.setBackground(Color.DARK_GRAY);
         btnSeven.addActionListener(new ActionListener() {
 
             @Override
@@ -188,11 +243,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnSeven.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnSeven.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnSeven.setForeground(Color.white);
         btnSeven.setBounds(166, 540, 132, 99);
         frame.getContentPane().add(btnSeven);
 
         btnEight = new JButton("8");
+        btnEight.setOpaque(true);
+        btnEight.setBackground(Color.DARK_GRAY);
         btnEight.addActionListener(new ActionListener() {
 
             @Override
@@ -202,11 +260,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnEight.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnEight.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnEight.setForeground(Color.white);
         btnEight.setBounds(310, 540, 132, 99);
         frame.getContentPane().add(btnEight);
 
         btnNine = new JButton("9");
+        btnNine.setOpaque(true);
+        btnNine.setBackground(Color.DARK_GRAY);
         btnNine.addActionListener(new ActionListener() {
 
             @Override
@@ -216,11 +277,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnNine.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnNine.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnNine.setForeground(Color.white);
         btnNine.setBounds(454, 540, 132, 99);
         frame.getContentPane().add(btnNine);
 
         btnZero = new JButton("0");
+        btnZero.setOpaque(true);
+        btnZero.setBackground(Color.DARK_GRAY);
         btnZero.addActionListener(new ActionListener() {
 
             @Override
@@ -230,11 +294,14 @@ public class GymLogin {
                 memberNumField.setText(currentText);
             }
         });
-        btnZero.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnZero.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 42));
+        btnZero.setForeground(Color.white);
         btnZero.setBounds(310, 649, 132, 99);
         frame.getContentPane().add(btnZero);
 
         btnConfirm = new JButton("확인");
+        btnConfirm.setOpaque(true);
+        btnConfirm.setBackground(Color.DARK_GRAY);
         btnConfirm.addActionListener(new ActionListener() {
             
             @Override
@@ -244,24 +311,34 @@ public class GymLogin {
                 comfirmedMember();
             }
         });
-        btnConfirm.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnConfirm.setFont(new Font("나눔고딕", Font.BOLD, 38));
+        btnConfirm.setForeground(Color.white);
         btnConfirm.setBounds(166, 649, 132, 99);
         frame.getContentPane().add(btnConfirm);
 
-        btnCancel = new JButton("취소");
+        btnCancel = new JButton("⌫");
+        btnCancel.setOpaque(true);
+        btnCancel.setBackground(Color.DARK_GRAY);
         btnCancel.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
-               memberNumField.setText("");
-               confirmedMember.setText("회원 확인을 먼저 해주세요...!");
+                String currentText = memberNumField.getText();
+                //TODO CurrentText에서 한글자씩 지우기
+                if(currentText.length() > 0) {
+                    currentText = currentText.substring(0, currentText.length() -1);
+                    memberNumField.setText(currentText);
+                }
             }
         });
-        btnCancel.setFont(new Font("D2Coding", Font.BOLD, 30));
+        btnCancel.setFont(new Font("D2Coding", Font.BOLD, 65));
+        btnCancel.setForeground(Color.white);
         btnCancel.setBounds(454, 649, 132, 99);
         frame.getContentPane().add(btnCancel);
 
         btnManager = new JButton("관리자메뉴");
+        btnManager.setOpaque(true);
+        btnManager.setBackground(Color.darkGray);
         btnManager.addActionListener(new ActionListener() {
             
             @Override
@@ -275,11 +352,14 @@ public class GymLogin {
                 
             }
         });
-        btnManager.setFont(new Font("D2Coding", Font.BOLD, 18));
-        btnManager.setBounds(22, 271, 132, 99);
+        btnManager.setFont(new Font("나눔고딕", Font.BOLD, 21));
+        btnManager.setForeground(Color.WHITE);
+        btnManager.setBounds(22, 695, 132, 53);
         frame.getContentPane().add(btnManager);
 
         btnGymEnter = new JButton("입장");
+        btnGymEnter.setOpaque(true);
+        btnGymEnter.setBackground(Color.DARK_GRAY);
         btnGymEnter.addActionListener(new ActionListener() {
             
             @Override
@@ -303,6 +383,8 @@ public class GymLogin {
                     //TODO 
                     //회원의 전화번호를 GymMemberMenu.showMemberMenu로 넘겨야한다.
                     //그래야 showMemberMenu에서 회원의 전화번호를 통해 회원의 정보를 db 테이블에서 넘겨받을 수 있다.
+                    memberNumField.setText("");
+                    confirmedMember.setText("회원 확인을 먼저 해주세요...!");
                 }
                 
                 if(!isConfirmed) {
@@ -310,15 +392,37 @@ public class GymLogin {
                 }
             }
         });
-        btnGymEnter.setFont(new Font("D2Coding", Font.BOLD, 40));
-        btnGymEnter.setBounds(23, 117, 132, 141);
+        btnGymEnter.setFont(new Font("나눔고딕", Font.BOLD, 40));
+        btnGymEnter.setForeground(Color.white);
+        btnGymEnter.setBounds(22, 171, 132, 141);
         frame.getContentPane().add(btnGymEnter);
         
-        lblMemNumInfo = new JLabel("회원번호는 회원의 전화번호입니다.");
+        lblMemNumInfo = new JLabel("회원번호는 회원의 전화번호입니다");
+        lblMemNumInfo.setOpaque(true);
+        lblMemNumInfo.setBackground(Color.darkGray);
         lblMemNumInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMemNumInfo.setFont(new Font("D2Coding", Font.BOLD, 22));
-        lblMemNumInfo.setBounds(166, 117, 420, 44);
+        lblMemNumInfo.setFont(new Font("나눔고딕", Font.BOLD, 26));
+        lblMemNumInfo.setForeground(Color.orange);
+        lblMemNumInfo.setBounds(136, 117, 478, 44);
         frame.getContentPane().add(lblMemNumInfo);
+        
+        BtnAllClear = new JButton("전체 삭제");
+        BtnAllClear.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                memberNumField.setText("");
+            }
+        });
+        BtnAllClear.setOpaque(true);
+        BtnAllClear.setForeground(Color.WHITE);
+        BtnAllClear.setFont(new Font("나눔고딕", Font.BOLD, 25));
+        BtnAllClear.setBorder(BorderFactory.createEmptyBorder());
+        BtnAllClear.setBackground(Color.DARK_GRAY);
+        BtnAllClear.setBounds(22, 322, 132, 99);
+        frame.getContentPane().add(BtnAllClear);
+        
+       
     }//initialize
 
     private boolean comfirmedMember() {
@@ -345,12 +449,11 @@ public class GymLogin {
         }
         
         if (!isMemberConfirmed) {
-            confirmedMember.setText("일치하지 않는 회원 전화번호입니다");
+            confirmedMember.setText("없는 회원 번호입니다.");
         }
     
         //회원인지 아닌지 boolean값을 반환한다.
         return isMemberConfirmed;
         
     }//end confirmedMember().
-
 }//end class
