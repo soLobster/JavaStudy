@@ -257,6 +257,8 @@ public class GymShowDetailMember extends JFrame {
         contentPane.add(textPtTrainerName);
 
         textbuyMemDate = new JTextField();
+        textbuyMemDate.setEditable(false);
+        textbuyMemDate.setFont(new Font("나눔고딕", Font.PLAIN, 18));
         textbuyMemDate.setBounds(132, 217, 174, 59);
         contentPane.add(textbuyMemDate);
         textbuyMemDate.setColumns(10);
