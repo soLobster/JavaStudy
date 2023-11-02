@@ -1,5 +1,6 @@
 package com.itwill.gym.view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 
@@ -27,12 +28,14 @@ import com.itwill.gym.controller.GymMemberDao;
 import com.itwill.gym.controller.MembershipDao;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 
 public class BuyMembershipPage extends JFrame {
 
 
-    public static final String[] COLUMN_NAMES = {"상품 코드","카테고리","금액"};
+    public static final String[] COLUMN_NAMES = {"코드","멤버쉽 카테고리","금액"};
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -43,7 +46,8 @@ public class BuyMembershipPage extends JFrame {
     private JButton btnBackPage;
     private DefaultTableModel tableModel;
     private MembershipDao dao = MembershipDao.getInstance();
-
+    private GymMemberDao memDao = GymMemberDao.getInstance();
+    private LocalDateTime buyMembership_Date = LocalDateTime.now();
 
     private String memberPhone;
     /**
@@ -76,21 +80,21 @@ public class BuyMembershipPage extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 504, 648);
+        setBounds(100, 100, 504, 536);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        lblBuyMembership = new JLabel("회원권 구매");
-        lblBuyMembership.setFont(new Font("D2Coding", Font.BOLD, 30));
+        lblBuyMembership = new JLabel("  회원권 구매");
+        lblBuyMembership.setFont(new Font("나눔고딕", Font.BOLD, 35));
         lblBuyMembership.setHorizontalAlignment(SwingConstants.LEFT);
-        lblBuyMembership.setBounds(12, 10, 464, 83);
+        lblBuyMembership.setBounds(0, 0, 488, 93);
         contentPane.add(lblBuyMembership);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(12, 103, 464, 306);
+        scrollPane.setBounds(12, 92, 464, 293);
         contentPane.add(scrollPane);
 
         tableMembership = new JTable() {
@@ -100,8 +104,8 @@ public class BuyMembershipPage extends JFrame {
             }};
             tableModel = new DefaultTableModel(null, COLUMN_NAMES);
             tableMembership.setModel(tableModel);
-            tableMembership.setFont(new Font("D2Coding", Font.PLAIN, 15));
-            tableMembership.setRowHeight(30);
+            tableMembership.setFont(new Font("나눔고딕", Font.BOLD, 17));
+            tableMembership.setRowHeight(40);
             scrollPane.setViewportView(tableMembership);
 
             btnBuy = new JButton("구매하기");
@@ -114,14 +118,14 @@ public class BuyMembershipPage extends JFrame {
                 }
 
             });
-            btnBuy.setFont(new Font("D2Coding", Font.BOLD, 18));
-            btnBuy.setBounds(63, 451, 130, 61);
+            btnBuy.setFont(new Font("나눔고딕", Font.BOLD, 22));
+            btnBuy.setBounds(12, 395, 157, 85);
             contentPane.add(btnBuy);
 
             btnBackPage = new JButton("뒤로가기");
             btnBackPage.addActionListener((e) -> dispose());
-            btnBackPage.setFont(new Font("D2Coding", Font.BOLD, 18));
-            btnBackPage.setBounds(283, 451, 130, 61);
+            btnBackPage.setFont(new Font("나눔고딕", Font.BOLD, 22));
+            btnBackPage.setBounds(319, 395, 157, 85);
             contentPane.add(btnBackPage);
     }//initialize().
 
@@ -156,6 +160,15 @@ public class BuyMembershipPage extends JFrame {
 
                     // GymMemberDao.update 메서드를 사용하여 회원 정보 업데이트
                     memberDao.updateMembership_Code(member);
+                    
+//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+//                    String FormattedNowDate = buyMemberShip_date.format(formatter);
+                    
+                    LocalDateTime expireDate = buyMembership_Date.plusDays(memDao.getMembershipNumOfDays(membership_code));
+//                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+//                    String formattedExpireDate = expireDate.format(formatter2);
+                    
+                    UpdateMembershipExpireDate(member.getId(), expireDate);
 
                 } else {
                     // member 객체가 null인 경우 처리
@@ -165,9 +178,10 @@ public class BuyMembershipPage extends JFrame {
                 // membership_code가 null인 경우 처리
                 System.err.println("membership_code가 null입니다.");
             }
+            JOptionPane.showMessageDialog(BuyMembershipPage.this, "회원권 구매 성공...!");
+        } else {
+            JOptionPane.showMessageDialog(BuyMembershipPage.this, "회원권 구매 취소...!");
         }
-        initTable();
-        JOptionPane.showMessageDialog(BuyMembershipPage.this, "회원권 구매 성공...!");
     }//end ConfirmedBuyMembership().
 
 
@@ -203,4 +217,8 @@ public class BuyMembershipPage extends JFrame {
         }
     }//컬럼 테이블 조절 함수
 
+    private void UpdateMembershipExpireDate(int id, LocalDateTime expireDate) {
+        memDao.updateGymMemberSetExpireDate(id, expireDate);
+    }
+    
 }//end class

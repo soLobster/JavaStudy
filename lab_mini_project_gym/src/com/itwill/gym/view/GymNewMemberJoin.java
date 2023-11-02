@@ -73,7 +73,7 @@ public class GymNewMemberJoin extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 451, 485);
+        setBounds(100, 100, 441, 485);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -81,46 +81,46 @@ public class GymNewMemberJoin extends JFrame {
         contentPane.setLayout(null);
         
         lblMemberJoin = new JLabel("회원가입");
-        lblMemberJoin.setFont(new Font("D2Coding", Font.BOLD, 29));
-        lblMemberJoin.setBounds(12, 10, 411, 53);
+        lblMemberJoin.setFont(new Font("나눔고딕", Font.BOLD, 32));
+        lblMemberJoin.setBounds(12, 10, 396, 53);
         contentPane.add(lblMemberJoin);
         
         lblMemName = new JLabel("이름");
-        lblMemName.setFont(new Font("D2Coding", Font.BOLD, 20));
+        lblMemName.setFont(new Font("나눔고딕", Font.BOLD, 22));
         lblMemName.setBounds(12, 68, 101, 53);
         contentPane.add(lblMemName);
         
         lblMemPhoneNum = new JLabel("연락처");
-        lblMemPhoneNum.setFont(new Font("D2Coding", Font.BOLD, 20));
+        lblMemPhoneNum.setFont(new Font("나눔고딕", Font.BOLD, 22));
         lblMemPhoneNum.setBounds(12, 131, 101, 53);
         contentPane.add(lblMemPhoneNum);
         
         lblMemGender = new JLabel("성별");
-        lblMemGender.setFont(new Font("D2Coding", Font.BOLD, 20));
+        lblMemGender.setFont(new Font("나눔고딕", Font.BOLD, 22));
         lblMemGender.setBounds(12, 194, 101, 53);
         contentPane.add(lblMemGender);
         
         lblMemBirthDate = new JLabel("생년월일");
-        lblMemBirthDate.setFont(new Font("D2Coding", Font.BOLD, 20));
+        lblMemBirthDate.setFont(new Font("나눔고딕", Font.BOLD, 22));
         lblMemBirthDate.setBounds(12, 257, 101, 53);
         contentPane.add(lblMemBirthDate);
         
         JLabel lblMemAddress = new JLabel("주소");
-        lblMemAddress.setFont(new Font("D2Coding", Font.BOLD, 20));
+        lblMemAddress.setFont(new Font("나눔고딕", Font.BOLD, 22));
         lblMemAddress.setBounds(12, 320, 101, 53);
         contentPane.add(lblMemAddress);
         
         textMemName = new JTextField();
-        textMemName.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        textMemName.setBounds(125, 73, 283, 40);
+        textMemName.setFont(new Font("나눔고딕", Font.PLAIN, 18));
+        textMemName.setBounds(125, 73, 283, 48);
         contentPane.add(textMemName);
         textMemName.setColumns(10);
         
         textPhoneNum = new JTextField();
         textPhoneNum.setText("'-'는 빼고 입력해주세요.");
-        textPhoneNum.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        textPhoneNum.setFont(new Font("나눔고딕", Font.PLAIN, 18));
         textPhoneNum.setColumns(10);
-        textPhoneNum.setBounds(125, 131, 283, 40);
+        textPhoneNum.setBounds(125, 135, 283, 48);
         textPhoneNum.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -144,7 +144,7 @@ public class GymNewMemberJoin extends JFrame {
         textGender.setText("'남' 또는 '여' 로 입력해주세요.");
         textGender.setFont(new Font("D2Coding", Font.PLAIN, 17));
         textGender.setColumns(10);
-        textGender.setBounds(125, 194, 283, 40);
+        textGender.setBounds(125, 194, 283, 50);
         textGender.addFocusListener(new FocusListener() {
             
             @Override
@@ -166,7 +166,7 @@ public class GymNewMemberJoin extends JFrame {
         //java.util.Date....
         memBirthDateChooser = new JDateChooser();
         memBirthDateChooser.getCalendarButton().setFont(new Font("D2Coding", Font.PLAIN, 16));
-        memBirthDateChooser.setBounds(125, 257, 283, 40);
+        memBirthDateChooser.setBounds(125, 257, 283, 53);
         contentPane.add(memBirthDateChooser);
         
         btnConfirm = new JButton("가입");
@@ -179,14 +179,14 @@ public class GymNewMemberJoin extends JFrame {
                 
             }
         });
-        btnConfirm.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnConfirm.setBounds(75, 388, 101, 38);
+        btnConfirm.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnConfirm.setBounds(12, 383, 115, 53);
         contentPane.add(btnConfirm);
         
         JButton btnCancel = new JButton("취소");
         btnCancel.addActionListener((e)->dispose());
-        btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnCancel.setBounds(255, 388, 101, 38);
+        btnCancel.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnCancel.setBounds(293, 383, 115, 53);
         contentPane.add(btnCancel);
         
         scrollPane = new JScrollPane();
@@ -194,7 +194,7 @@ public class GymNewMemberJoin extends JFrame {
         contentPane.add(scrollPane);
         
         textMemAddress = new JTextArea();
-        textMemAddress.setFont(new Font("D2Coding", Font.BOLD, 18));
+        textMemAddress.setFont(new Font("나눔고딕", Font.BOLD, 18));
         scrollPane.setViewportView(textMemAddress);
     }
 

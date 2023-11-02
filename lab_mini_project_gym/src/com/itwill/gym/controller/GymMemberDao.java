@@ -73,7 +73,7 @@ public class GymMemberDao {
         LocalDateTime join_time = rs.getTimestamp("JOIN_TIME").toLocalDateTime();
         LocalDateTime expire_date = rs.getTimestamp("EXPIRE_DATE").toLocalDateTime();
         int pt_code = rs.getInt("PT_CODE");
-        
+
         GymMember gymMember = new GymMember(id, name, phone, gender, birthday, address, join_time, expire_date, membership_code, pt_code);
         return gymMember;
     }
@@ -432,16 +432,17 @@ public class GymMemberDao {
         }
 
     }//end updateGymMemberSetExpireDate
+    
 
     public static final String SQL_UPDATE_GYM_MEMBER = 
             "update gym_member set name = ?, phone = ?, address = ?, gender = ?, birthday = ? where id = ?";
-    
+
     public int update(GymMember gymMember) {
         int result = 0;
-        
+
         Connection conn = null;
         PreparedStatement stmt = null;
-        
+
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt =conn.prepareStatement(SQL_UPDATE_GYM_MEMBER);
@@ -451,15 +452,15 @@ public class GymMemberDao {
             stmt.setString(4, gymMember.getGender());
             stmt.setDate(5, gymMember.getBirthday());
             stmt.setInt(6, gymMember.getId());
-            
+
             result = stmt.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             closeResources(conn, stmt);
         }
-        
+
         return result;
     }
 
@@ -475,17 +476,16 @@ public class GymMemberDao {
     // 생일 검색 키워드.
     public static final String SQL_SELECT_BY_BIRTHDAY = 
             "select * from gym_member where TO_CHAR(birthday, 'YYYY-MM-DD') like ? order by birthday desc";
-    
-    
-    
+   
+
     public List<GymMember> search(int type, String keyword) {
         final String searchKeyword = "%" + keyword.toLowerCase() + "%";
         List<GymMember> result = new ArrayList<GymMember>();
-        
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DriverManager.getConnection(URL,USER,PASSWORD);
             switch(type) {
@@ -506,21 +506,21 @@ public class GymMemberDao {
                 stmt.setString(1, searchKeyword);
                 break;
             }
-            
+
             rs = stmt.executeQuery();
-            
+
             while(rs.next()) {
                 GymMember g = makeGymMemberResultSet(rs);
                 result.add(g);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             closeResources(conn, stmt, rs);
         }
-        
-        
+
+
         return result;
     }
 

@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import com.itwill.gym.controller.GymMemberDao;
 import com.itwill.gym.model.GymMember;
@@ -75,7 +77,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 773, 620);
+        setBounds(100, 100, 773, 529);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -84,12 +86,12 @@ public class GymMemUpdateOrShowAll extends JFrame {
         
         comboBox = new JComboBox();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"이름", "연락처", "성별", "생년월일"}));
-        comboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        comboBox.setBounds(120, 9, 156, 38);
+        comboBox.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        comboBox.setBounds(136, 9, 140, 38);
         contentPane.add(comboBox);
         
         textSearchKeyword = new JTextField();
-        textSearchKeyword.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        textSearchKeyword.setFont(new Font("나눔고딕", Font.PLAIN, 18));
         textSearchKeyword.setBounds(288, 9, 325, 39);
         contentPane.add(textSearchKeyword);
         textSearchKeyword.setColumns(10);
@@ -103,12 +105,12 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 searchByKeyword();
             }
         });
-        btnSearch.setFont(new Font("D2Coding", Font.BOLD, 23));
-        btnSearch.setBounds(625, 9, 120, 39);
+        btnSearch.setFont(new Font("나눔고딕", Font.BOLD, 25));
+        btnSearch.setBounds(619, 9, 126, 39);
         contentPane.add(btnSearch);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(12, 63, 733, 402);
+        scrollPane.setBounds(12, 63, 733, 347);
         contentPane.add(scrollPane);
         
         table = new JTable() { // 익명 클래스
@@ -119,7 +121,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
         };
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
         table.setModel(tableModel);
-        table.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        table.setFont(new Font("나눔고딕", Font.PLAIN, 18));
         table.setRowHeight(30);
         scrollPane.setViewportView(table);
         
@@ -132,8 +134,8 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 initTable();
             }
         });
-        btnShowAllMem.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnShowAllMem.setBounds(87, 491, 162, 58);
+        btnShowAllMem.setFont(new Font("나눔고딕", Font.BOLD, 22));
+        btnShowAllMem.setBounds(12, 420, 170, 58);
         contentPane.add(btnShowAllMem);
         
         btnViewMemInfo = new JButton("회원정보 상세정보");
@@ -145,8 +147,8 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 showGymMemberDetails();
             }
         });
-        btnViewMemInfo.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnViewMemInfo.setBounds(261, 492, 209, 58);
+        btnViewMemInfo.setFont(new Font("나눔고딕", Font.BOLD, 22));
+        btnViewMemInfo.setBounds(183, 420, 390, 58);
         contentPane.add(btnViewMemInfo);
         
         btnDeleteMember = new JButton("회원 삭제");
@@ -158,14 +160,14 @@ public class GymMemUpdateOrShowAll extends JFrame {
                 deleteGymMember(); 
             }
         });
-        btnDeleteMember.setFont(new Font("D2Coding", Font.BOLD, 20));
-        btnDeleteMember.setBounds(482, 491, 162, 58);
+        btnDeleteMember.setFont(new Font("나눔고딕", Font.BOLD, 22));
+        btnDeleteMember.setBounds(575, 420, 170, 58);
         contentPane.add(btnDeleteMember);
         
         btnBackPage = new JButton("뒤로가기");
         btnBackPage.addActionListener((e) -> dispose());
-        btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 13));
-        btnBackPage.setBounds(12, 9, 96, 40);
+        btnBackPage.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnBackPage.setBounds(12, 9, 116, 40);
         contentPane.add(btnBackPage);
         
     }//end initialize()
@@ -232,6 +234,7 @@ public class GymMemUpdateOrShowAll extends JFrame {
             tableModel.addRow(row);
         }
         table.setModel(tableModel); // 테이블에 모델을 다시 세팅.
+        resizeColumnWidth(table);
     }//end resetTableModel.
     
     private void initTable() {
@@ -244,5 +247,18 @@ public class GymMemUpdateOrShowAll extends JFrame {
         initTable();
         JOptionPane.showMessageDialog(frame, "회원 정보 업데이트 성공");
     }
+    
+    public void resizeColumnWidth(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 50; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width +1 , width);
+            }
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
+    }//컬럼 테이블 조절 함수
     
 }//end class

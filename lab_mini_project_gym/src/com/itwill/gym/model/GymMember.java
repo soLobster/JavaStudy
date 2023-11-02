@@ -17,7 +17,7 @@ public class GymMember {
     private LocalDateTime expireDate;
     private Integer membership_code;
     private Integer pt_Code;
-
+    
     public GymMember() {}
 
     public GymMember(Integer id, String name, String phone, String gender, Date birthday, String address) {
@@ -50,6 +50,8 @@ public class GymMember {
         this.membership_code = membership_code;
         this.pt_Code = pt_Code;
     }
+    
+
 
     public Integer getId() {
         return id;
@@ -115,6 +117,7 @@ public class GymMember {
         this.expireDate = expireDate;
     }
 
+    
     public Integer getMembership_code() {
         return membership_code;
     }
@@ -139,5 +142,4 @@ public class GymMember {
     }
 
     
-
 }

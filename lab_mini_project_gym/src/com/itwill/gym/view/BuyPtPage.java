@@ -78,7 +78,7 @@ public class BuyPtPage extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 353, 583);
+        setBounds(100, 100, 353, 528);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -86,8 +86,8 @@ public class BuyPtPage extends JFrame {
         contentPane.setLayout(null);
 
         lblPtBuyInfo = new JLabel("PT권 구매");
-        lblPtBuyInfo.setFont(new Font("D2Coding", Font.BOLD, 32));
-        lblPtBuyInfo.setBounds(12, 10, 461, 78);
+        lblPtBuyInfo.setFont(new Font("나눔고딕", Font.BOLD, 35));
+        lblPtBuyInfo.setBounds(12, 10, 313, 78);
         contentPane.add(lblPtBuyInfo);
 
         ptComboBox = new JComboBox();
@@ -108,47 +108,47 @@ public class BuyPtPage extends JFrame {
                 }
             }
         });
-        ptComboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        ptComboBox.setBounds(12, 119, 313, 88);
+        ptComboBox.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        ptComboBox.setBounds(12, 98, 313, 64);
         contentPane.add(ptComboBox);
 
         lblPtPrice = new JLabel("PT권 금액");
         lblPtPrice.setHorizontalAlignment(SwingConstants.LEFT);
-        lblPtPrice.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblPtPrice.setBounds(12, 255, 133, 47);
+        lblPtPrice.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblPtPrice.setBounds(12, 212, 133, 47);
         contentPane.add(lblPtPrice);
 
         textPtPrice = new JTextField();
         textPtPrice.setEditable(false);
-        textPtPrice.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        textPtPrice.setBounds(192, 255, 133, 47);
+        textPtPrice.setFont(new Font("나눔고딕", Font.PLAIN, 20));
+        textPtPrice.setBounds(192, 212, 133, 47);
         contentPane.add(textPtPrice);
         textPtPrice.setColumns(10);
 
         lblPtTrainer = new JLabel("담당 트레이너");
         lblPtTrainer.setHorizontalAlignment(SwingConstants.LEFT);
-        lblPtTrainer.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblPtTrainer.setBounds(12, 312, 133, 47);
+        lblPtTrainer.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblPtTrainer.setBounds(12, 269, 133, 47);
         contentPane.add(lblPtTrainer);
 
         textPtTrainer = new JTextField();
         textPtTrainer.setEditable(false);
-        textPtTrainer.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textPtTrainer.setFont(new Font("나눔고딕", Font.PLAIN, 20));
         textPtTrainer.setColumns(10);
-        textPtTrainer.setBounds(192, 312, 133, 47);
+        textPtTrainer.setBounds(192, 269, 133, 47);
         contentPane.add(textPtTrainer);
 
         lblPtCount = new JLabel("PT 횟수");
         lblPtCount.setHorizontalAlignment(SwingConstants.LEFT);
-        lblPtCount.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblPtCount.setBounds(12, 369, 133, 47);
+        lblPtCount.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblPtCount.setBounds(12, 326, 133, 47);
         contentPane.add(lblPtCount);
 
         textPtCount = new JTextField();
-        textPtCount.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        textPtCount.setFont(new Font("나눔고딕", Font.PLAIN, 20));
         textPtCount.setEditable(false);
         textPtCount.setColumns(10);
-        textPtCount.setBounds(192, 369, 133, 47);
+        textPtCount.setBounds(192, 326, 133, 47);
         contentPane.add(textPtCount);
 
         btnBuyPt = new JButton("구매하기");
@@ -158,14 +158,14 @@ public class BuyPtPage extends JFrame {
                 confirmedBuyPt();
             }
         });
-        btnBuyPt.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        btnBuyPt.setBounds(12, 478, 133, 47);
+        btnBuyPt.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnBuyPt.setBounds(12, 427, 133, 47);
         contentPane.add(btnBuyPt);
 
         btnBackPage = new JButton("뒤로가기");
         btnBackPage.addActionListener((e) -> dispose());
-        btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        btnBackPage.setBounds(192, 478, 133, 47);
+        btnBackPage.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnBackPage.setBounds(192, 427, 133, 47);
         contentPane.add(btnBackPage);
     }//end initialize
 
@@ -206,8 +206,11 @@ public class BuyPtPage extends JFrame {
                     memberDao.updatePt_Code(member);
                 }
             }
+            JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 완료....!");
+        } else {
+            JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 취소....!");
         }
-        JOptionPane.showMessageDialog(BuyPtPage.this, "PT 이용권 구매 완료....!");
+        
     }//confirmedBuyPt
 
     private void popUpPtComboBox() {

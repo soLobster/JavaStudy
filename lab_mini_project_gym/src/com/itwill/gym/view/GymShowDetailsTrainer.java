@@ -103,7 +103,7 @@ public class GymShowDetailsTrainer extends JFrame {
     public void initialize() {
         setTitle("ITWILL_FITNESS");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 724, 725);
+        setBounds(100, 100, 662, 624);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -111,108 +111,99 @@ public class GymShowDetailsTrainer extends JFrame {
         contentPane.setLayout(null);
 
         lblTName = new JLabel("이름");
-        lblTName.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTName.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTName.setBounds(6, 80, 129, 64);
+        lblTName.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTName.setBounds(19, 73, 110, 50);
         contentPane.add(lblTName);
 
         lblTNum = new JLabel("직원번호");
-        lblTNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTNum.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTNum.setBounds(6, 6, 129, 64);
+        lblTNum.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTNum.setBounds(19, 13, 110, 50);
         contentPane.add(lblTNum);
 
         lblTBirth = new JLabel("생년월일");
-        lblTBirth.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTBirth.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTBirth.setBounds(6, 156, 129, 64);
+        lblTBirth.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTBirth.setBounds(19, 133, 110, 50);
         contentPane.add(lblTBirth);
 
         lblTPhoneNum = new JLabel("연락처");
-        lblTPhoneNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTPhoneNum.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTPhoneNum.setBounds(296, 6, 129, 64);
+        lblTPhoneNum.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTPhoneNum.setBounds(296, 13, 110, 50);
         contentPane.add(lblTPhoneNum);
 
         lblTGender = new JLabel("성별");
-        lblTGender.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTGender.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTGender.setBounds(296, 80, 129, 64);
+        lblTGender.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTGender.setBounds(296, 73, 110, 50);
         contentPane.add(lblTGender);
 
         lblTHireDate = new JLabel("입사 날짜");
-        lblTHireDate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTHireDate.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTHireDate.setBounds(296, 156, 129, 64);
+        lblTHireDate.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTHireDate.setBounds(296, 133, 110, 50);
         contentPane.add(lblTHireDate);
 
         lblTAddress = new JLabel("주소");
-        lblTAddress.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTAddress.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTAddress.setBounds(6, 318, 129, 64);
+        lblTAddress.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTAddress.setBounds(19, 253, 110, 50);
         contentPane.add(lblTAddress);
 
         lblTSalary = new JLabel("급여(월)");
-        lblTSalary.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTSalary.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTSalary.setBounds(6, 232, 129, 64);
+        lblTSalary.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTSalary.setBounds(19, 193, 110, 50);
         contentPane.add(lblTSalary);
 
         textTNum = new JTextField();
-        textTNum.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTNum.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textTNum.setEditable(false);
-        textTNum.setBounds(130, 13, 154, 50);
+        textTNum.setBounds(130, 14, 154, 50);
         contentPane.add(textTNum);
         textTNum.setColumns(10);
 
         textTName = new JTextField();
-        textTName.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTName.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textTName.setColumns(10);
-        textTName.setBounds(130, 80, 154, 50);
+        textTName.setBounds(130, 74, 154, 50);
         contentPane.add(textTName);
 
         textTPhoneNum = new JTextField();
-        textTPhoneNum.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTPhoneNum.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textTPhoneNum.setColumns(10);
-        textTPhoneNum.setBounds(437, 14, 230, 50);
+        textTPhoneNum.setBounds(418, 14, 220, 50);
         contentPane.add(textTPhoneNum);
 
         textGender = new JTextField();
-        textGender.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textGender.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textGender.setColumns(10);
-        textGender.setBounds(437, 80, 154, 50);
+        textGender.setBounds(418, 74, 154, 50);
         contentPane.add(textGender);
 
         dateBirth = new JDateChooser();
-        dateBirth.setBounds(130, 156, 154, 50);
+        dateBirth.setBounds(130, 133, 154, 50);
         contentPane.add(dateBirth);
 
         dateHire = new JDateChooser();
-        dateHire.setBounds(437, 156, 154, 50);
+        dateHire.setBounds(418, 133, 154, 50);
         contentPane.add(dateHire);
 
         textTSalary = new JTextField();
-        textTSalary.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTSalary.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textTSalary.setColumns(10);
-        textTSalary.setBounds(130, 240, 154, 50);
+        textTSalary.setBounds(130, 194, 154, 50);
         contentPane.add(textTSalary);
 
         textAddress = new JTextField();
-        textAddress.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textAddress.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textAddress.setColumns(10);
-        textAddress.setBounds(130, 326, 537, 50);
+        textAddress.setBounds(130, 251, 508, 57);
         contentPane.add(textAddress);
 
         lblTEmail = new JLabel("이메일");
-        lblTEmail.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTEmail.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTEmail.setBounds(296, 232, 129, 64);
+        lblTEmail.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTEmail.setBounds(296, 193, 110, 50);
         contentPane.add(lblTEmail);
         
         textTEmail = new JTextField();
-        textTEmail.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTEmail.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         textTEmail.setColumns(10);
-        textTEmail.setBounds(437, 240, 230, 50);
+        textTEmail.setBounds(418, 194, 220, 50);
         contentPane.add(textTEmail);
         
         
@@ -225,24 +216,23 @@ public class GymShowDetailsTrainer extends JFrame {
                 updateTrainer();
             }
         });
-        btnUpdate.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnUpdate.setBounds(130, 605, 129, 50);
+        btnUpdate.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnUpdate.setBounds(12, 526, 220, 50);
         contentPane.add(btnUpdate);
 
         btnCancel = new JButton("취소");
         btnCancel.addActionListener((e) -> dispose());
-        btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 18));
-        btnCancel.setBounds(437, 605, 129, 50);
+        btnCancel.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        btnCancel.setBounds(418, 526, 220, 50);
         contentPane.add(btnCancel);
 
         lblTSession = new JLabel("PT 현황");
-        lblTSession.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTSession.setFont(new Font("D2Coding", Font.PLAIN, 20));
-        lblTSession.setBounds(6, 392, 120, 64);
+        lblTSession.setFont(new Font("나눔고딕", Font.BOLD, 20));
+        lblTSession.setBounds(19, 313, 110, 50);
         contentPane.add(lblTSession);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(130, 392, 537, 203);
+        scrollPane.setBounds(130, 313, 508, 203);
         contentPane.add(scrollPane);
 
         tablePtSession = new JTable() { // 익명 클래스
@@ -253,7 +243,7 @@ public class GymShowDetailsTrainer extends JFrame {
         };
         tableModel = new DefaultTableModel(null, COLUMN_NAMES);
         tablePtSession.setModel(tableModel);
-        tablePtSession.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        tablePtSession.setFont(new Font("나눔고딕", Font.PLAIN, 17));
         tablePtSession.setRowHeight(25);
         scrollPane.setViewportView(tablePtSession);
     }//end initialize()
