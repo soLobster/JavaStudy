@@ -61,6 +61,8 @@ public class GymShowDetailsTrainer extends JFrame {
     private JScrollPane scrollPane;
     private JTable tablePtSession;
     private DefaultTableModel tableModel;
+    private JLabel lblTEmail;
+    private JTextField textTEmail;
 
 
     /**
@@ -92,6 +94,7 @@ public class GymShowDetailsTrainer extends JFrame {
         initTable();
         
         resizeColumnWidth(tablePtSession);
+        
     }
 
     /**
@@ -200,6 +203,19 @@ public class GymShowDetailsTrainer extends JFrame {
         textAddress.setBounds(130, 326, 537, 50);
         contentPane.add(textAddress);
 
+        lblTEmail = new JLabel("이메일");
+        lblTEmail.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTEmail.setFont(new Font("D2Coding", Font.PLAIN, 20));
+        lblTEmail.setBounds(296, 232, 129, 64);
+        contentPane.add(lblTEmail);
+        
+        textTEmail = new JTextField();
+        textTEmail.setFont(new Font("D2Coding", Font.PLAIN, 15));
+        textTEmail.setColumns(10);
+        textTEmail.setBounds(437, 240, 230, 50);
+        contentPane.add(textTEmail);
+        
+        
         btnUpdate = new JButton("업데이트");
         btnUpdate.addActionListener(new ActionListener() {
 
@@ -254,6 +270,7 @@ public class GymShowDetailsTrainer extends JFrame {
             dateBirth.setDate(gymTrainers.getBirthday());
             dateHire.setDate(gymTrainers.getHiredate());
             textAddress.setText(gymTrainers.getT_address());
+            textTEmail.setText(gymTrainers.getT_email());
         }
     }//initTrainerDetails
     
@@ -272,11 +289,13 @@ public class GymShowDetailsTrainer extends JFrame {
         
         String t_address = textAddress.getText();
         
-        if(t_name.equals("") || t_phone.equals("") || t_gender.equals("") || t_salary == 0 || t_birthday==null || t_hiredate==null || t_address.equals("")) {
-            JOptionPane.showMessageDialog(GymShowDetailsTrainer.this, "이름, 연락처, 성별, 이메일, 주소, 생년월일, 고용날짜가 누락 되어 있으면 안됩니다.");
+        String t_email = textTEmail.getText();
+        
+        if(t_name.equals("") || t_phone.equals("") || t_gender.equals("") || t_salary == 0 || t_birthday==null || t_hiredate==null || t_address.equals("") || t_email.equals("")) {
+            JOptionPane.showMessageDialog(GymShowDetailsTrainer.this, "트레이너 정보가 누락 되어 있으면 안됩니다.");
             return;
         }
-        GymTrainer gymTrainer = new GymTrainer(t_id, t_name, t_phone, t_gender, t_gender, t_salary, t_birthday, t_hiredate, t_address);
+        GymTrainer gymTrainer = new GymTrainer(t_id, t_name, t_phone, t_gender, t_email, t_salary, t_birthday, t_hiredate, t_address);
         int result = dao.update(gymTrainer);
         
         if(result == 1) {
@@ -316,5 +335,4 @@ public class GymShowDetailsTrainer extends JFrame {
             columnModel.getColumn(column).setPreferredWidth(width);
         }
     }//테이블 컬럼 사이즈 조절 함수
-    
 }//end class
