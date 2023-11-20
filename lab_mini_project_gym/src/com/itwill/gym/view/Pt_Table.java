@@ -22,7 +22,7 @@ public class Pt_Table extends JFrame {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public static void showPt_Table() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -35,11 +35,16 @@ public class Pt_Table extends JFrame {
         });
     }
 
+    public Pt_Table() {
+        initialize();
+    }
+    
     /**
      * Create the frame.
      */
-    public Pt_Table() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void initialize() {
+        setTitle("ITWILL_FITNESS");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 757, 663);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,18 +53,18 @@ public class Pt_Table extends JFrame {
         contentPane.setLayout(null);
         
         JComboBox comboBox = new JComboBox();
-        comboBox.setFont(new Font("D2Coding", Font.PLAIN, 18));
+        comboBox.setFont(new Font("나눔고딕", Font.BOLD, 18));
         comboBox.setBounds(107, 22, 156, 38);
         contentPane.add(comboBox);
         
         textField = new JTextField();
-        textField.setFont(new Font("D2Coding", Font.PLAIN, 17));
+        textField.setFont(new Font("나눔고딕", Font.BOLD, 18));
         textField.setColumns(10);
         textField.setBounds(265, 21, 325, 39);
         contentPane.add(textField);
         
         JButton btnSearch = new JButton("검색");
-        btnSearch.setFont(new Font("D2Coding", Font.BOLD, 23));
+        btnSearch.setFont(new Font("나눔고딕", Font.BOLD, 24));
         btnSearch.setBounds(602, 21, 120, 39);
         contentPane.add(btnSearch);
         
@@ -71,22 +76,22 @@ public class Pt_Table extends JFrame {
         scrollPane.setViewportView(table);
         
         JButton btnPt = new JButton("전체 PT 목록");
-        btnPt.setFont(new Font("D2Coding", Font.BOLD, 20));
+        btnPt.setFont(new Font("나눔고딕", Font.BOLD, 24));
         btnPt.setBounds(64, 503, 162, 58);
         contentPane.add(btnPt);
         
         JButton btnPt_1 = new JButton("PT 상세정보");
-        btnPt_1.setFont(new Font("D2Coding", Font.BOLD, 20));
+        btnPt_1.setFont(new Font("나눔고딕", Font.BOLD, 24));
         btnPt_1.setBounds(238, 504, 209, 58);
         contentPane.add(btnPt_1);
         
         JButton btnPt_2 = new JButton("PT 삭제");
-        btnPt_2.setFont(new Font("D2Coding", Font.BOLD, 20));
+        btnPt_2.setFont(new Font("나눔고딕", Font.BOLD, 24));
         btnPt_2.setBounds(459, 503, 162, 58);
         contentPane.add(btnPt_2);
         
         JButton btnBackPage = new JButton("뒤로가기");
-        btnBackPage.setFont(new Font("D2Coding", Font.PLAIN, 13));
+        btnBackPage.setFont(new Font("나눔고딕", Font.BOLD, 18));
         btnBackPage.setBounds(6, 21, 96, 40);
         contentPane.add(btnBackPage);
     }

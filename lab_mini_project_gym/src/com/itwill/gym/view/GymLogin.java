@@ -365,7 +365,8 @@ public class GymLogin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /* 
-                 * comfirmedMember() method 를 통해 회원 확인이 되었을 때 입장 버튼을 누르면 회원 정보 메뉴로 넘어간다
+                 * comfirmedMember() method 를 통해 회원 확인이 되었을 때 
+                 * 입장 버튼을 누르면 회원 정보 메뉴로 넘어간다
                  */
                 
                 boolean isConfirmed = comfirmedMember();
@@ -375,18 +376,15 @@ public class GymLogin {
                     GymMemberDao dao = GymMemberDao.getInstance();
                     GymMember gymMembers = dao.read(inputMemberPhoneName);
                     
-                    //System.out.println(gymMembers.getPhone());
-                    
                     String memberPhone = gymMembers.getPhone();
                     
                     GymMemberMenu.showMemberMenu(memberPhone);
-                    //TODO 
                     //회원의 전화번호를 GymMemberMenu.showMemberMenu로 넘겨야한다.
-                    //그래야 showMemberMenu에서 회원의 전화번호를 통해 회원의 정보를 db 테이블에서 넘겨받을 수 있다.
+                    //그래야 showMemberMenu에서 회원의 전화번호를 통해 
+                    //회원의 정보를 db 테이블에서 넘겨받을 수 있다.
                     memberNumField.setText("");
                     confirmedMember.setText("회원 확인을 먼저 해주세요...!");
                 }
-                
                 if(!isConfirmed) {
                     JOptionPane.showMessageDialog(frame, "회원 확인이 완료되지 않았습니다.");
                 }

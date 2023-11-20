@@ -141,6 +141,13 @@ public class GymManagerView extends JFrame {
         btnMembershipList.setBackground(Color.DARK_GRAY);
         btnMembershipList.setFont(new Font("나눔고딕", Font.BOLD, 26));
         btnMembershipList.setForeground(Color.white);
+        btnMembershipList.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MembershipTable.showMembershipTable();
+            }
+        });
         btnMembershipList.setBounds(56, 416, 299, 96);
         contentPane.add(btnMembershipList);
         
@@ -149,6 +156,13 @@ public class GymManagerView extends JFrame {
         btnPtList.setBackground(Color.DARK_GRAY);
         btnPtList.setFont(new Font("나눔고딕", Font.BOLD, 26));
         btnPtList.setForeground(Color.white);
+        btnPtList.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Pt_Table.showPt_Table();
+            }
+        });
         btnPtList.setBounds(56, 522, 299, 96);
         contentPane.add(btnPtList);
     }//end initialize()
